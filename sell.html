@@ -169,7 +169,7 @@
             实时币价
         </div>
         <div class="right" style="color: #0093A3;">
-            $7260.23/BTC
+            $<span class="sprice"></span>/BTC
         </div>
     </div>
 
@@ -178,7 +178,8 @@
             <!-- 卖出数量 -->
         </div>
         <div class="right">
-            2.13 BTC
+            <span class="num"></span>
+             BTC
         </div>
     </div>
 
@@ -187,7 +188,8 @@
             预计收入
         </div>
         <div class="right">
-            90000 GTCoin
+            <span class="income"></span>
+             GTCoin
         </div>
     </div>
 
@@ -230,9 +232,40 @@
                 self.now_lang = new_lang;  
             }  
         } 
+
         $(function(){
+            var num = GetQueryString('num')
+            $('.num').text(num)
+            // console.log(amount)
+            getPrice(num)
+            setInterval(
+                function () { getPrice(num) },10000)
+
             language_pack.loadProperties(GetQueryString('lang'));
         })
+
+        function getPrice(num){
+            $.ajax({
+                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code'),
+                type:'get',
+                success:function(data){
+                    // alert(data)
+                    l(data)
+                    // console.log(amount)
+                    if(isString(data)){
+                        data = JSON.parse(data)
+                    }
+
+                    var price = data.sell_price
+                    $('.price').html(price)
+                    // console.log(BUYNUM)
+
+                    var income = (num * 100) * (price*100) /10000
+                    $('.income').html(Math.floor(income))
+                }
+            })
+        }
+
 
         $(window).resize(function(){
             deviceWidth =  $(window).width()

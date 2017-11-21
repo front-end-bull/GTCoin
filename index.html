@@ -511,7 +511,7 @@
             width: 3.59rem;
             height: .98rem;
             line-height: .98rem;
-            border-bottom: 1px solid #e1e1e1;
+            /*border-bottom: 1px solid #e1e1e1;*/
         }
 
         .block4 .pad1{
@@ -521,7 +521,7 @@
             color: white;
             font-size: .3333rem;
             line-height: .98rem;
-            border-bottom: 1px solid #e1e1e1;
+            /*border-bottom: 1px solid #e1e1e1;*/
         }
 
         .block4 .right{
@@ -536,7 +536,7 @@
             line-height: .98rem;
             position: relative;
             text-align: right;
-            border-bottom: 1px solid #e1e1e1;
+            /*border-bottom: 1px solid #e1e1e1;*/
         }
 
 
@@ -686,7 +686,7 @@
         <div class="pad">1</div>
         <div class="left"  data-lang="string_sellQuantity"></div>
         <div class="middle">
-            <input type="number" placeholder="" class="atleast001" onkeyup="changeSellNum(this.value)">
+            <input type="number" placeholder="" class="atleast001 sellNum" onkeyup="changeSellNum(this.value)">
         </div>
     </div>
 
@@ -710,7 +710,7 @@
         </div>
     </a>
     
-    <a href="javascript:void(0)" onclick="goBalance()">
+    <!-- <a href="javascript:void(0)" onclick="goBalance()">
         <div class="block5">
             <div class="pad">1</div>
             <div class="left" data-lang='string_gtcBalance'></div>
@@ -719,7 +719,7 @@
             <div class="pad1">1</div>
             <img src="img/arrow.png" alt="" style="right: .333rem;">
         </div>
-    </a>
+    </a> -->
 
     <div class="block6">
         <span data-lang="string_read"></span><a href="" style="color: #1095A3;" data-lang="string_agreement"></a>
@@ -741,6 +741,10 @@
         var isInput3 = false
         var isCanbuy = false
 
+
+
+        var BUY_PRICE 
+        var SELL_PRICE 
 
         var Cost,Income
         function canBuy(flag){
@@ -836,7 +840,9 @@
         }
 
         function goSell(){
-            window.location.href = 'sell.html?lang='+GetQueryString('lang')+'&code='+GetQueryString('code')
+            var num 
+            num = SELLNUM
+            window.location.href = 'sell.html?lang='+GetQueryString('lang')+'&code='+GetQueryString('code')+'&num='+num
         }
 
 
@@ -905,7 +911,7 @@
         $(function(){
             init()
             getPrice()
-            setInterval(getPrice,2000)
+            setInterval(getPrice,10000)
 
             language_pack.loadProperties(GetQueryString('lang'));
         
@@ -926,23 +932,33 @@
                 type:'get',
                 success:function(data){
                     // alert(data)
+                    l(data)
 
                     if(isString(data)){
                         data = JSON.parse(data)
                     }
 
-                    var price = data.price
-                    $('.num').html(price)
+                    BUY_PRICE = data.buy_price
+                    SELL_PRICE = data.sell_price
+
+
+                    if(isBuy){
+                        $('.num').html(BUY_PRICE)
+                    }else{
+                        $('.num').html(SELL_PRICE)
+                    }
+
+
                     // console.log(BUYNUM)
-                    var num = BUYAMOUNT*10000/(price*100)
+                    var num = BUYAMOUNT*10000/(BUY_PRICE*100)
                     $('.estimatedNum').html(parseInt(num)/100)
 
-                    var cost = (BUYNUM * 100) * (price * 100) / 10000
+                    var cost = (BUYNUM * 100) * (BUY_PRICE * 100) / 10000
                     $('.estimatedCost').html(Math.ceil(cost))
                     Cost = Math.ceil(cost)
                     // console.log('SELLNUM',SELLNUM)
 
-                    var income = (SELLNUM * 100) * (price*100) /10000
+                    var income = (SELLNUM * 100) * (SELL_PRICE*100) /10000
                     $('.estimatedIncome').html(Math.floor(income))
                     Income = Math.floor(income)
                 }
@@ -1007,6 +1023,7 @@
                 $('.block3-3').hide()
                 isBuy = true
                 $('.button').text($.i18n.map['string_confirmBuy'])
+                $('.num').html(BUY_PRICE)
             }else{
                 $('.buy').removeClass('bingo');
                 $('.sell').addClass('bingo');
@@ -1018,6 +1035,7 @@
                 $('.block3-3').show()
                 isBuy = false
                 $('.button').text($.i18n.map['string_confirmSelling'])
+                $('.num').html(SELL_PRICE)
             }
         }
 
