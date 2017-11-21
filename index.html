@@ -176,15 +176,31 @@
             right: 1.25rem;
             bottom: 0; 
         }*/
+        
+        .ar .block2{
+            padding-right: .32rem;
+            padding-left: 0;
+        }
+
+        .ar .block2 .left{
+            float: right;
+        }
+
+        .ar .block2 .right{
+            float: right;
+        }
+
+        .ar .block2 .middle{
+            float: right;
+        }
 
         .block2{
             width: 100%;
             height: .99rem;
-            /*padding-left: .32rem;*/
+            padding-left: .32rem;
             line-height: .98rem;
             background: white;
             position: relative;
-            font-size: 0;
         }
 
         .block2 .left{
@@ -192,8 +208,7 @@
             font-size: .3333rem;
             color: #333333;
             letter-spacing: 0;
-            /*float: left;*/
-            display: inline-block;
+            float: left;
             width: 1.87rem;
             height: .98rem;
             border-bottom: 1px solid #e1e1e1;
@@ -202,7 +217,6 @@
         .block2 .right{
             width: 1.68rem;
             float: right;
-            /*display: inline-block;*/
             height: .98rem;
             text-align: center;
             line-height: .36rem;
@@ -210,6 +224,7 @@
             font-size: .25rem;
             color: #1095A3;
             letter-spacing: 0;
+            
             border-left: 1px solid #e1e1e1;
             border-bottom: 1px solid #e1e1e1;
         }
@@ -218,8 +233,7 @@
             width: 3.62rem;
             height: .98rem;
             border-bottom: 1px solid #e1e1e1;
-            /*float: left;*/
-            display: inline-block;
+            float: left;
         }
 
         .block2 .middle input{
@@ -229,7 +243,7 @@
             font-size: .3333rem;
             color: #333;
             letter-spacing: 0;
-            line-height: .97rem;
+            line-height: .9rem;
             display: block;
         }
 
@@ -265,7 +279,7 @@
         }
 
 
-        /*.block2-2{
+        .block2-2{
             width: 100%;
             height: .99rem;
             padding-left: .32rem;
@@ -316,64 +330,7 @@
             letter-spacing: 0;
             line-height: .97rem;
             display: block;
-        }*/
-
-        .block2-2{
-            width: 100%;
-            height: .99rem;
-            /*padding-left: .32rem;*/
-            line-height: .98rem;
-            background: white;
-            position: relative;
-            font-size: 0;
         }
-
-        .block2-2 .left{
-            font-family: PingFangSC-Regular;
-            font-size: .3333rem;
-            color: #333333;
-            letter-spacing: 0;
-            /*float: left;*/
-            display: inline-block;
-            width: 1.87rem;
-            height: .98rem;
-            border-bottom: 1px solid #e1e1e1;
-        }
-
-        .block2-2 .right{
-            width: 1.68rem;
-            float: right;
-            /*display: inline-block;*/
-            height: .98rem;
-            text-align: center;
-            line-height: .36rem;
-            font-family: PingFangSC-Medium;
-            font-size: .25rem;
-            color: #1095A3;
-            letter-spacing: 0;
-            border-left: 1px solid #e1e1e1;
-            border-bottom: 1px solid #e1e1e1;
-        }
-
-        .block2-2 .middle{
-            width: 3.62rem;
-            height: .98rem;
-            border-bottom: 1px solid #e1e1e1;
-            /*float: left;*/
-            display: inline-block;
-        }
-
-        .block2-2 .middle input{
-            border:none;
-            width: 100%;
-            font-family: PingFangSC-Regular;
-            font-size: .3333rem;
-            color: #333;
-            letter-spacing: 0;
-            line-height: .97rem;
-            display: block;
-        }
-
 
         .block3-2{
             width: 100%;
@@ -411,7 +368,7 @@
         .block2-3{
             width: 100%;
             height: .99rem;
-            /*padding-left: .32rem;*/
+            padding-left: .32rem;
             line-height: .98rem;
             background: white;
             position: relative;
@@ -423,8 +380,7 @@
             font-size: .3333rem;
             color: #333333;
             letter-spacing: 0;
-            /*float: left;*/
-            display: inline-block;
+            float: left;
             width: 1.87rem;
             height: .98rem;
             border-bottom: 1px solid #e1e1e1;
@@ -434,9 +390,8 @@
             width:  5.31rem;
             height: .98rem;
             border-bottom: 1px solid #e1e1e1;
-            /*float: left;*/
-            display: inline-block;
-            /*padding-right: .325rem;*/
+            float: left;
+            padding-right: .325rem;
         }
 
         .block2-3 .middle input{
@@ -651,7 +606,6 @@
     </div>
 
     <div class="block2 clearfix">
-        <div class="pad">1</div>
         <div class="left" data-lang="string_buyNum"></div>
         <div class="middle">
             <input type="number" placeholder="" class="atleast500 amount1" onkeyup="changeBuyAmount(this.value)">
@@ -667,7 +621,6 @@
 
 
      <div class="block2-2 clearfix" style="display: none;">
-        <div class="pad">1</div>
         <div class="left" data-lang="string_buyQuantity"></div>
         <div class="middle">
             <input type="number" placeholder="" class="atleast001" onkeyup="changeBuyQuantity(this.value)">
@@ -683,7 +636,6 @@
 
 
     <div class="block2-3 clearfix" style="display: none;">
-        <div class="pad">1</div>
         <div class="left"  data-lang="string_sellQuantity"></div>
         <div class="middle">
             <input type="number" placeholder="" class="atleast001 sellNum" onkeyup="changeSellNum(this.value)">
@@ -731,9 +683,9 @@
         <!-- 确认购买 -->
     </div>
     <script>
-        var BUYAMOUNT = 500
-        var BUYNUM = 0.01
-        var SELLNUM = 0.01
+        var BUYAMOUNT = 0
+        var BUYNUM = 0
+        var SELLNUM = 0
 
 
         var isInput1 = false
@@ -760,10 +712,13 @@
         function changeBuyAmount(value){
             var value = parseInt(value)
             if(isNaN(value)){value = 0}
-            if(value<500){
+            if(value==0){
                 BUYAMOUNT = 0
                 isInput1 = false
                 canBuy(0)
+
+                var num = BUYAMOUNT*100000/(BUY_PRICE*100)
+                $('.estimatedNum').html(parseInt(num)/1000)
             }else{
                 BUYAMOUNT = value
                 isInput1 = true
@@ -772,46 +727,61 @@
                 }else{
                     canBuy(0)
                 }
+                var num = BUYAMOUNT*100000/(BUY_PRICE*100)
+                $('.estimatedNum').html(parseInt(num)/1000)
             }   
             getPrice()
         }
 
         function changeBuyQuantity(value){
-            var value = parseInt(value*100)
+            var value = parseInt(value*1000)
+            l('value',value)
             if(isNaN(value)){value = 0}
 
             if(value<1){
-                BUYNUM = 0.01
+                BUYNUM = value/1000
                 isInput2 = false
                 canBuy(0)
+                var cost = (BUYNUM * 1000) * (BUY_PRICE * 100) / 100000
+                $('.estimatedCost').html(Math.ceil(cost))
+                Cost = Math.ceil(cost)
             }else{
-                BUYNUM = value/100
+                BUYNUM = value/1000
                 isInput2 = true
                 if(isAgree){
                     canBuy(1)
                 }else{
                     canBuy(0)
                 }
+                var cost = (BUYNUM * 1000) * (BUY_PRICE * 100) / 100000
+                $('.estimatedCost').html(Math.ceil(cost))
+                Cost = Math.ceil(cost)
             }   
             getPrice()
         }
 
         function changeSellNum(value){
-            var value = parseInt(value*100)
+            var value = parseInt(value*1000)
             if(isNaN(value)){value = 0}
             // console.log('value',value)
             if(value<1){
-                SELLNUM = 0
+                SELLNUM = value/1000
                 isInput2 = false
                 canBuy(0)
+                var income = (SELLNUM * 1000) * (SELL_PRICE*100) /100000
+                $('.estimatedIncome').html(Math.floor(income))
+                Income = Math.floor(income)
             }else{
-                SELLNUM = value/100
+                SELLNUM = value/1000
                 isInput2 = true
                 if(isAgree){
                     canBuy(1)
                 }else{
                     canBuy(0)
                 }
+                var income = (SELLNUM * 1000) * (SELL_PRICE*100) /100000
+                $('.estimatedIncome').html(Math.floor(income))
+                Income = Math.floor(income)
             }   
             getPrice()
         }
@@ -924,7 +894,7 @@
                 }  
                 language_pack.loadProperties(new_lang);  
             });  
-        })
+        }) 
 
         function getPrice(){
             $.ajax({
@@ -932,7 +902,7 @@
                 type:'get',
                 success:function(data){
                     // alert(data)
-                    l(data)
+                    // l(data)
 
                     if(isString(data)){
                         data = JSON.parse(data)
@@ -950,15 +920,17 @@
 
 
                     // console.log(BUYNUM)
-                    var num = BUYAMOUNT*10000/(BUY_PRICE*100)
-                    $('.estimatedNum').html(parseInt(num)/100)
+                    var num = BUYAMOUNT*100000/(BUY_PRICE*100)
+                    $('.estimatedNum').html(parseInt(num)/1000)
 
-                    var cost = (BUYNUM * 100) * (BUY_PRICE * 100) / 10000
+                    // l('BUYNUM',BUYNUM)
+
+                    var cost = (BUYNUM * 1000) * (BUY_PRICE * 100) / 100000
                     $('.estimatedCost').html(Math.ceil(cost))
                     Cost = Math.ceil(cost)
                     // console.log('SELLNUM',SELLNUM)
 
-                    var income = (SELLNUM * 100) * (SELL_PRICE*100) /10000
+                    var income = (SELLNUM * 1000) * (SELL_PRICE*100) /100000
                     $('.estimatedIncome').html(Math.floor(income))
                     Income = Math.floor(income)
                 }

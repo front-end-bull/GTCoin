@@ -243,13 +243,13 @@
     </div>
     <div class="block">
         <div class="pad">1</div>
-        <div class="left">GTCoin 现值</div>
-        <div class="right nowGtc">480.32</div>
+        <div class="left">GTCoin <span data-lang="string_presentValue"></span></div>
+        <div class="right nowGtc"></div>
         <div class="pad">1</div>
     </div>
     
     <img src="img/none.png" alt="" class="none" style="display: none;">
-    <div class="desc" style="display: none;">还没有持仓</div>
+    <div class="desc" style="display: none;" data-lang="string_noPosition"></div>
 
     <div class="block1" style="display: none;" data-lang="string_tradeRecord">交易记录</div>
     
@@ -284,7 +284,7 @@
                         for(var i in $.i18n.map){  
                             $('[data-lang="'+i+'"]').text($.i18n.map[i]); 
                         }  
-                        // document.title = $.i18n.map['string_title'];  
+                        document.title = $.i18n.map['string_myPosition']; 
                     }  
                 });  
                 self.now_lang = new_lang;  
@@ -298,11 +298,15 @@
 
         function init(){
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcBalance&userid=1&token=1"+'&code='+GetQueryString('code'),
+                url:HOST+"/bitcoin/v1?cmd=btcBalance"+'&code='+GetQueryString('code'),
                 type:'get',
                 success:function(data){
                     // console.log(data)
-                    var data = JSON.parse(data)
+
+                    if(isString(data)){
+                        data = JSON.parse(data)
+                    }
+
                     $('.num').html(data.balance)
                     $('.nowGtc').html(data.nowGtc)
                     if(data.list.length>0){
