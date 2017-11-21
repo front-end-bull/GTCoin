@@ -106,28 +106,35 @@
             width: 100%;
             position: relative;
             background: white;
+            font-size: 0;
         }
 
         .block .left{
-            padding-left: .333rem;
-            width: 50%;
-            float: left;
+            /*padding-left: .32rem;*/
+            width: 3.43rem;
+            /*float: left;*/
+            display: inline-block;
             font-family: PingFangSC-Regular;
             font-size: .3333rem;
             color: #333333;
             letter-spacing: 0;
-            text-align: left;
+            /*text-align: left;*/
         }
 
         .block .right{
-            float: left;
-            width: 50%;
-            padding-right: .32rem;
+            /*float: left;*/
+            display: inline-block;
+            width: 3.43rem;
+            /*padding-right: .32rem;*/
             text-align: right;
             font-family: PingFangSC-Medium;
             font-size: .3333rem;
             color: #0093A3;
             letter-spacing: 0;
+        }
+
+        .ar .block .right{
+            text-align: left;
         }
 
         .block1{
@@ -212,6 +219,19 @@
             text-align: center;
             top: 6.222rem;
         }
+
+        .pad{
+            width: .32rem;
+            display: inline-block;
+            height: .96rem;
+            color: white;
+            font-size: .3333rem;
+            line-height: .96rem;
+        }
+
+        .ar{
+            direction: rtl;
+        }
     </style>
    
 </head>
@@ -221,8 +241,10 @@
         <div class="num"></div>
     </div>
     <div class="block">
+        <div class="pad">1</div>
         <div class="left">GTCoin 现值</div>
         <div class="right nowGtc">480.32</div>
+        <div class="pad">1</div>
     </div>
     
     <img src="img/none.png" alt="" class="none" style="display: none;">
@@ -231,7 +253,7 @@
     <div class="block1" style="display: none;" data-lang="string_tradeRecord">交易记录</div>
     
     <script>
-        const HOST = 'http://52.77.187.2:4002'
+        const HOST = 'http://192.168.0.250:8000'
 
         var language_pack = {
             now_lang : 0, // 0:ch,1:en  
@@ -240,9 +262,16 @@
                 var tmp_lang = '';  
                 if(new_lang == 0 || new_lang == 'zh'){  
                     tmp_lang = 'zh'; 
+                    $('body').addClass('zh')
                 }
                 if(new_lang == 1 || new_lang == 'en'){  
                     tmp_lang = 'en';  
+                    $('body').addClass('en')
+
+                }   
+                if(new_lang == 2 || new_lang == 'ar'){  
+                    tmp_lang = 'ar'; 
+                    $('body').addClass('ar')
                 }   
                 jQuery.i18n.properties({//加载资浏览器语言对应的资源文件  
                     name: 'strings', //资源文件名称  
@@ -263,11 +292,12 @@
 
         $(function(){
             init()
+            language_pack.loadProperties(GetQueryString('lang'));
         })
 
         function init(){
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcBalance&userid=1&token=1",
+                url:HOST+"/bitcoin/v1?cmd=btcBalance&userid=1&token=1"+'&code='+GetQueryString('code'),
                 type:'get',
                 success:function(data){
                     // console.log(data)

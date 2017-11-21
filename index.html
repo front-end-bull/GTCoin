@@ -811,19 +811,19 @@
 
 
         function goPosition(){
-            window.location.href = 'position.html?lang='+GetQueryString('lang')
+            window.location.href = 'position.html?lang='+GetQueryString('lang')+'&code='+GetQueryString('code')
         }
 
         function goBalance(){
-            window.location.href = 'balance.html?lang='+GetQueryString('lang')
+            window.location.href = 'balance.html?lang='+GetQueryString('lang')+'&code='+GetQueryString('code')
         }
 
         function goBuy(){
-            window.location.href = 'buy.html?lang='+GetQueryString('lang')
+            window.location.href = 'buy.html?lang='+GetQueryString('lang')+'&code='+GetQueryString('code')
         }
 
         function goSell(){
-            window.location.href = 'sell.html?lang='+GetQueryString('lang')
+            window.location.href = 'sell.html?lang='+GetQueryString('lang')+'&code='+GetQueryString('code')
         }
 
 
@@ -888,7 +888,7 @@
         } 
 
 
-        const HOST = 'http://52.77.187.2:4002'
+        const HOST = 'http://192.168.10.250:8000'
 
         $(function(){
             init()
@@ -910,7 +910,7 @@
 
         function getPrice(){
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcNow&userid=1&token=1",
+                url:HOST+"/bitcoin/v1?cmd=btcNow&userid=1&token=1"+'&code='+GetQueryString('code'),
                 type:'get',
                 success:function(data){
                     // alert(data)
@@ -934,7 +934,7 @@
 
         function init(){
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=myInfo&userid=1&token=1",
+                url:HOST+"/bitcoin/v1?cmd=myInfo&userid=1&token=1"+'&code='+GetQueryString('code'),
                 type:'get',
                 success:function(data){
                     // console.log(data)
