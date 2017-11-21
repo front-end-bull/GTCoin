@@ -796,11 +796,11 @@
 
 
         function goPosition(){
-            window.location.href = 'position.html?lang='+GetQueryString('lang')+'&code='+GetQueryString('code')
+            window.location.href = 'position.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
         }
 
         function goBalance(){
-            window.location.href = 'balance.html?lang='+GetQueryString('lang')+'&code='+GetQueryString('code')
+            window.location.href = 'balance.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
         }
 
         function goBuy(){
@@ -813,13 +813,13 @@
                 amount = Income
             }
 
-            window.location.href = 'buy.html?lang='+GetQueryString('lang')+'&code='+GetQueryString('code')+'&amount='+amount
+            window.location.href = 'buy.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&amount='+amount
         }
 
         function goSell(){
             var num 
             num = SELLNUM
-            window.location.href = 'sell.html?lang='+GetQueryString('lang')+'&code='+GetQueryString('code')+'&num='+num
+            window.location.href = 'sell.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&num='+num
         }
 
 
@@ -890,7 +890,7 @@
             getPrice()
             setInterval(getPrice,10000)
 
-            language_pack.loadProperties(GetQueryString('lang'));
+            language_pack.loadProperties(GetQueryString('lang')?GetQueryString('lang'):'en');
         
             $('#J_lang_switch').click(function(){  
                 var new_lang;  
