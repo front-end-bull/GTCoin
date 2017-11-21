@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
+    <script src="js/jQuery.js"></script>
+    <script src="js/jquery.i18n.properties.min.js"></script>
+    <!-- <script src="//oi6dgk1k6.qnssl.com/jquery.min.2.1.4.js"></script> -->
+    
+    <script type="text/javascript">
+        
+        
+        var deviceWidth = $(window).width()
+        var fontSize = deviceWidth/750*100 +'px'
+        $('html').css({'font-size':fontSize})
+
+        function GetQueryString(name) {  
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
+            var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
+            var context = "";  
+            if (r != null)  
+                 context = r[2];  
+            reg = null;  
+            r = null;  
+            return context == null || context == "" || context == "undefined" ? "" : context;  
+        }
+        
+
+    </script>
+
+    
+    <title>我的持仓</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            outline: none;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        a { text-decoration: none; }
+
+        html{
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+            font-size: 100px;
+        }
+        
+        body{
+            background: rgb(245, 245, 245);
+        }
+
+        .clearfix{ 
+            zoom: 1; 
+        } 
+
+        .clearfix:before, .clearfix:after{ 
+            display: table; 
+            line-height: 0; 
+            content: ""; 
+        } 
+        
+        .clearfix:after { 
+            clear: both; 
+        }
+
+        .top{
+            width: 100%;
+            height: 2.1rem;
+            background: #515566;
+            position: relative;
+        }
+
+        .top .title{
+            font-family: Roboto-Regular;
+            font-size: .2917rem;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            bottom: 1.26rem;
+            position: absolute;
+            width: 100%;
+            text-align: center;
+        }
+
+        .top .num{
+            font-family: Roboto-Medium;
+            font-size: .5833rem;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            position: absolute;
+            width: 100%;
+            line-height: .68rem;
+            bottom: .51rem;
+            text-align: center;
+        }
+
+        .block{
+            height: .96rem;
+            line-height: .96rem;
+            width: 100%;
+            position: relative;
+            background: white;
+        }
+
+        .block .left{
+            padding-left: .333rem;
+            width: 50%;
+            float: left;
+            font-family: PingFangSC-Regular;
+            font-size: .3333rem;
+            color: #333333;
+            letter-spacing: 0;
+            text-align: left;
+        }
+
+        .block .right{
+            float: left;
+            width: 50%;
+            padding-right: .32rem;
+            text-align: right;
+            font-family: PingFangSC-Medium;
+            font-size: .3333rem;
+            color: #0093A3;
+            letter-spacing: 0;
+        }
+
+        .block1{
+            font-family: PingFangSC-Regular;
+            font-size: .2917rem;
+            color: #7F7F7F;
+            line-height: .71rem;
+            padding-left: .33rem;
+        }
+
+        .block2{
+            padding-left: .33rem;
+            width: 100%;
+            background: white;
+            position: relative;
+        }
+
+        .container{
+            width: 100%;
+            position: relative;
+            height: 1.23rem;
+        }
+
+        .container .title{
+            font-family: PingFangSC-Regular;
+            font-size: .3125rem;
+            color: #333333;
+            position: absolute;
+            top: .2rem;
+            left: 0;
+        }
+
+        .container .num{
+            font-family: PingFangSC-Medium;
+            font-size: .375rem;
+            color: #666666;
+            position: absolute;
+            margin: auto;
+            right: .32rem;
+            top: 0;
+            bottom: 0;
+            line-height: 1.23rem;
+        }
+
+        .container .time{
+            font-family: PingFangSC-Regular;
+            font-size: .25rem;
+            color: #999999;
+            position: absolute;
+            bottom: .2rem;
+        }  
+
+        .block2{
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .block2:nth-last-child(2){
+            border:none;
+        }
+
+        .sell{
+            color: #0093A3 !important;
+        }
+
+        .none{
+            width: 1.76rem;
+            height: 1.76rem;
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top: 4.18rem;
+        }
+
+        .desc{
+            font-family: NotoSansCJKsc-Regular;
+            font-size: .3333rem;
+            color: #999999;
+            letter-spacing: 0;  
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 6.222rem;
+        }
+    </style>
+   
+</head>
+<body onclick="">
+    <div class="top">
+        <div class="title">BTC</div>
+        <div class="num"></div>
+    </div>
+    <div class="block">
+        <div class="left">GTCoin 现值</div>
+        <div class="right nowGtc">480.32</div>
+    </div>
+    
+    <img src="img/none.png" alt="" class="none" style="display: none;">
+    <div class="desc" style="display: none;">还没有持仓</div>
+
+    <div class="block1" style="display: none;" data-lang="string_tradeRecord">交易记录</div>
+    
+    <script>
+        const HOST = 'http://52.77.187.2:4002'
+
+        var language_pack = {
+            now_lang : 0, // 0:ch,1:en  
+            loadProperties : function(new_lang){  
+                var self = this;  
+                var tmp_lang = '';  
+                if(new_lang == 0 || new_lang == 'zh'){  
+                    tmp_lang = 'zh'; 
+                }
+                if(new_lang == 1 || new_lang == 'en'){  
+                    tmp_lang = 'en';  
+                }   
+                jQuery.i18n.properties({//加载资浏览器语言对应的资源文件  
+                    name: 'strings', //资源文件名称  
+                    path:'language/', //资源文件路径  
+                    language: tmp_lang,  
+                    cache: false,  
+                    mode:'map', //用Map的方式使用资源文件中的值  
+                    callback: function() {//加载成功后设置显示内容  
+                        for(var i in $.i18n.map){  
+                            $('[data-lang="'+i+'"]').text($.i18n.map[i]); 
+                        }  
+                        // document.title = $.i18n.map['string_title'];  
+                    }  
+                });  
+                self.now_lang = new_lang;  
+            }  
+        } 
+
+        $(function(){
+            init()
+        })
+
+        function init(){
+            $.ajax({
+                url:HOST+"/bitcoin/v1?cmd=btcBalance&userid=1&token=1",
+                type:'get',
+                success:function(data){
+                    // console.log(data)
+                    var data = JSON.parse(data)
+                    $('.num').html(data.balance)
+                    $('.nowGtc').html(data.nowGtc)
+                    if(data.list.length>0){
+                        $('.block1').show()
+                        var html = ''
+                        data.list.forEach(function(e){
+                            html+='<div class="block2">'+
+                                    '<div class="container">'+
+                                        '<div class="title" data-lang="string_'+(e.type==1?'buy':'sell')+'">'+(e.type==1?'买入':'卖出')+'</div>'+
+                                        '<div class="num '+(e.type==2?'':'sell')+'">'+(e.type==2?'-':'+')+e.num+'</div>'+
+                                        '<div class="time">'+e.createtime+'</div>'+
+                                    '</div>'+
+                                '</div>'
+                        })
+                        $('.block1').after(html)
+                        language_pack.loadProperties(GetQueryString('lang'));  
+                    }else{
+                        $('.desc').show()
+                        $('.none').show()
+                    }
+                }
+            })
+        }
+        
+        $(window).resize(function(){
+            deviceWidth =  $(window).width()
+            fontSize  = deviceWidth/750*100 +'px'
+            $('html').css({'font-size':fontSize})
+        });
+    </script>
+</body>
+
+</html>

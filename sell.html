@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
+    <script src="js/jQuery.js"></script>
+    <script src="js/jquery.i18n.properties.min.js"></script>
+
+    <script type="text/javascript">
+        var deviceWidth = $(window).width()
+        var fontSize = deviceWidth/750*100 +'px'
+        $('html').css({'font-size':fontSize})
+        function GetQueryString(name) {  
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
+            var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
+            var context = "";  
+            if (r != null)  
+                 context = r[2];  
+            reg = null;  
+            r = null;  
+            return context == null || context == "" || context == "undefined" ? "" : context;  
+        }
+        
+
+    </script>
+
+    
+    <title>卖出</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            outline: none;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        a { text-decoration: none; }
+
+        html{
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+            font-size: 100px;
+        }
+        
+        body{
+            background: rgb(245, 245, 245);
+        }
+
+        .clearfix{ 
+            zoom: 1; 
+        } 
+
+        .clearfix:before, .clearfix:after{ 
+            display: table; 
+            line-height: 0; 
+            content: ""; 
+        } 
+        
+        .clearfix:after { 
+            clear: both; 
+        }
+
+        .desc{
+            font-family: NotoSansCJKsc-Regular;
+            font-size: .2708rem;
+            color: #999999;
+            letter-spacing: 0;
+            text-align: left;
+            line-height: .4rem;
+            padding: .213rem .32rem;
+            word-break: break-all;
+        }
+
+        .block{
+            background:white;
+            height: .96rem;
+            line-height: .96rem;
+            width: 100%;
+        }
+
+        .block .left{
+            width: 50%;
+            float: left;
+            padding-left: .32rem;
+            font-family: PingFangSC-Regular;
+            font-size: .3333rem;
+            color: #333333;
+            letter-spacing: 0;
+        }
+
+        .block .right{
+            width: 50%;
+            float: left;
+            padding-right: .32rem;
+            text-align: right;
+            font-family: PingFangSC-Regular;
+            font-size: .3333rem;
+            color: #333333;
+            letter-spacing: 0;
+        }
+        
+        .desc2{
+            font-family: PingFangSC-Regular;
+            font-size: .2708rem;
+            color: #999999;
+            margin-top: .416rem;
+            padding-left: .723rem;
+            position: relative;
+        }
+
+        .desc2 img{
+            width: .28rem;
+            height: .28rem;
+            position: absolute;
+            margin:auto;
+            top: 0;
+            bottom: 0;
+            left: .3rem;
+        }
+        
+
+        .bottom{
+            height: 1.04rem;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            background: #0093A3;
+            line-height: 1.04rem;
+            font-family: PingFangSC-Regular;
+            font-size: .3542rem;
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+       /* .bottom .left{
+            width: 5rem;
+            float: left;
+            font-family: PingFangSC-Regular;
+            font-size: .3333rem;
+            color: #666666;
+            padding-left: .333rem;
+        }
+
+        .bottom .right{
+            font-family: PingFangSC-Regular;
+            font-size: .3542rem;
+            color: #FFFFFF;
+            width: 2.5rem;
+            float: right;
+            background: #0093A3;
+            text-align: center;
+        }*/
+    </style>
+   
+</head>
+<body>
+    <div class="desc" data-lang="string_desc">
+    </div>  
+
+    <div class="block clearfix">
+        <div class="left" data-lang="string_nowPrice2">
+            实时币价
+        </div>
+        <div class="right" style="color: #0093A3;">
+            $7260.23/BTC
+        </div>
+    </div>
+
+    <div class="block clearfix" style="margin-top: .215rem;border-bottom: 1px solid #e1e1e1;">
+        <div class="left" data-lang="string_sellingQuantity">
+            <!-- 卖出数量 -->
+        </div>
+        <div class="right">
+            2.13 BTC
+        </div>
+    </div>
+
+    <div class="block clearfix" style="">
+        <div class="left" data-lang="string_EstimatedIncome">
+            预计收入
+        </div>
+        <div class="right">
+            90000 GTCoin
+        </div>
+    </div>
+
+    <div class="desc2">
+        <!-- 交易说明 -->
+        <span data-lang="string_buyDesc"></span>
+        <img src="img/desc.png" alt="">
+    </div>
+    
+    <div class="bottom clearfix" data-lang="string_confirmSelling">
+        <!-- 确认卖出 -->
+    </div>
+    <script>
+         var language_pack = {
+            now_lang : 0, // 0:ch,1:en  
+            loadProperties : function(new_lang){  
+                var self = this;  
+                var tmp_lang = '';  
+                if(new_lang == 0 || new_lang == 'zh'){  
+                    tmp_lang = 'zh';  
+                    $('body').removeClass('en').addClass('zh');  
+                }
+                if(new_lang == 1 || new_lang == 'en'){  
+                    tmp_lang = 'en';  
+                    $('body').removeClass('zh').addClass('en');  
+                }  
+                jQuery.i18n.properties({//加载资浏览器语言对应的资源文件  
+                    name: 'strings', //资源文件名称  
+                    path:'language/', //资源文件路径  
+                    language: tmp_lang,  
+                    cache: false,  
+                    mode:'map', //用Map的方式使用资源文件中的值  
+                    callback: function() {//加载成功后设置显示内容  
+                        for(var i in $.i18n.map){  
+                            $('[data-lang="'+i+'"]').html($.i18n.map[i]); 
+                        }  
+                        document.title = $.i18n.map['string_sell'];  
+                    }  
+                });  
+                self.now_lang = new_lang;  
+            }  
+        } 
+        $(function(){
+            language_pack.loadProperties(GetQueryString('lang'));
+        })
+
+        $(window).resize(function(){
+            deviceWidth =  $(window).width()
+            fontSize  = deviceWidth/750*100 +'px'
+            $('html').css({'font-size':fontSize})
+        });
+    </script>
+</body>
+
+</html>
