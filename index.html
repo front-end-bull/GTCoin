@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
     <script src="js/jQuery.js"></script>
     <script src="js/jquery.i18n.properties.min.js"></script>
+    <script src="js/config.js"></script>
     
     <script type="text/javascript">
         var deviceWidth = $(window).width()
@@ -25,7 +26,7 @@
             reg = null;  
             r = null;  
             // return context == null || context == "" || context == "undefined" ? '' : context;  
-            return context == null || context == "" || context == "undefined" ? 'zh' : context;  
+            return context == null || context == "" || context == "undefined" ? '' : context;  
         }
     </script>
 
@@ -653,7 +654,7 @@
         <div class="pad">1</div>
         <div class="left" data-lang="string_buyNum"></div>
         <div class="middle">
-            <input type="number" placeholder="" class="atleast500" onkeyup="changeBuyAmount(this.value)">
+            <input type="number" placeholder="" class="atleast500 amount1" onkeyup="changeBuyAmount(this.value)">
         </div>
         <div class="right" onclick="toggle()" data-lang="string_buybyBtc"></div>
     </div>
@@ -702,7 +703,7 @@
         <div class="block4">
             <div class="pad">1</div>
             <div class="left" data-lang="string_position"></div>
-            <div class="right"><span class="btcBalance"></span>
+            <div class="right"><span class="btcBalance">&nbsp;</span>
             </div>
             <div class="pad1">1</div>
             <img src="img/arrow.png" alt="" style="right: .333rem;">
@@ -713,7 +714,7 @@
         <div class="block5">
             <div class="pad">1</div>
             <div class="left" data-lang='string_gtcBalance'></div>
-            <div class="right"><span class="gtcBalance"></span>
+            <div class="right"><span class="gtcBalance">&nbsp;</span>
             </div>
             <div class="pad1">1</div>
             <img src="img/arrow.png" alt="" style="right: .333rem;">
@@ -739,6 +740,9 @@
         var isInput2 = false
         var isInput3 = false
         var isCanbuy = false
+
+
+        var Cost,Income
         function canBuy(flag){
             if(flag){
                 $('.button').addClass('commit')
@@ -819,7 +823,16 @@
         }
 
         function goBuy(){
-            window.location.href = 'buy.html?lang='+GetQueryString('lang')+'&code='+GetQueryString('code')
+            var amount 
+            if(isInput1&&isBuy&&!isBTC){
+                amount = $('.amount1').val()
+            }else if(isInput2&&isBuy&&isBTC){
+                amount = Cost
+            }else if(isInput3&&!isBuy){
+                amount = Income
+            }
+
+            window.location.href = 'buy.html?lang='+GetQueryString('lang')+'&code='+GetQueryString('code')+'&amount='+amount
         }
 
         function goSell(){
@@ -888,7 +901,6 @@
         } 
 
 
-        const HOST = 'http://192.168.10.250:8000'
 
         $(function(){
             init()
@@ -910,11 +922,15 @@
 
         function getPrice(){
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcNow&userid=1&token=1"+'&code='+GetQueryString('code'),
+                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code'),
                 type:'get',
                 success:function(data){
                     // alert(data)
-                    var data = JSON.parse(data)
+
+                    if(isString(data)){
+                        data = JSON.parse(data)
+                    }
+
                     var price = data.price
                     $('.num').html(price)
                     // console.log(BUYNUM)
@@ -923,10 +939,12 @@
 
                     var cost = (BUYNUM * 100) * (price * 100) / 10000
                     $('.estimatedCost').html(Math.ceil(cost))
+                    Cost = Math.ceil(cost)
                     // console.log('SELLNUM',SELLNUM)
 
                     var income = (SELLNUM * 100) * (price*100) /10000
                     $('.estimatedIncome').html(Math.floor(income))
+                    Income = Math.floor(income)
                 }
             })
         }
@@ -934,11 +952,13 @@
 
         function init(){
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=myInfo&userid=1&token=1"+'&code='+GetQueryString('code'),
+                url:HOST+"/bitcoin/v1?cmd=myInfo"+'&code='+GetQueryString('code'),
                 type:'get',
                 success:function(data){
                     // console.log(data)
-                    var data = JSON.parse(data)
+                    if(isString(data)){
+                        data = JSON.parse(data)
+                    }
                     $('.btcBalance').html(data.btcBalance+' BTC')
                     $('.gtcBalance').html(data.gtcBalance)
                 }
@@ -1031,14 +1051,13 @@
                 return
             }
 
-
             if(isBuy){
                 goBuy()
             }else{
                 goSell()
+
             }
         }
-
 
 
         $(window).resize(function(){

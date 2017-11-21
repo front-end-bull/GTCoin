@@ -9,12 +9,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
     <script src="js/jQuery.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/jquery.i18n.properties.min.js"></script>
     <!-- <script src="//oi6dgk1k6.qnssl.com/jquery.min.2.1.4.js"></script> -->
     
     <script type="text/javascript">
-        
-        
         var deviceWidth = $(window).width()
         var fontSize = deviceWidth/750*100 +'px'
         $('html').css({'font-size':fontSize})
@@ -29,7 +28,6 @@
             r = null;  
             return context == null || context == "" || context == "undefined" ? "" : context;  
         }
-        
 
     </script>
 
@@ -169,7 +167,7 @@
             <!-- 实时币价 -->
         </div>
         <div class="right" style="color: #0093A3;">
-            $7260.23/BTC
+            $<span class="price"></span>/BTC
         </div>
     </div>
 
@@ -178,7 +176,8 @@
             <!-- 购买金额 -->
         </div>
         <div class="right">
-            90000 GTCoin
+            <span class="sum"></span>
+            GTCoin
         </div>
     </div>
 
@@ -187,7 +186,8 @@
             <!-- 实时数量 -->
         </div>
         <div class="right">
-            2.13 BTC
+            <span class="estimatedNum"></span>
+             BTC
         </div>
     </div>
 
@@ -198,11 +198,13 @@
     </div>
     
     <div class="bottom clearfix">
-        <div class="left">GTCoin：<span style="color:#0093A3;">90000</span></div>
-        <div class="right" data-lang="string_confirmPay"></div>
+        <div class="left">GTCoin：<span style="color:#0093A3;" class="sum"></span></div>
+        <div class="right" data-lang="string_confirmPay" onclick="pay()"></div>
     </div>
     <script>
-         var language_pack = {
+        var SUM,PRICE,NUM
+
+        var language_pack = {
             now_lang : 0, // 0:ch,1:en  
             loadProperties : function(new_lang){  
                 var self = this;  
@@ -232,9 +234,76 @@
             }  
         } 
         $(function(){
+            var amount = GetQueryString('amount')
+            $('.sum').text(amount)
+            // console.log(amount)
+            getPrice(amount)
+            setInterval(
+                function () { getPrice(amount) },2000)
+
             language_pack.loadProperties(GetQueryString('lang'));
         })
 
+
+        function getPrice(amount){
+            $.ajax({
+                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code'),
+                type:'get',
+                success:function(data){
+                    // alert(data)
+                    // l(data)
+                    // console.log(amount)
+                    if(isString(data)){
+                        data = JSON.parse(data)
+                    }
+
+                    var price = data.price
+                    $('.price').html(price)
+                    // console.log(BUYNUM)
+
+                    var num = amount*10000/(price*100)
+                    $('.estimatedNum').html(parseInt(num)/100)
+
+                    SUM = amount
+                    PRICE = price
+                    NUM = parseInt(num)/100
+                }
+            })
+        }
+
+
+        var isFirst = true
+        function pay(){
+            if(!isFirst) return 
+            isFirst = false
+
+            var url = HOST+"/btcBuy?"
+                +'show_amount='+NUM
+                +'&show_price='+PRICE
+                +'&total_pay='+SUM
+                +'&code='+GetQueryString('code')
+            $.ajax({
+                url:url,
+                type:'POST',
+                success:function(data){
+                    if(isString(data)){
+                        data = JSON.parse(data)
+                    }
+                    if(data.code==0){
+
+                    }else{
+                        l('msg')
+                        isFirst = true
+                    }
+                },
+                error:function(err){
+                    l(str(err))
+                    isFirst = true
+                }
+            })
+
+
+        }
 
 
         $(window).resize(function(){
