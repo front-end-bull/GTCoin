@@ -282,12 +282,12 @@
                     $('.price').html(price)
                     // console.log(BUYNUM)
 
-                    var num = amount*10000/(price*100)
-                    $('.estimatedNum').html(parseInt(num)/100)
+                    var num = amount*100000/(price*100)
+                    $('.estimatedNum').html(parseInt(num)/1000)
 
                     SUM = amount
                     PRICE = price
-                    NUM = parseInt(num)/100
+                    NUM = parseInt(num)/1000
                 }
             })
         }
