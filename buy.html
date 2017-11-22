@@ -379,12 +379,12 @@
                         data = JSON.parse(data)
                     }
                     if(data.code==0){
-                        // webPay.webFinancePayment(data);
-                        $('.loading').text('Success')
-                        $('.loading').show()
-                        setTimeout(function(){
-                            $('.loading').hide()
-                        },2000)
+                        webPay.webFinancePayment(data);
+                        // $('.loading').text('Success')
+                        // $('.loading').show()
+                        // setTimeout(function(){
+                            // $('.loading').hide()
+                        // },2000)
                     }else{
                         // l('msg')
                         isFirst = true
