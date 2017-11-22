@@ -75,163 +75,123 @@
             clear: both; 
         }
 
-        .desc{
-            font-family: NotoSansCJKsc-Regular;
-            font-size: .2708rem;
-            color: #999999;
-            letter-spacing: 0;
-            text-align: left;
-            line-height: .4rem;
-            padding: .213rem .32rem;
-            word-break:break-all;
+        .title{
+            width: 100%;
+            font-family: PingFangSC-Medium;
+            font-size: .5rem;
+            color: #333333;
+            line-height: .7rem;
+            text-align: center;
+        }
+
+        .buy{
+            width: .32rem;
+            height: .32rem;
+            line-height: .32rem;
+            color: white;
+            background: #0093A3;
+            border-radius: .04rem;
+            text-align: center;
+            font-family: PingFangSC-Semibold;
+            font-size: .2rem;
+            vertical-align: middle;
+            position: absolute;
+            left: 2.79rem;
+            top: .8rem;
+        }
+
+        .status{
+            font-family: PingFangSC-Regular;
+            font-size: .28rem;
+            color: #666666;
+            width: 100%;
+            text-align: center;
+            margin-top: .11rem;
+        }
+    
+
+        .container{
+            border-bottom: 1px solid #e1e1e1;
+            background: white;
         }
 
         .block{
-            background:white;
-            height: .96rem;
-            line-height: .96rem;
+            padding-left: .3rem;
+            padding-right: .3rem;
             width: 100%;
+            line-height: .6rem;
+            font-size: 0;
         }
 
         .block .left{
             width: 50%;
-            float: left;
-            padding-left: .32rem;
             font-family: PingFangSC-Regular;
-            font-size: .3333rem;
-            color: #333333;
-            letter-spacing: 0;
+            font-size: .3rem;
+            color: #999999;
+            display: inline-block;
         }
 
         .block .right{
             width: 50%;
-            float: left;
-            padding-right: .32rem;
-            text-align: right;
             font-family: PingFangSC-Regular;
-            font-size: .3333rem;
-            color: #333333;
-            letter-spacing: 0;
-        }
-        
-        .desc2{
-            font-family: PingFangSC-Regular;
-            font-size: .2708rem;
-            color: #999999;
-            margin-top: .416rem;
-            padding-left: .723rem;
-            position: relative;
-        }
-
-        .desc2 img{
-            width: .28rem;
-            height: .28rem;
-            position: absolute;
-            margin:auto;
-            top: 0;
-            bottom: 0;
-            left: .3rem;
-        }
-        
-
-        .bottom{
-            height: 1.04rem;
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            background: white;
-            line-height: 1.04rem;
-         
-        }
-
-        .bottom .left{
-            width: 5rem;
-            float: left;
-            font-family: PingFangSC-Regular;
-            font-size: .3333rem;
-            color: #666666;
-            padding-left: .333rem;
-        }
-
-        .bottom .right{
-            font-family: PingFangSC-Regular;
-            font-size: .3542rem;
-            color: #FFFFFF;
-            width: 2.5rem;
-            float: right;
-            background: #0093A3;
-            text-align: center;
-        }
-
-        .loading{
-            width: 5.44rem;
-            height: 2.44rem;
-            position: absolute;
-            background: rgba(17, 17, 17, 0.7);
-            text-align: center;
-            border-radius: 0.1rem;
-            margin: auto;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            color: white;
             font-size: .3rem;
-            padding: 1rem .1rem;
+            color: #333333;
+            display: inline-block;
+            text-align: right;
+        }
+
+        .divider{
+            width: 6.9rem;
+            height: 1px;
+            margin-left: .3rem;
+            margin-right: .3rem;
+            background: #e1e1e1;
+        }
+
+        .stage{
+            padding-top: .6rem;
+            padding-bottom: .8rem;
+            background: white;
+        }
+
+        .en .buy{
+            left:2.49rem;
         }
     </style>
    
 </head>
 <body>
-    <div class="desc" data-lang="string_desc">
-    </div>  
-
-    <div class="block clearfix">
-        <div class="left" data-lang='string_nowPrice'>
-            <!-- 实时币价 -->
+    <div class="stage">
+        <div class="title" data-lang="string_buying">
         </div>
-        <div class="right" style="color: #0093A3;">
-            $<span class="price"></span>/BTC
-        </div>
+        <div class="buy-box"><div class="buy" data-lang="string_buyLabel">买</div></div>
+        <div class="status" data-lang="sting_transactionProcessing"></div>
     </div>
-
-    <div class="block clearfix" style="margin-top: .215rem;border-bottom: 1px solid #e1e1e1;">
-        <div class="left" data-lang="string_buyAmount">
-            <!-- 购买金额 -->
+    <div class="container">
+        <div class="block">
+            <div class="left" data-lang="string_strikePrice">成交价格</div>
+            <div class="right">$ 8431.53</div>
         </div>
-        <div class="right">
-            <span class="sum"></span>
-            GTCoin
+        <div class="block">
+            <div class="left" data-lang="string_sellCount">卖出数量</div>
+            <div class="right">0.493 BTC</div>
         </div>
-    </div>
-
-    <div class="block clearfix" style="">
-        <div class="left" data-lang="string_nowNum">
-            <!-- 实时数量 -->
+        <div class="block" style="margin-bottom: .32rem;">
+            <div class="left">预计收益</div>
+            <div class="right">4000 GTCoin</div>
         </div>
-        <div class="right">
-            <span class="estimatedNum"></span>
-             BTC
+        <div class="divider"></div>
+        <div class="block" style="margin-top: .32rem;">
+            <div class="left">创建时间</div>
+            <div class="right">2017-11-19 17:24</div>
+        </div>
+        <div class="block">
+            <div class="left" style="width: 20%;">订单号</div>
+            <div class="right" style="width: 80%;">walzh617dqbzd43zmjjt-481</div>
         </div>
     </div>
 
-    <div class="desc2">
-        <span data-lang="string_buyDesc"></span>
-        <!-- 交易说明 -->
-        <img src="img/desc.png" alt="">
-    </div>
-    
-    <div class="loading" style="display: none;">
-        Sorry, your balance is not enough.
-    </div>
-
-    <div class="bottom clearfix">
-        <div class="left">GTCoin：<span style="color:#0093A3;" class="sum"></span></div>
-        <div class="right" data-lang="string_confirmPay" onclick="pay()"></div>
-    </div>
     <script>
-        var SUM,PRICE,NUM
-
         var language_pack = {
             now_lang : 0, // 0:ch,1:en  
             loadProperties : function(new_lang){  
@@ -239,11 +199,11 @@
                 var tmp_lang = '';  
                 if(new_lang == 'zh_HANS'){  
                     tmp_lang = 'zh';  
-                    $('body').addClass('zh');  
+                    $('body').addClass('zh_HANS');  
                 }
                 if(new_lang == 'zh_HANT'){  
                     tmp_lang = 'zh';  
-                    $('body').addClass('zh');  
+                    $('body').addClass('zh_HANT');
                 }
                 if(new_lang == 'en'){  
                     tmp_lang = 'en';  
@@ -302,7 +262,8 @@
                     //海地
                     tmp_lang = 'hi';  
                     $('body').addClass('hi'); 
-                } 
+                }
+
                 jQuery.i18n.properties({//加载资浏览器语言对应的资源文件  
                     name: 'strings', //资源文件名称  
                     path:'language/', //资源文件路径  
@@ -313,91 +274,34 @@
                         for(var i in $.i18n.map){  
                             $('[data-lang="'+i+'"]').html($.i18n.map[i]); 
                         }  
-                        document.title = $.i18n.map['string_pay'];  
+                        document.title = $.i18n.map['string_TransactionNotice'];  
+                        if(new_lang==2 || new_lang=='ar'){
+                            $('html').css('direction','rtl')
+                        }
                     }  
                 });  
                 self.now_lang = new_lang;  
             }  
         } 
         $(function(){
-            var amount = GetQueryString('amount')
-            $('.sum').text(amount)
-            // console.log(amount)
-            getPrice(amount)
-            setInterval(
-                function () { getPrice(amount) },10000)
-
+            var orderid = GetQueryString('orderid')
+            // $('.sum').text(amount)
+            init(orderid)
             language_pack.loadProperties(GetQueryString('lang'));
-        })
+        })  
 
 
-        function getPrice(amount){
+        function init(){
+            l(HOST+"/bitcoin/v1?cmd=orderInfo"+'&code='+GetQueryString('code')+"&orderid="+GetQueryString('orderid'))
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code'),
+                url:HOST+"/bitcoin/v1?cmd=orderInfo"+'&code='+GetQueryString('code')+"&orderid="+GetQueryString('orderid'),
                 type:'get',
                 success:function(data){
-                    // alert(data)
-                    // l(data)
-                    // console.log(amount)
-                    if(isString(data)){
-                        data = JSON.parse(data)
-                    }
-
-                    var price = data.buy_price
-                    $('.price').html(price)
-                    // console.log(BUYNUM)
-
-                    var num = amount*100000/(price*100)
-                    $('.estimatedNum').html(parseInt(num)/1000)
-
-                    SUM = amount
-                    PRICE = price
-                    NUM = parseInt(num)/1000
-                }
-            })
-        }
-
-
-        var isFirst = true
-        function pay(){
-            if(!isFirst) return 
-            isFirst = false
-
-            var url = HOST+"/bitcoin/v1?cmd=btcBuy"
-                +'&show_amount='+NUM
-                +'&show_price='+PRICE
-                +'&total_pay='+SUM
-                +'&code='+GetQueryString('code')
-            l(url)
-            $.ajax({
-                url:url,
-                type:'POST',
-                success:function(data){
                     l(str(data))
-
-                    if(isString(data)){
-                        data = JSON.parse(data)
-                    }
-                    if(data.code==0){
-                        // webPay.webFinancePayment(data);
-                    }else{
-                        // l('msg')
-                        isFirst = true
-                        $('.loading').text(data.text)
-                        $('.loading').show()
-                        setTimeout(function(){
-                            $('.loading').hide()
-                        },2000)
-                    }
-                },
-                error:function(err){
-                    l(str(err))
-                    isFirst = true
                 }
             })
-
-
         }
+
 
 
         $(window).resize(function(){
