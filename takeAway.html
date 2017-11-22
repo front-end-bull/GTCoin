@@ -71,11 +71,23 @@
         .clearfix:after{
             clear: both;
         }
+
+        .container{
+            width: 100%;
+            background: white;
+            
+        }
+
+        .divider{
+            width: 7.2rem;
+            margin-left: .3rem;
+            height: 1px;
+            background: #e1e1e1;
+        }
     </style>
    
 </head>
 <body>
-   
     <script>
         var language_pack = {
             now_lang : 0, // 0:ch,1:en  
@@ -180,7 +192,7 @@
                 url:HOST+"/bitcoin/v1?cmd=messageList"+'&code='+GetQueryString('code'),
                 type:'get',
                 success:function(data){
-
+                    
                 }
             })
         }

@@ -380,12 +380,17 @@
                     }
                     if(data.code==0){
 
-                        webPay.webFinancePayment(data)
+
+                        // l(str('webPay',webPay))
+                        // l(str('app_pay_done',app_pay_done))
 
 
-                        l(str('webPay',webPay))
-                        
-                        l(str('app_pay_done',app_pay_done))
+                        try{
+                            webPay.webFinancePayment(data)
+                        }catch(err){
+                            alert(err)
+                        }
+
 
                         // app_pay_done(){
                         //     alert(str(result))                           
@@ -394,7 +399,7 @@
                         // $('.loading').text('Success')
                         // $('.loading').show()
                         // setTimeout(function(){
-                            // $('.loading').hide()
+                        //     $('.loading').hide()
                         // },2000)
                     }else{
                         // l('msg')
