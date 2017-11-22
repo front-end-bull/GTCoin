@@ -384,10 +384,9 @@
                         // l(str('webPay',webPay))
                         // l(str('app_pay_done',app_pay_done))
 
-
                         try{
-                            alert(str(data))
-                            webPay.webFinancePayment(data)
+                            // alert(str(data))
+                            webPay.webFinancePayment(data.data)
                         }catch(err){
                             alert(err)
                         }
