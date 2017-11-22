@@ -982,11 +982,11 @@
 
         function getPrice(){
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code'),
+                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+( GetQueryString('lang')?GetQueryString('lang'):'en' ),
                 type:'get',
                 success:function(data){
                     // alert(data)
-                    // l(data)
+                    l(data)
 
                     if(isString(data)){
                         data = JSON.parse(data)

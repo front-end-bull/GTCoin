@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    
+    <script src="js/jQuery.js"></script>
+    <script src="js/config201711221619.js"></script>
+    <script src="js/jquery.i18n.properties.min.js"></script>
+    
+    <script type="text/javascript">
+        var deviceWidth = $(window).width()
+        var fontSize = deviceWidth/750*100 +'px'
+        $('html').css({'font-size':fontSize})
+
+        function GetQueryString(name) {  
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
+            var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
+            var context = "";  
+            if (r != null)  
+                 context = r[2];  
+            reg = null;  
+            r = null;  
+            return context == null || context == "" || context == "undefined" ? "" : context;  
+        }
+
+    </script>
+
+    
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            outline: none;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        a { text-decoration: none; }
+
+        html{
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+            font-size: 100px;
+        }
+        
+        body{
+            background: rgb(245, 245, 245);
+        }
+
+        .clearfix{ 
+            zoom: 1; 
+        } 
+
+        .clearfix:before, .clearfix:after{ 
+            display: table; 
+            line-height: 0; 
+            content: ""; 
+        } 
+        
+        .clearfix:after { 
+            clear: both; 
+        }
+    
+       
+    </style>
+   
+</head>
+<body>
+   
+    <script>
+        var language_pack = {
+            now_lang : 0, // 0:ch,1:en  
+            loadProperties : function(new_lang){  
+                var self = this;  
+                var tmp_lang = '';  
+                if(new_lang == 'zh_HANS'){  
+                    tmp_lang = 'zh';  
+                    $('body').addClass('zh_HANS');  
+                }
+                if(new_lang == 'zh_HANT'){  
+                    tmp_lang = 'zh';  
+                    $('body').addClass('zh_HANT');
+                }
+                if(new_lang == 'en'){  
+                    tmp_lang = 'en';  
+                    $('body').addClass('en');  
+                } 
+                if(new_lang == 'ml'){  
+                    //马来西亚
+                    tmp_lang = 'ml';  
+                    $('body').addClass('ml');  
+                }  
+                if(new_lang == 'in'){  
+                    //印度尼西亚
+                    tmp_lang = 'in';  
+                    $('body').addClass('in');  
+                }  
+                if(new_lang == 'ar'){
+                    tmp_lang = 'ar';  
+                    $('body').addClass('ar'); 
+                }
+                if(new_lang == 'th'){
+                    //泰国
+                    tmp_lang = 'th';  
+                    $('body').addClass('th'); 
+                }
+                if(new_lang == 'es'){
+                    //西班牙
+                    tmp_lang = 'es';  
+                    $('body').addClass('es'); 
+                }
+                if(new_lang == 'vi'){
+                    //越南
+                    tmp_lang = 'vi';  
+                    $('body').addClass('vi'); 
+                }
+                if(new_lang == 'fr'){
+                    //法国
+                    tmp_lang = 'fr';  
+                    $('body').addClass('fr'); 
+                }
+                if(new_lang == 'ru'){
+                    //俄罗斯
+                    tmp_lang = 'ru';  
+                    $('body').addClass('ru'); 
+                }
+                if(new_lang == 'ko'){
+                    //韩国
+                    tmp_lang = 'ko';  
+                    $('body').addClass('ko'); 
+                }
+                if(new_lang == 'ja'){
+                    //日本
+                    tmp_lang = 'ja';  
+                    $('body').addClass('ja'); 
+                }
+                if(new_lang == 'hi'){
+                    //海地
+                    tmp_lang = 'hi';  
+                    $('body').addClass('hi'); 
+                }
+
+                jQuery.i18n.properties({//加载资浏览器语言对应的资源文件  
+                    name: 'strings', //资源文件名称  
+                    path:'language/', //资源文件路径  
+                    language: tmp_lang,  
+                    cache: false,  
+                    mode:'map', //用Map的方式使用资源文件中的值  
+                    callback: function() {//加载成功后设置显示内容  
+                        for(var i in $.i18n.map){  
+                            $('[data-lang="'+i+'"]').html($.i18n.map[i]); 
+                        }  
+                        if(new_lang==2 || new_lang=='ar'){
+                            $('html').css('direction','rtl')
+                        }
+                        document.title = $.i18n.map['string_TransactionNotice'];  
+                    }  
+                });  
+                self.now_lang = new_lang;  
+            }  
+        } 
+        $(function(){
+            init()
+            language_pack.loadProperties(GetQueryString('lang'));
+        })  
+
+
+        function init(){
+            $.ajax({
+                url:HOST+"/bitcoin/v1?cmd=messageList"+'&code='+GetQueryString('code'),
+                type:'get',
+                success:function(data){
+                }
+            })
+        }
+
+
+
+        $(window).resize(function(){
+            deviceWidth =  $(window).width()
+            fontSize  = deviceWidth/750*100 +'px'
+            $('html').css({'font-size':fontSize})
+        });
+    </script>
+</body>
+
+</html>

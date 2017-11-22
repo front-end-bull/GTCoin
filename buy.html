@@ -320,7 +320,7 @@
             }  
         } 
         $(function(){
-            var amount = GetQueryString('amount')
+            var amount = GetQueryString('amount')  
             $('.sum').text(amount)
             // console.log(amount)
             getPrice(amount)
@@ -333,7 +333,7 @@
 
         function getPrice(amount){
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code'),
+                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+GetQueryString('lang'),
                 type:'get',
                 success:function(data){
                     // alert(data)
@@ -381,7 +381,7 @@
                     if(data.code==0){
 
                         webPay.webFinancePayment(data).app_pay_done(result){
-                            alert(str(result))                            
+                            alert(str(result))                           
                         }
 
                         // $('.loading').text('Success')

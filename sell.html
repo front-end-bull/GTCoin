@@ -246,7 +246,7 @@
 
         function getPrice(num){
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code'),
+                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+GetQueryString('lang'),
                 type:'get',
                 success:function(data){
                     // alert(data)
