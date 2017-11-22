@@ -92,6 +92,10 @@
 
         .block:nth-last-child(1) .container{
             border: none;
+        }   
+
+        .en .block .title{
+            font-size: .32rem;
         }
 
         .block .title{
@@ -195,6 +199,8 @@
             text-align: center;
             top: 6.222rem;
         }
+
+       
 
     </style>
    
@@ -350,8 +356,8 @@
 
                         data.forEach(function(e){
                             html += '<div class="block">'+
-                                '<div class="container" onclick="goOrder('+e.orderid+')">'+
-                                    '<div class="title">'+e.data1+'<div class="buy-box"><div class="'+(e.type==1?'buy':'sell')+'">'+(e.type==1?'买':'卖')+'</div></div></div>'+
+                                '<div class="container" onclick="goOrder(\''+e.orderid+'\')">'+
+                                    '<div class="title">'+$.i18n.map['string_statusDesc'+e.orderStatus]+'<div class="buy-box"><div class="'+(e.type==1?'buy':'sell')+'">'+(e.type==1?$.i18n.map['string_buyLabel']:$.i18n.map['string_sellLabel'])+'</div></div></div>'+
                                     '<div class="time">'+utils.formatDate ( new Date ( e.createtime*1000) ) +'</div>'+
                                     '<img src="img/arrow.png" alt="" class="arrow">'+
                                 '</div>'+
