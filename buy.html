@@ -380,9 +380,16 @@
                     }
                     if(data.code==0){
 
-                        webPay.webFinancePayment(data).app_pay_done(result){
-                            alert(str(result))                           
-                        }
+                        webPay.webFinancePayment(data)
+
+
+                        l(str('webPay',webPay))
+                        
+                        l(str('app_pay_done',app_pay_done))
+
+                        // app_pay_done(){
+                        //     alert(str(result))                           
+                        // }
 
                         // $('.loading').text('Success')
                         // $('.loading').show()
