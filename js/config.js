@@ -1,5 +1,6 @@
 // const HOST = 'http://192.168.10.93:8080'
-const HOST = 'http://52.77.187.2:4002'
+const HOST = 'http://192.168.10.250:8000'
+// const HOST = 'http://52.77.187.2:4002'
 
 const isString = function(obj){
 	  return Object.prototype.toString.call(obj) === "[object String]"; 
