@@ -385,7 +385,8 @@
                         // l(str('app_pay_done',app_pay_done))
 
                         try{
-                            // alert(str(data))
+                            data.data.clientExtraInfo=JSON.stringify(data.data.clientExtraInfo);
+                            alert(str(data.data))
                             webPay.webFinancePayment(data.data)
                         }catch(err){
                             alert(err)
