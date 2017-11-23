@@ -35,7 +35,6 @@
             r = null;  
             return context == null || context == "" || context == "undefined" ? "" : context;  
         }
-
     </script>
 
     
@@ -203,6 +202,7 @@
         </div>
         <div class="buy-box buyBox" style="display: none;"><div class="buy" data-lang="string_buyLabel">买</div></div>
         <div class="buy-box sellBox" style="display: none;"><div class="sell" data-lang="string_sellLabel">卖</div></div>
+        <div class="buy-box widthDrawBox" style="display: none;"><div class="buy" data-lang="string_widthDrawLabel"></div></div>
         <div class="status status0" style="display: none;" data-lang="string_transactionProcessing"></div>
         <div class="status status1" style="display: none;" data-lang="string_success"></div>
         <div class="status status2" style="display: none;" data-lang="string_failure"></div>
@@ -234,6 +234,8 @@
     <div class="button" onclick="goIndex()" style="display: none;" data-lang="string_backHome"></div>
 
     <script>
+        var STATUS = ''
+        var FLAG = ''
 
         function goIndex(){
             window.location.href = 'index.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
@@ -338,7 +340,7 @@
             init(orderid)
 
             if(from=='buy'){
-                setInterval(function(){init(orderid)},3000)
+                FLAG = setInterval(function(){init(orderid)},3000)
                 $('.button').show()
             }
 
@@ -362,6 +364,12 @@
                     $('.createtime').text(utils.formatDate(new Date(data.createtime*1000)))
                     $('.orderid').text(data.id)
                     $('.status'+data.status).show()
+                    STATUS = status
+
+                    if(STATUS==1||STATUS==99){
+                        clearInterval(FLAG)
+                    }
+
                     if(data.type==1){
                         $('.buyBox').show()
                         $('.label2 .left').text($.i18n.map['string_buyQuantity'])
@@ -370,7 +378,10 @@
                         $('.sellBox').show()
                         $('.label2 .left').text($.i18n.map['string_sellCount'])
                         $('.label3 .left').text($.i18n.map['string_anticipatedIncome'])
+                    }else if(data.type==3){
+                        $('.widthDrawBox').show()
                     }
+
                     $('.container').show()
 
                 }
