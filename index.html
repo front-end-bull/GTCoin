@@ -825,7 +825,7 @@
             }else{
                 BUYAMOUNT = value
                 isInput1 = true
-                if(isAgree){
+                if(isAgree && BUY_PRICE){
                     canBuy(1)
                 }else{
                     canBuy(0)
@@ -851,7 +851,7 @@
             }else{
                 BUYNUM = value/1000
                 isInput2 = true
-                if(isAgree){
+                if(isAgree && BUY_PRICE){
                     canBuy(1)
                 }else{
                     canBuy(0)
@@ -877,7 +877,7 @@
             }else{
                 SELLNUM = value/1000
                 isInput2 = true
-                if(isAgree){
+                if(isAgree && SELL_PRICE){
                     canBuy(1)
                 }else{
                     canBuy(0)
