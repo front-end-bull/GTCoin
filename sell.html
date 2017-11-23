@@ -380,14 +380,14 @@
                     }
 
                     if(data.code==0){
-                        $('#orderid').val(data.orderid)
+                        $('#orderid').val(data.orderid);
+                        window.location.href = 'order.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&orderid='+$('#orderid').val()+'&from=buy'
+                        // try{
+                        //     webPay.webFinancePayment(str(data.data))
 
-                        try{
-                            webPay.webFinancePayment(str(data.data))
-
-                        }catch(err){
+                        // }catch(err){
                             
-                        }
+                        // }
 
                     }else if(data.code==1003){
                         isFirst = true
@@ -414,9 +414,9 @@
             })
         }
 
-        function app_pay_done(parmas1,parmas2,parmas3){
-            window.location.href = 'order.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&orderid='+$('#orderid').val()+'&from=buy'
-        }
+        // function app_pay_done(parmas1,parmas2,parmas3){
+        //     window.location.href = 'order.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&orderid='+$('#orderid').val()+'&from=buy'
+        // }
 
         $(window).resize(function(){
             deviceWidth =  $(window).width()
