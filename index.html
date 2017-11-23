@@ -782,7 +782,7 @@
         <img src="img/unchecked.png" class="unchecked"  alt="" onclick="agree()" style="display: none;">
     </div>
 
-    <div class="button" data-lang='string_confirmBuy' onclick="commit()">
+    <div class="button" data-lang='string_purchase' onclick="commit()">
         <!-- 确认购买 -->
     </div>
     <script>
@@ -912,12 +912,21 @@
                 amount = Income
             }
 
+            if(!BUY_PRICE){
+                return
+            }
+
             window.location.href = 'buy.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&amount='+amount+'&price='+BUY_PRICE
         }
 
         function goSell(){
             var num 
             num = SELLNUM
+
+            if(!SELL_PRICE){
+                return
+            }
+            
             window.location.href = 'sell.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&num='+num+'&price='+SELL_PRICE
         }
 
@@ -1038,7 +1047,6 @@
         } 
 
 
-
         $(function(){
             init()
             getPrice()
@@ -1103,14 +1111,14 @@
 
 
         function init(){
-            $('.loading').show()
+            // $('.loading').show()
             $.ajax({
                 url:HOST+"/bitcoin/v1?cmd=myInfo"+'&code='+GetQueryString('code'),
                 type:'get',
                 success:function(data){
                     // console.log(data)
                     l(data)
-                    $('.loading').hide()
+                    // $('.loading').hide()
 
                     if(isString(data)){
                         data = JSON.parse(data)
