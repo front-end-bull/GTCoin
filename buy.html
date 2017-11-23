@@ -222,7 +222,7 @@
     </div>
     
     <div class="loading" style="display: none;">
-        Sorry, your balance is not enough.
+        <!-- Sorry, your balance is not enough. -->
     </div>
 
     <div class="bottom clearfix">
@@ -379,37 +379,20 @@
                 url:url,
                 type:'POST',
                 success:function(data){
-                    // l(str(data))
-
                     if(isString(data)){
                         data = JSON.parse(data)
                     }
 
                     if(data.code==0){
                         $('#orderid').val(data.orderid)
-                        // l(str('webPay',webPay))
-                        // l(str('app_pay_done',app_pay_done))
 
                         try{
-                            // data.data.clientExtraInfo=JSON.stringify(data.data.clientExtraInfo);
-                            // alert(str(data.data))
                             webPay.webFinancePayment(str(data.data))
-                            // app_pay_done(parmas1,parmas2,parmas3)
 
                         }catch(err){
-                            // alert(err)
+                            
                         }
 
-
-                        // app_pay_done(){
-                        //     alert(str(result))                           
-                        // }
-
-                        // $('.loading').text('Success')
-                        // $('.loading').show()
-                        // setTimeout(function(){
-                        //     $('.loading').hide()
-                        // },2000)
                     }else if(data.code==1003){
                         isFirst = true
                         $('.loading').text($.i18n.map['string_noBalance'])

@@ -98,6 +98,25 @@
             left: 2.79rem;
             top: .8rem;
         }
+        .widthDraw{
+            width: .32rem;
+            height: .32rem;
+            line-height: .32rem;
+            color: white;
+            background: #0093A3;
+            border-radius: .04rem;
+            text-align: center;
+            font-family: PingFangSC-Semibold;
+            font-size: .2rem;
+            vertical-align: middle;
+            position: absolute;
+            left: 2.79rem;
+            top: .8rem;
+        }
+
+        .en .widthDraw{
+            left:2rem;
+        }
 
         .sell{
             width: .32rem;
@@ -198,28 +217,40 @@
 </head>
 <body>
     <div class="stage">
-        <div class="title" data-lang="string_buying">
+        <div class="title">
         </div>
         <div class="buy-box buyBox" style="display: none;"><div class="buy" data-lang="string_buyLabel">买</div></div>
         <div class="buy-box sellBox" style="display: none;"><div class="sell" data-lang="string_sellLabel">卖</div></div>
-        <div class="buy-box widthDrawBox" style="display: none;"><div class="buy" data-lang="string_widthDrawLabel"></div></div>
+        <div class="buy-box widthDrawBox" style="display: none;"><div class="widthDraw" data-lang="string_widthDrawLabel"></div></div>
         <div class="status status0" style="display: none;" data-lang="string_transactionProcessing"></div>
         <div class="status status1" style="display: none;" data-lang="string_success"></div>
         <div class="status status2" style="display: none;" data-lang="string_failure"></div>
     </div>
     <div class="container" style="display: none;">
-        <div class="block">
+        <div class="block  buyOrSell"  style="display: none;">
             <div class="left" data-lang="string_strikePrice"></div>
             <div class="right">$ <span class="price"></span></div>
         </div>
-        <div class="block label2">
+        <div class="block label2 buyOrSell"  style="display: none;">
             <div class="left" data-lang=""></div>
             <div class="right"><span class="amount"></span> BTC</div>
         </div>
-        <div class="block label3" style="margin-bottom: .32rem;">
+        <div class="block label3 buyOrSell" style="margin-bottom: .32rem;display: none;">
             <div class="left" data-lang=""></div>
             <div class="right"><span class="num"></span> GTCoin</div>
         </div>
+
+        <div class="block pickup"  style="display: none;">
+            <div class="left" data-lang="string_takeAwayNum"></div>
+            <div class="right"><span class="amount"></span> BTC</div>
+        </div>
+
+        <div class="block pickup"  style="display: none;">
+            <div class="left" data-lang="string_commissionCharge"></div>
+            <div class="right"><span class="rate"></span>%</div>
+        </div>
+
+
         <div class="divider"></div>
         <div class="block" style="margin-top: .32rem;">
             <div class="left" data-lang="string_createtime"></div>
@@ -370,16 +401,24 @@
                         clearInterval(FLAG)
                     }
 
+                    data.type = 3
+
                     if(data.type==1){
                         $('.buyBox').show()
+                        $('.stage .title').text($.i18n.map['string_buying'])
                         $('.label2 .left').text($.i18n.map['string_buyQuantity'])
                         $('.label3 .left').text($.i18n.map['string_EstimatedCost'])
+                        $('.buyOrSell').show()
                     }else if(data.type==2){
                         $('.sellBox').show()
+                        $('.stage .title').text($.i18n.map['string_selling'])
                         $('.label2 .left').text($.i18n.map['string_sellCount'])
                         $('.label3 .left').text($.i18n.map['string_anticipatedIncome'])
+                        $('.buyOrSell').show()
                     }else if(data.type==3){
                         $('.widthDrawBox').show()
+                        $('.stage .title').text($.i18n.map['string_takeAway'])
+                        $('.pickup').show()
                     }
 
                     $('.container').show()

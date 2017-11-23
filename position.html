@@ -18,8 +18,6 @@
     <!-- <script src="//oi6dgk1k6.qnssl.com/jquery.min.2.1.4.js"></script> -->
     
     <script type="text/javascript">
-        
-        
         var deviceWidth = $(window).width()
         var fontSize = deviceWidth/750*100 +'px'
         $('html').css({'font-size':fontSize})
@@ -34,11 +32,8 @@
             r = null;  
             return context == null || context == "" || context == "undefined" ? "" : context;  
         }
-        
-
     </script>
 
-    
     <title>我的持仓</title>
     <style>
         *{
@@ -200,6 +195,10 @@
             border:none;
         }
 
+        .block3:nth-last-child(2){
+            border:none;
+        }
+
         .sell{
             color: #0093A3 !important;
         }
@@ -237,6 +236,62 @@
         .ar{
             direction: rtl;
         }
+
+        .block3{
+            border-bottom: 1px solid #e1e1e1;
+            padding: .1rem .33rem;
+            background: white;
+        }
+
+        .block3 .line1{
+            width: 100%;
+            font-size: 0;
+        }   
+
+        .line1 .left{
+            /*background: red;*/
+            width: 50%;
+            display: inline-block;
+            font-size: .4rem;
+            line-height: .6rem;
+        }
+
+        .line1 .right{
+            /*background: green;*/
+            width: 50%;
+            display: inline-block;
+            font-size: .4rem;
+            text-align: right;
+            line-height: .6rem;
+        }
+
+        .block3 .line2{
+            width: 100%;
+            font-size: 0;
+            margin-top: .1rem;
+        }   
+
+        .line2 .left{
+            /*background: red;*/
+            width: 50%;
+            display: inline-block;
+            font-size: .25rem;
+            color: #999;
+        }
+
+        .line2 .right{
+            /*background: green;*/
+            width: 50%;
+            display: inline-block;
+            font-size: .25rem;
+            text-align: right;
+            color: #999;
+        }
+
+
+
+
+
     </style>
    
 </head>
@@ -255,8 +310,35 @@
     <img src="img/none.png" alt="" class="none" style="display: none;">
     <div class="desc" style="display: none;" data-lang="string_noPosition"></div>
 
-    <div class="block1" style="display: none;" data-lang="string_tradeRecord">交易记录</div>
+    <!-- <div class="block1" style="display: none;" data-lang="string_tradeRecord"></div> -->
+    <div class="block1" data-lang="string_tradeRecord"></div>
     
+
+<!--     <div class="block2">
+        <div class="container">
+            <div class="title">Buy</div>
+            <div class="num sell">+0.002</div>
+            <div class="time">2017-11-23 16:14</div>
+        </div>
+    </div> -->
+
+
+    <div class="block3" onclick="goOrder('')">
+        <div class="line1">
+            <div class="left">
+                Buy
+            </div>
+            <div class="right">
+                +0.002
+            </div>
+        </div>
+        <div class="line2">
+            <div class="left">2017-11-23 16:14</div>
+            <div class="right">-10000</div>
+        </div>
+    </div>
+
+
     <script>
         // const HOST = 'http://192.168.0.250:8000'
 
@@ -372,9 +454,11 @@
                         data.list.forEach(function(e){
                             html+='<div class="block2">'+
                                     '<div class="container">'+
+
                                         '<div class="title" data-lang="string_'+(e.type==1?'buy':'sell')+'">'+(e.type==1?'买入':'卖出')+'</div>'+
-                                        '<div class="num '+(e.type==2?'':'sell')+'">'+(e.type==2?'-':'+')+e.num+'</div>'+
-                                        '<div class="time">'+e.createtime+'</div>'+
+
+                                        '<div class="num '+(e.type==2?'':'sell')+'">'+(e.type==2?'-':'+')+e.amount+'</div>'+
+                                        '<div class="time">'+utils.formatDate( new Date(e.createtime * 1000) )+'</div>'+
                                     '</div>'+
                                 '</div>'
                         })
