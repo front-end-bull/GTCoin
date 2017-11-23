@@ -159,7 +159,7 @@
         }*/
 
 
-        .loading{
+        .msg{
             width: 5.44rem;
             position: relative;
             background: rgba(17, 17, 17, 0.7);
@@ -174,10 +174,69 @@
             padding: .5rem .3rem;
         }
 
+        .loading{
+            width: 2.44rem;
+            height: 2.44rem;
+            position: fixed;
+            background: rgba(17, 17, 17, 0.7);
+            text-align: center;
+            border-radius: 0.1rem;
+            left:50%;
+            margin-left: -1.22rem;
+            top:3.66rem;
+            z-index: 999;
+        }
+
+
+        .loading .desc{
+            font-size: 0.32rem;
+            color: white;
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top:1.6rem;
+            letter-spacing: 0;
+
+        }
+        
+
+        .loading .pics{
+            width: 0.76rem;
+            height: 0.76rem;
+
+            background: transparent url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgxMDB2MTAwSDB6Ii8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTlFOUU5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTMwKSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iIzk4OTY5NyIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgzMCAxMDUuOTggNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjOUI5OTlBIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDYwIDc1Ljk4IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0EzQTFBMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCA2NSA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNBQkE5QUEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwIDU4LjY2IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0IyQjJCMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgxNTAgNTQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjQkFCOEI5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDE4MCA1MCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDMkMwQzEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1MCA0NS45OCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDQkNCQ0IiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEyMCA0MS4zNCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNEMkQyRDIiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDM1IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0RBREFEQSIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgtNjAgMjQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTJFMkUyIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAtNS45OCA2NSkiLz48L3N2Zz4=) no-repeat;
+            animation: weuiLoading 1s steps(12, end) infinite;
+            -webkit-animation:weuiLoading 1s steps(12, end) infinite;
+            background-size: 100%;
+
+            position: absolute;
+            left:50%;
+            margin-left: -0.38rem;
+            top: 0.6rem;
+        }
+
+
+        @keyframes weuiLoading {
+            0% {
+                -webkit-transform: rotate3d(0, 0, 1, 0deg);
+                transform: rotate3d(0, 0, 1, 0deg);
+            }
+            100% {
+                -webkit-transform: rotate3d(0, 0, 1, 360deg);
+                transform: rotate3d(0, 0, 1, 360deg);
+            }
+        }
     </style>
    
 </head>
 <body>
+
+
+    <div class="loading" style="display: none;">
+        <div class="pics"></div>
+        <div class="desc" data-lang="string_loading"></div>
+    </div>
+
     <div class="desc" data-lang="string_desc">
     </div>  
 
@@ -221,8 +280,8 @@
     </div>
 
 
-    <!-- <div class="loading"> -->
-    <div class="loading" style="display: none;">
+    <!-- <div class="msg"> -->
+    <div class="msg" style="display: none;">
         <!-- Sorry, your balance is not enough. -->
     </div>
 
@@ -363,7 +422,7 @@
         function commitSell(){
             if(!isFirst) return 
             isFirst = false
-
+            $('.loading').show()
             var url = HOST+"/bitcoin/v1?cmd=btcSell"
                 +'&show_amount='+NUM
                 +'&show_price='+PRICE
@@ -375,6 +434,8 @@
                 type:'POST',
                 success:function(data){
                     l(data)
+                    $('.loading').hide()
+
                     if(isString(data)){
                         data = JSON.parse(data)
                     }
@@ -391,19 +452,19 @@
 
                     }else if(data.code==1003){
                         isFirst = true
-                        $('.loading').text($.i18n.map['string_noBalance'])
-                        $('.loading').show()
+                        $('.msg').text($.i18n.map['string_noBalance'])
+                        $('.msg').show()
                         setTimeout(function(){
-                            $('.loading').hide()
+                            $('.msg').hide()
                         },5000)
                     }else{
                         // l(data.text)
 
                         isFirst = true
-                        $('.loading').text(data.text.text)
-                        $('.loading').show()
+                        $('.msg').text(data.text.text)
+                        $('.msg').show()
                         setTimeout(function(){
-                            $('.loading').hide()
+                            $('.msg').hide()
                         },5000)
                     }
                 },
