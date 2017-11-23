@@ -777,7 +777,7 @@
     </a> -->
 
     <div class="block6">
-        <span data-lang="string_read"></span><a href="" style="color: #1095A3;" data-lang="string_agreement"></a>
+        <span data-lang="string_read"></span><a href="javascript:void(0)" style="color: #1095A3;" data-lang="string_agreement"></a>
         <img src="img/checked.png"  class="checked" alt="" onclick="agree()">
         <img src="img/unchecked.png" class="unchecked"  alt="" onclick="agree()" style="display: none;">
     </div>
@@ -885,7 +885,7 @@
                 var income = (SELLNUM * 1000) * (SELL_PRICE*100) /100000
                 $('.estimatedIncome').html(Math.floor(income))
                 Income = Math.floor(income)
-            }   
+            }
             getPrice()
         }
 
@@ -1048,6 +1048,8 @@
 
 
         $(function(){
+
+            $('input').val('')
             init()
             getPrice()
             setInterval(getPrice,10000)
@@ -1066,6 +1068,7 @@
         }) 
 
         function getPrice(){
+            // l('come in!')
             $.ajax({
                 url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+( GetQueryString('lang')?GetQueryString('lang'):'en' ),
                 type:'get',
