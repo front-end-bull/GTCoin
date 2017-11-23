@@ -216,7 +216,7 @@
    
 </head>
 <body>
-    <div class="stage">
+    <div class="stage" style="display: none;">
         <div class="title">
         </div>
         <div class="buy-box buyBox" style="display: none;"><div class="buy" data-lang="string_buyLabel">买</div></div>
@@ -366,7 +366,6 @@
             var orderid = GetQueryString('orderid')
             var from = GetQueryString('from')
 
-
             // $('.sum').text(amount)
             init(orderid)
 
@@ -385,6 +384,7 @@
                 type:'get',
                 success:function(data){
                     // l(str(data))
+                    l(data)
                     if(isString(data)){
                         data = JSON.parse(data)
                     }
@@ -419,9 +419,11 @@
                         $('.widthDrawBox').show()
                         $('.stage .title').text($.i18n.map['string_takeAway'])
                         $('.pickup').show()
+                        $('.rate').text(localStorage.rate*100)
                     }
 
                     $('.container').show()
+                    $('.stage').show()
 
                 }
             })
