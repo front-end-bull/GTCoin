@@ -610,6 +610,21 @@
             line-height: .98rem;
             font-size: .3rem;
         }
+
+        .msgNum{
+            width: .26rem;
+            height: .26rem;
+            background: #ff8800;
+            text-align: center;
+            line-height: .26rem;
+            border-radius:100%;
+            position: absolute;
+            right: .2rem;
+            top:.2rem;
+            font-family: SFUIText-Medium;
+            font-size: .2rem;
+            color: rgba(255,255,255,0.87);
+        }
     </style>
     
 </head>
@@ -618,6 +633,7 @@
         <div class="num"></div>
         <div class="desc" ><span data-lang="string_nowPrice"></span>（$/BTC）</div>
         <img src="img/message.jpg" alt="" class="message" onclick="goNotice()">
+        <div class="msgNum" style="display: none;"></div>
     </div>
     <div class="block1 clearfix">
         <div class="left bingo buy" onclick="buy(1)" >
@@ -1031,10 +1047,15 @@
                 type:'get',
                 success:function(data){
                     // console.log(data)
-                    // l(data)
+                    l(data)
 
                     if(isString(data)){
                         data = JSON.parse(data)
+                    }   
+
+                    if(data.noreadMsgCount){
+                        $('.msg').show()
+                        $('.msg').html(data.noreadMsgCount)
                     }
 
                     localStorage.rate = data.drawRate
@@ -1043,7 +1064,15 @@
                     $('.btcBalance').html(data.btcBalance+' BTC')
                     $('.gtcBalance').html(data.gtcBalance)
                 }
-            })
+            });
+            // $.ajax({
+            //     url:HOST+"/bitcoin/v1?cmd=messageList"+'&code='+GetQueryString('code'),
+            //     type:'get',
+            //     success:function(data){
+            //         l(data)
+            //     },
+            //     error:function(error){}
+            // })
         }
 
         var isBTC = false
@@ -1140,7 +1169,7 @@
                 goSell()
 
             }
-        }
+        }   
 
 
         $(window).resize(function(){
