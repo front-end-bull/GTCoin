@@ -268,13 +268,13 @@
     <div class="stage">
         
     </div>
-    <div class="block">
+   <!--  <div class="block" style="">
         <div class="container">
-            <!-- <div class="title">您有一笔买入交易正在处理中<div class="buy-box"><div class="buy">买</div></div></div> -->
-            <!-- <div class="time">2017-11-21 15:12</div> -->
-            <!-- <img src="img/arrow.png" alt="" class="arrow"> -->
+            <div class="title">您有一笔买入交易正在处理中<div class="buy-box"><div class="buy">买</div></div></div>
+            <div class="time">2017-11-21 15:12</div>
+            <img src="img/arrow.png" alt="" class="arrow">
         </div>
-    </div>
+    </div> -->
     
 
     <img src="img/none.png" alt="" class="none" style="display: none;">
@@ -418,7 +418,10 @@
                         data.forEach(function(e){
                             html += '<div class="block">'+
                                 '<div class="container" onclick="goOrder(\''+e.orderid+'\')">'+
-                                    '<div class="title">'+$.i18n.map['string_statusDesc'+e.type + e.orderStatus]+'<div class="buy-box"><div class="'+(e.type==1?'buy':'sell')+'">'+(e.type==1?$.i18n.map['string_buyLabel']:$.i18n.map['string_sellLabel'])+'</div></div></div>'+
+                                    '<div class="title">'+$.i18n.map['string_statusDesc'+e.type + e.orderStatus]+
+                                    '<div class="buy-box"><div class="'+(e.type==2?'buy':'sell')+'">'+
+                                    $.i18n.map['string_labelType'+e.type]+
+                                    '</div></div></div>'+
                                     '<div class="time">'+utils.formatDate ( new Date ( e.createtime*1000) ) +'</div>'+
                                     '<img src="img/arrow.png" alt="" class="arrow">'+
                                 '</div>'+
@@ -426,6 +429,7 @@
                         })
 
                         $('.stage').html(html)
+                        // $('.stage').show()
                     }
 
                 }

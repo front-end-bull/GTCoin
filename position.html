@@ -289,7 +289,19 @@
         }
 
 
-
+        .button{
+            height: 1rem;
+            line-height: 1rem;
+            width: 100%;
+            position:fixed;
+            bottom: 0;
+            border-top: 1px solid #e1e1e1;
+            font-family: PingFangSC-Regular;
+            font-size: .34rem;
+            color: #525566;
+            text-align: center;
+            background: white;
+        }
 
 
     </style>
@@ -323,7 +335,7 @@
     </div> -->
 
 
-    <div class="block3" onclick="goOrder('')">
+<!--     <div class="block3" onclick="goOrder('')">
         <div class="line1">
             <div class="left">
                 Buy
@@ -336,9 +348,12 @@
             <div class="left">2017-11-23 16:14</div>
             <div class="right">-10000</div>
         </div>
+    </div> -->
+
+    
+    <div class="button" data-lang="string_takeAway" onclick="goTakeAway()">
+        
     </div>
-
-
     <script>
         // const HOST = 'http://192.168.0.250:8000'
 
@@ -428,7 +443,12 @@
                 });  
                 self.now_lang = new_lang;  
             }  
-        } 
+        }   
+
+
+        function goTakeAway(){
+            window.location.href = 'takeAway.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
+        }
 
         $(function(){
             init()
