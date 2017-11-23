@@ -169,12 +169,10 @@
             color: #999999;
             line-height: .38rem;
             margin-top: .2rem;
-            word-break: break-all;
         }
 
         .button{
-            opacity: 0.6;
-            background: #0093A3;
+            background: #6cbac4;
             border-radius: .04rem;
             width: 6.1rem;
             height: 1rem;
@@ -183,7 +181,7 @@
             left: 0;
             right: 0;
             /*bottom: 2.22rem;*/
-            top:8.2rem;
+            top:5.85rem;
             text-align: center;
             line-height: 1rem;
             font-size: .36rem;
@@ -262,92 +260,81 @@
             vertical-align: top;
             width: 100%;
         }
+
+        .ok{
+            background: #0093A3;
+        }
     </style>
    
 </head>
 <body>
     <div class="container">
-        <div class="label" data-lang="string_address"></div>
-        <div class="input" onclick="selectAddr()">
-            <div class="left address" data-lang="string_pleaseSelectAddr"></div>
+        <div class="label" data-lang="string_address">地址</div>
+        <div class="input">
+            <div class="left address">
+                <input type="text" placeholder="" class="num url" onkeyup="checkAddr(this.value)">
+            </div>
             <div class="right">
-                <img src="img/dizhi.png" alt="" class="dizhi">
+                <img src="img/saoma.png" alt="" class="dizhi" onclick="saoma()">
             </div>
         </div>
         <div class="divider" style="margin-top: .3rem;margin-bottom: .4rem;"></div>
         <div class="line">
-            <div class="left" data-lang="string_takeAwayNum"></div>         
-            <div class="right"><span data-lang="string_canOperate"></span> <span class="quantity">0.123</span> BTC</div>
+            <div class="left" data-lang="string_remark">备注</div>
         </div>
         <div class="input">
             <div class="left">
             <!-- 请选择地址 -->
-                <input type="number" placeholder="" class="num">
+                <input type="text" placeholder="" class="num remark" onkeyup="checkRemark()">
             </div>
             <div class="right">
-                BTC
             </div>
-        </div>
-        <div class="divider" style="margin-top: .3rem;margin-bottom: .4rem;"></div>
-        <div class="line">
-            <div class="left" data-lang="string_commissionCharge"></div>
-            <div class="right">0.6%</div>
-        </div>
-        <div class="desc" data-lang="string_transferNotice">
         </div>
     </div>
     
     <div class="prompt">
-        <!-- 输入的金额超过余额 -->
     </div>
 
-    <div class="button" data-lang="string_commit">
-        确认
+    <div class="button" data-lang="string_commit" onclick="addAddr()">
     </div>
-
-    
-    <div class="shade" onclick="closeShade()" style="display: none;">
-        <div class="card" onclick="closeShade2()">
-            <div class="top">地址簿</div>
-            <div class="block" onclick="chooseAddr('1Mvj4Du4hT12r2d4WmH7S5Gp9XcnAecHPZ')">
-                <div class="title">默认</div>
-                <div class="content">1Mvj4Du4hT12r2d4WmH7S5Gp9XcnAecHPZ</div>
-            </div>
-            <div class="block">
-                <div class="title">默认</div>
-                <div class="content">1Mvj4Du4hT12r2d4WmH7S5Gp9XcnAecHPZ</div>
-            </div>
-            <div class="block">
-                <div class="title">默认</div>
-                <div class="content">1Mvj4Du4hT12r2d4WmH7S5Gp9XcnAecHPZ</div>
-            </div>
-            <div class="block">
-                <div class="title">默认</div>
-                <div class="content">1Mvj4Du4hT12r2d4WmH7S5Gp9XcnAecHPZ</div>
-            </div>
-        </div>
-    </div>
-
 
     <script>
-        function selectAddr(){
-            getAddrList()
-            // $('.shade').show()
+        var isFirst = true
+        var isOk = false
+        var isAddress = false
+        var isRemark = false
+
+
+
+        function checkOk(){
+            if(isOk){
+                $('.button').addClass('ok')
+            }else{
+                $('.button').removeClass('ok')
+            }
         }
 
-        function closeShade(){
-            $('.shade').hide()
+
+        function checkAddr(address){
+            if(address){
+
+            }
+
         }
 
-        function closeShade2(e){ 
-            window.event? window.event.cancelBubble = true : e.stopPropagation();
-        }  
 
-        function chooseAddr(addr){
-            $('.address').html(addr)
-            $('.shade').hide()
+        function checkRemark(){
+
+
+
         }
 
+
+
+
+        function saoma(){
+            alert('扫码')
+        }
 
 
         var language_pack = {
@@ -435,8 +422,9 @@
                         if(new_lang==2 || new_lang=='ar'){
                             $('html').css('direction','rtl')
                         }
-                        document.title = $.i18n.map['string_takeAway'];  
-                        $('.num').attr('placeholder',$.i18n.map['string_transferAmount'])
+                        document.title = $.i18n.map['string_addAddr'];
+                        $('.url').attr('placeholder',$.i18n.map['string_inputOrPaste'])
+                        $('.remark').attr('placeholder',$.i18n.map['string_lessThan20'])
                     }  
                 });  
                 self.now_lang = new_lang;  
@@ -444,31 +432,21 @@
         } 
 
         $(function(){
-            $('.shade').css('height',$(window).height()+'px')
+            // init()
+            // $('.shade').css('height',$(window).height()+'px')
 
             language_pack.loadProperties(GetQueryString('lang'));
         }) 
         
 
-        function getAddrList(){
-
-            window.location.href = 'addAddr.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
-            
-            // $.ajax({
-            //     url:HOST+"/bitcoin/v1?cmd=btcAddressList"+'&code='+GetQueryString('code'),
-            //     type:'get',
-            //     success:function(data){
-            //         if(isString(data)){
-            //             data = JSON.parse(data)
-            //         }
-
-            //         // l(str(data))
-            //         if(data.list.length==0){
-            //             window.location.href = 'addAddr.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
-            //         }
-
-            //     }   
-            // })
+        function addAddr(){
+            $.ajax({
+                url:HOST+"/bitcoin/v1?cmd=btcAddressAdd"+'&code='+GetQueryString('code')+'&address='+address+'&remark='+remark,
+                type:'get',
+                success:function(data){
+                    l(str(data))
+                }
+            })
         }
 
 

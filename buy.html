@@ -358,6 +358,11 @@
         }
 
 
+        function app_pay_done(result){
+            alert(result)
+        }
+
+
         var isFirst = true
         function pay(){
             if(!isFirst) return 
@@ -378,19 +383,21 @@
                     if(isString(data)){
                         data = JSON.parse(data)
                     }
+
                     if(data.code==0){
-
-
                         // l(str('webPay',webPay))
                         // l(str('app_pay_done',app_pay_done))
 
                         try{
-                            data.data.clientExtraInfo=JSON.stringify(data.data.clientExtraInfo);
-                            alert(str(data.data))
-                            webPay.webFinancePayment(data.data)
+                            // data.data.clientExtraInfo=JSON.stringify(data.data.clientExtraInfo);
+                            // alert(str(data.data))
+                            webPay.webFinancePayment(str(data.data))
+                            app_pay_done(result)
+
                         }catch(err){
-                            alert(err)
+                            // alert(err)
                         }
+
 
                         // app_pay_done(){
                         //     alert(str(result))                           
@@ -401,6 +408,13 @@
                         // setTimeout(function(){
                         //     $('.loading').hide()
                         // },2000)
+                    }else if(data.code==1003){
+                        isFirst = true
+                        $('.loading').text($.i18n.map['string_noBalance'])
+                        $('.loading').show()
+                        setTimeout(function(){
+                            $('.loading').hide()
+                        },2000)
                     }else{
                         // l('msg')
                         isFirst = true
