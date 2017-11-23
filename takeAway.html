@@ -443,7 +443,7 @@
 
 
                     if(data.code==0){
-                        window.location.href = 'order.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&orderid='+data.orderid
+                        window.location.href = 'order.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&orderid='+data.orderid+'&from=buy'
                     }else if(data.code==1003){
                         isFirst = true
                         $('.msg').text($.i18n.map['string_noBalance'])
