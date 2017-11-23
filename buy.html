@@ -179,6 +179,8 @@
             font-size: .3rem;
             padding: 1rem .1rem;
         }
+
+        
     </style>
    
 </head>
@@ -229,6 +231,9 @@
         <div class="left">GTCoin：<span style="color:#0093A3;" class="sum"></span></div>
         <div class="right" data-lang="string_confirmPay" onclick="pay()"></div>
     </div>
+
+
+    <input type="hidden" id="orderid">
     <script>
         var SUM,PRICE,NUM
 
@@ -359,9 +364,10 @@
 
 
         function app_pay_done(parmas1,parmas2,parmas3){
-            alert(parmas1)
-            alert(parmas2)
-            alert(str(parmas3))
+            window.location.href = 'order.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&orderid='+$('#orderid').val()+'&from=buy'
+            // alert(parmas1)
+            // alert(parmas2)
+            // alert(str(parmas3))
         }
 
 
@@ -375,18 +381,20 @@
                 +'&show_price='+PRICE
                 +'&total_pay='+SUM
                 +'&code='+GetQueryString('code')
-            l(url)
             $.ajax({
                 url:url,
                 type:'POST',
                 success:function(data){
-                    l(str(data))
+                    // l(str(data))
+                    // l(data)
 
                     if(isString(data)){
                         data = JSON.parse(data)
                     }
 
                     if(data.code==0){
+                        $('#orderid').val(data.orderid)
+
                         // l(str('webPay',webPay))
                         // l(str('app_pay_done',app_pay_done))
 

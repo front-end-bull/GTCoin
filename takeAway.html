@@ -173,8 +173,7 @@
         }
 
         .button{
-            opacity: 0.6;
-            background: #0093A3;
+            background: #6cbac4;
             border-radius: .04rem;
             width: 6.1rem;
             height: 1rem;
@@ -316,6 +315,10 @@
                 transform: rotate3d(0, 0, 1, 360deg);
             }
         }
+
+        .ok{
+            background: #0093A3;
+        }
     </style>
    
 </head>
@@ -335,8 +338,7 @@
         </div>
         <div class="input">
             <div class="left">
-            <!-- 请选择地址 -->
-                <input type="number" placeholder="" class="num">
+                <input type="number" placeholder="" class="num" onkeyup="checkOk()">
             </div>
             <div class="right">
                 BTC
@@ -355,7 +357,7 @@
         <!-- 输入的金额超过余额 -->
     </div>
 
-    <div class="button" data-lang="string_commit">
+    <div class="button" data-lang="string_commit" onclick="commit()">
         确认
     </div>
 
@@ -374,6 +376,67 @@
 
 
     <script>
+        var isOk = false
+        var isFirst = true
+        var isAddr = false
+
+
+        function commit(){
+            if(!isOk||!isFirst){
+                return
+            }
+
+            isFirst = false
+            $('.loading').show()
+
+            var amount = $('.num').val()
+            amount = parseInt(amount*1000)/1000
+
+            var address = $('.address').html()
+
+
+            var url = HOST+"/bitcoin/v1?cmd=btcDraw"+'&code='+GetQueryString('code')+'&amount='+amount+'&address='+address
+
+            l(url)
+
+
+            $.ajax({
+                url:url,
+                type:'get',
+                success:function(data){
+                    if(isString(data)){
+                        data = JSON.parse(data)
+                    }
+                    $('.loading').hide()
+
+                    l(str(data))
+                    
+
+                },
+                error:function(data) {
+
+                }
+            })
+
+
+
+        }
+
+        function checkOk(){
+            // l ( $('.num').val() )
+            if(isAddr && $('.num').val()){
+                isOk = true
+            }else{
+                isOk = false
+            }
+
+            if(isOk){
+                $('.button').addClass('ok')
+            }else{
+                $('.button').removeClass('ok')
+            }
+        }
+
         function selectAddr(){
             getAddrList()
             // $('.shade').show()
@@ -390,8 +453,9 @@
         function chooseAddr(addr){
             $('.address').html(addr)
             $('.shade').hide()
+            isAddr = true
+            checkOk()
         }
-
 
 
         var language_pack = {
@@ -497,7 +561,7 @@
         function getAddrList(){
 
             // window.location.href = 'addAddr.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
-            
+            $('.loading').show()
             $.ajax({
                 url:HOST+"/bitcoin/v1?cmd=btcAddressList"+'&code='+GetQueryString('code'),
                 type:'get',
@@ -505,23 +569,34 @@
                     if(isString(data)){
                         data = JSON.parse(data)
                     }
+                    $('.loading').hide()
 
-                    // l(str(data))
-                    if(data.list.length==0){
-                        window.location.href = 'addAddr.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
-                    }else{
-                        var html = ''
-                        data.list.forEach(function(e){
-                            html += '<div class="block" onclick="chooseAddr()">'+
-                                        '<div class="title">默认</div>'+
-                                        '<div class="content">'+e.id+'</div>'+
-                                    '</div>'
-                        })
+                    l(str(data))
 
 
-                    }
+                    window.location.href = 'addAddr.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
 
-                }   
+
+                    // if(data.list.length==0){
+                    //     window.location.href = 'addAddr.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
+                    // }else{
+                    //     var html = '<div class="top">地址簿</div>'
+                    //     data.list.forEach(function(e){
+                    //         html += '<div class="block" onclick="chooseAddr(\''+e.address+'\')">'+
+                    //                     '<div class="title">默认</div>'+
+                    //                     '<div class="content">'+e.address+'</div>'+
+                    //                 '</div>'
+                    //     })
+                    //     // l(html)
+
+                    //     $('.card').html(html)
+                    //     $('.shade').show()
+                    // }
+
+                },
+                error:function(data) {
+
+                }
             })
         }
 

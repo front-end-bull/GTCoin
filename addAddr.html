@@ -449,7 +449,13 @@
                 url:HOST+"/bitcoin/v1?cmd=btcAddressAdd"+'&code='+GetQueryString('code')+'&address='+address+'&remark='+remark,
                 type:'get',
                 success:function(data){
-                    l(str(data))
+                    if(isString(data)){
+                        data = JSON.parse(data)
+                    }
+                    if(data.code==0){
+                        window.location.href = 'takeAway.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
+                    }
+
                 },
                 error:function(err){
                     l(str(err))
