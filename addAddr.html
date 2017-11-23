@@ -298,15 +298,19 @@
     <div class="button" data-lang="string_commit" onclick="addAddr()">
     </div>
 
+
+    
+
     <script>
         var isFirst = true
         var isOk = false
-        var isAddress = false
-        var isRemark = false
-
-
 
         function checkOk(){
+            if($('.url').val() && $('.remark').val()){
+                isOk = true
+            }else{
+                isOk = false
+            }
             if(isOk){
                 $('.button').addClass('ok')
             }else{
@@ -316,17 +320,12 @@
 
 
         function checkAddr(address){
-            if(address){
-
-            }
-
+            checkOk()
         }
 
 
-        function checkRemark(){
-
-
-
+        function checkRemark(remark){
+            checkOk()
         }
 
 
@@ -440,13 +439,25 @@
         
 
         function addAddr(){
+            if(!isFirst || !isOk){
+                return 
+            }
+            isFirst = false
+            var address = $('.url').val()
+            var remark = $('.remark').val()
             $.ajax({
                 url:HOST+"/bitcoin/v1?cmd=btcAddressAdd"+'&code='+GetQueryString('code')+'&address='+address+'&remark='+remark,
                 type:'get',
                 success:function(data){
                     l(str(data))
+                },
+                error:function(err){
+                    l(str(err))
+                    isFirst = true
                 }
             })
+
+
         }
 
 
