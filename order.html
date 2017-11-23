@@ -207,26 +207,26 @@
         <div class="status status1" style="display: none;" data-lang="string_success"></div>
         <div class="status status2" style="display: none;" data-lang="string_failure"></div>
     </div>
-    <div class="container">
+    <div class="container" style="display: none;">
         <div class="block">
-            <div class="left" data-lang="string_strikePrice">成交价格</div>
+            <div class="left" data-lang="string_strikePrice"></div>
             <div class="right">$ <span class="price"></span></div>
         </div>
-        <div class="block">
-            <div class="left" data-lang="string_sellCount">卖出数量</div>
+        <div class="block label2">
+            <div class="left" data-lang=""></div>
             <div class="right"><span class="amount"></span> BTC</div>
         </div>
-        <div class="block" style="margin-bottom: .32rem;">
-            <div class="left" data-lang="string_anticipatedIncome">预计收益</div>
+        <div class="block label3" style="margin-bottom: .32rem;">
+            <div class="left" data-lang=""></div>
             <div class="right"><span class="num"></span> GTCoin</div>
         </div>
         <div class="divider"></div>
         <div class="block" style="margin-top: .32rem;">
-            <div class="left" data-lang="string_createtime">创建时间</div>
+            <div class="left" data-lang="string_createtime"></div>
             <div class="right"><span class="createtime"></span></div>
         </div>
         <div class="block">
-            <div class="left" style="width: 20%;" data-lang="string_orderid">订单号</div>
+            <div class="left" style="width: 20%;" data-lang="string_orderid"></div>
             <div class="right" style="width: 80%;"><span class="orderid"></span></div>
         </div>
     </div>
@@ -346,13 +346,12 @@
             language_pack.loadProperties(GetQueryString('lang'));
         })  
 
-
         function init(){
             $.ajax({
                 url:HOST+"/bitcoin/v1?cmd=orderInfo"+'&code='+GetQueryString('code')+"&orderid="+GetQueryString('orderid'),
                 type:'get',
                 success:function(data){
-                    l(str(data))
+                    // l(str(data))
                     if(isString(data)){
                         data = JSON.parse(data)
                     }
@@ -365,9 +364,15 @@
                     $('.status'+data.status).show()
                     if(data.type==1){
                         $('.buyBox').show()
-                    }else{
+                        $('.label2 .left').text($.i18n.map['string_buyQuantity'])
+                        $('.label3 .left').text($.i18n.map['string_EstimatedCost'])
+                    }else if(data.type==2){
                         $('.sellBox').show()
+                        $('.label2 .left').text($.i18n.map['string_sellCount'])
+                        $('.label3 .left').text($.i18n.map['string_anticipatedIncome'])
                     }
+                    $('.container').show()
+
                 }
             })
         }
