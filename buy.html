@@ -361,7 +361,7 @@
         function app_pay_done(parmas1,parmas2,parmas3){
             alert(parmas1)
             alert(parmas2)
-            alert(parmas3)
+            alert(str(parmas3))
         }
 
 
@@ -394,7 +394,7 @@
                             // data.data.clientExtraInfo=JSON.stringify(data.data.clientExtraInfo);
                             // alert(str(data.data))
                             webPay.webFinancePayment(str(data.data))
-                            app_pay_done(result)
+                            // app_pay_done(parmas1,parmas2,parmas3)
 
                         }catch(err){
                             // alert(err)
