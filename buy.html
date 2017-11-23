@@ -322,7 +322,17 @@
             var amount = GetQueryString('amount')  
             $('.sum').text(amount)
             // console.log(amount)
-            getPrice(amount)
+            // getPrice(amount)
+
+            var price = GetQueryString('price')
+            $('.price').html(price)
+            PRICE = price
+            SUM = amount
+            var num = amount*100000/(price*100)
+            $('.estimatedNum').html(parseInt(num)/1000)
+            NUM = parseInt(num)/1000
+
+
             setInterval(
                 function () { getPrice(amount) },10000)
 
@@ -336,7 +346,7 @@
                 type:'get',
                 success:function(data){
                     // alert(data)
-                    // l(data)
+                    l(data)
                     // console.log(amount)
                     if(isString(data)){
                         data = JSON.parse(data)

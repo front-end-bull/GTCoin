@@ -912,13 +912,13 @@
                 amount = Income
             }
 
-            window.location.href = 'buy.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&amount='+amount
+            window.location.href = 'buy.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&amount='+amount+'&price='+BUY_PRICE
         }
 
         function goSell(){
             var num 
             num = SELLNUM
-            window.location.href = 'sell.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&num='+num
+            window.location.href = 'sell.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&num='+num+'&price='+SELL_PRICE
         }
 
 

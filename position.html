@@ -555,48 +555,59 @@
                         var html = ''
                         data.list.forEach(function(e){
 
+                            if(e.type==1||e.type==2){
+                                    html +=     '<div class="block3" onclick="goOrder(\''+e.id+'\')">'+
+                                                    '<div class="line1">'+
+                                                        '<div class="left">'
+                                    
+                                    if(e.type==1){
+                                        html+='<span data-lang="string_buy"></span>'
+                                    }else if(e.type==2){
+                                        html+='<span data-lang="string_sell"></span>'
+                                    }else if(e.type==3){
+                                        html+='<span data-lang="string_takeAway"></span>'
+                                    }
 
-                            html +=     '<div class="block3" onclick="goOrder(\''+e.id+'\')">'+
-                                            '<div class="line1">'+
-                                                '<div class="left">'
-                            
-                            if(e.type==1){
-                                html+='<span data-lang="string_buy"></span>'
-                            }else if(e.type==2){
-                                html+='<span data-lang="string_sell"></span>'
-                            }else if(e.type==3){
-                                html+='<span data-lang="string_takeAway"></span>'
-                            }
-
-                            html+='-<span data-lang="string_status'+e.status+'"></span>'+
-                                                '</div>'+
-                                                '<div class="right">'
+                                    html+='-<span data-lang="string_status'+e.status+'"></span>'+
+                                                        '</div>'+
+                                                        '<div class="right">'
 
 
-                            if(e.type==1){
-                                html += '+'+e.amount+' BTC'
-                            }else if(e.type==2){
-                                html += '-'+e.amount+' BTC'
-                            }else if(e.type==3){
-                                html += '-'+e.amount+' BTC'
-                            }
-                                                    
+                                    if(e.type==1){
+                                        html += '+'+e.amount+' BTC'
+                                    }else if(e.type==2){
+                                        html += '-'+e.amount+' BTC'
+                                    }else if(e.type==3){
+                                        html += '-'+e.amount+' BTC'
+                                    }
+                                                            
+
+                                                html += '</div>'+
+                                                    '</div>'+
+                                                    '<div class="line2">'+
+                                                        '<div class="left">'+utils.formatDate(new Date(e.createtime*1000))+'</div>'
+                                    if(e.type==1){
+                                        html += '<div class="right">-'+e.num+' GTCash</div>'
+                                    }else if(e.type==2){
+                                        html += '<div class="right">+'+e.num+' GTCash</div>'
+                                    }else if(e.type==3){
+                                        html += '<div class="right">-'+e.num+' GTCash</div>'
+                                    }
 
                                         html += '</div>'+
-                                            '</div>'+
-                                            '<div class="line2">'+
-                                                '<div class="left">2017-11-23 16:14</div>'
-                            if(e.type==1){
-                                html += '<div class="right">-'+e.num+' GTCash</div>'
-                            }else if(e.type==2){
-                                html += '<div class="right">+'+e.num+' GTCash</div>'
+                                                    '<img src="img/arrow.png" alt="" class="arrow">'+
+                                                '</div>'
                             }else if(e.type==3){
-                                html += '<div class="right">-'+e.num+' GTCash</div>'
-                            }
 
-                                html += '</div>'+
-                                            '<img src="img/arrow.png" alt="" class="arrow">'+
+                                html+=  '<div class="block2" onclick="goOrder(\''+e.id+'\')">'+
+                                            '<div class="container">'+
+                                                '<div class="title" data-lang="string_takeAway"></div>'+
+                                                '<div class="num sell">-'+e.amount+' BTC</div>'+
+                                                '<div class="time">'+utils.formatDate(new Date(e.createtime*1000))+'</div>'+
+                                            '</div>'+
                                         '</div>'
+
+                            }
 
                             // html+='<div class="block2">'+
                             //         '<div class="container">'+

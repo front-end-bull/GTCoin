@@ -382,7 +382,19 @@
             var num = GetQueryString('num')
             $('.num').text(num)
             // console.log(amount)
-            getPrice(num)
+            // getPrice(num)
+
+
+            var price = GetQueryString('price')
+            $('.price').html(price)
+            var income = (num * 1000) * (price*100) /100000
+            $('.income').html(Math.floor(income))
+            SUM = Math.floor(income)
+            PRICE = price
+            NUM = num
+
+
+
             setInterval(
                 function () { getPrice(num) },10000)
 
