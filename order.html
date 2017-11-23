@@ -461,7 +461,7 @@
                     $('.createtime').text(utils.formatDate(new Date(data.createtime*1000)))
                     $('.orderid').text(data.id)
                     $('.status'+data.status).show()
-                    STATUS = status
+                    STATUS = data.status
 
                     if(STATUS==1||STATUS==99){
                         clearInterval(FLAG)
