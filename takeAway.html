@@ -602,8 +602,8 @@
 
         $(function(){
             $('.shade').css('height',$(window).height()+'px')
-            $('.rate').text(localStorage.rate*100)
-            $('.btcBalance').text(localStorage.btcBalance)
+            $('.rate').text(sessionStorage.rate*100)
+            $('.btcBalance').text(sessionStorage.btcBalance)
 
             language_pack.loadProperties(GetQueryString('lang'));
         }) 

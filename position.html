@@ -195,8 +195,9 @@
             border:none;
         }
 
-        .block3:nth-last-child(2){
+        .block3:nth-last-child(3){
             border:none;
+            margin-bottom: 2rem;
         }
 
         .sell{
@@ -239,8 +240,20 @@
 
         .block3{
             border-bottom: 1px solid #e1e1e1;
-            padding: .1rem .33rem;
+            /*padding: .1rem .33rem;*/
+            padding: .1rem .6rem .1rem .33rem;
             background: white;
+            position: relative;
+        }
+
+        .arrow{
+            width: .16rem;
+            height: .24rem;
+            position: absolute;
+            right: .2rem;
+            margin: auto;
+            top: 0;
+            bottom: 0;
         }
 
         .block3 .line1{
@@ -252,7 +265,7 @@
             /*background: red;*/
             width: 50%;
             display: inline-block;
-            font-size: .4rem;
+            font-size: .32rem;
             line-height: .6rem;
         }
 
@@ -260,7 +273,7 @@
             /*background: green;*/
             width: 50%;
             display: inline-block;
-            font-size: .4rem;
+            font-size: .32rem;
             text-align: right;
             line-height: .6rem;
         }
@@ -268,14 +281,14 @@
         .block3 .line2{
             width: 100%;
             font-size: 0;
-            margin-top: .1rem;
+            /*margin-top: .1rem;*/
         }   
 
         .line2 .left{
             /*background: red;*/
             width: 50%;
             display: inline-block;
-            font-size: .25rem;
+            font-size: .24rem;
             color: #999;
         }
 
@@ -283,7 +296,7 @@
             /*background: green;*/
             width: 50%;
             display: inline-block;
-            font-size: .25rem;
+            font-size: .24rem;
             text-align: right;
             color: #999;
         }
@@ -315,6 +328,7 @@
             left:50%;
             margin-left: -1.22rem;
             top:3.66rem;
+            z-index: 999;
         }
 
 
@@ -397,19 +411,20 @@
     </div> -->
 
 
-<!--     <div class="block3" onclick="goOrder('')">
+    <!-- <div class="block3" onclick="goOrder('')">
         <div class="line1">
             <div class="left">
-                Buy
+                <span data-lang="string_buy">买入</span>-<span data-lang="string_status">处理中</span>
             </div>
             <div class="right">
-                +0.002
+                +0.002 BTC
             </div>
         </div>
         <div class="line2">
             <div class="left">2017-11-23 16:14</div>
-            <div class="right">-10000</div>
+            <div class="right">-10000 GTCash</div>
         </div>
+        <img src="img/arrow.png" alt="" class="arrow">
     </div> -->
 
     
@@ -511,6 +526,10 @@
             window.location.href = 'takeAway.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
         }
 
+        function goOrder(orderid){
+            window.location.href = 'order.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&orderid='+orderid
+        }
+
         $(function(){
             init()
             language_pack.loadProperties(GetQueryString('lang'));
@@ -535,15 +554,59 @@
                         $('.block1').show()
                         var html = ''
                         data.list.forEach(function(e){
-                            html+='<div class="block2">'+
-                                    '<div class="container">'+
 
-                                        '<div class="title" data-lang="string_'+(e.type==1?'buy':'sell')+'">'+(e.type==1?'买入':'卖出')+'</div>'+
 
-                                        '<div class="num '+(e.type==2?'':'sell')+'">'+(e.type==2?'-':'+')+e.amount+'</div>'+
-                                        '<div class="time">'+utils.formatDate( new Date(e.createtime * 1000) )+'</div>'+
-                                    '</div>'+
-                                '</div>'
+                            html +=     '<div class="block3" onclick="goOrder(\''+e.id+'\')">'+
+                                            '<div class="line1">'+
+                                                '<div class="left">'
+                            
+                            if(e.type==1){
+                                html+='<span data-lang="string_buy"></span>'
+                            }else if(e.type==2){
+                                html+='<span data-lang="string_sell"></span>'
+                            }else if(e.type==3){
+                                html+='<span data-lang="string_takeAway"></span>'
+                            }
+
+                            html+='-<span data-lang="string_status'+e.status+'"></span>'+
+                                                '</div>'+
+                                                '<div class="right">'
+
+
+                            if(e.type==1){
+                                html += '+'+e.amount+' BTC'
+                            }else if(e.type==2){
+                                html += '-'+e.amount+' BTC'
+                            }else if(e.type==3){
+                                html += '-'+e.amount+' BTC'
+                            }
+                                                    
+
+                                        html += '</div>'+
+                                            '</div>'+
+                                            '<div class="line2">'+
+                                                '<div class="left">2017-11-23 16:14</div>'
+                            if(e.type==1){
+                                html += '<div class="right">-'+e.num+' GTCash</div>'
+                            }else if(e.type==2){
+                                html += '<div class="right">+'+e.num+' GTCash</div>'
+                            }else if(e.type==3){
+                                html += '<div class="right">-'+e.num+' GTCash</div>'
+                            }
+
+                                html += '</div>'+
+                                            '<img src="img/arrow.png" alt="" class="arrow">'+
+                                        '</div>'
+
+                            // html+='<div class="block2">'+
+                            //         '<div class="container">'+
+
+                            //             '<div class="title" data-lang="string_'+(e.type==1?'buy':'sell')+'">'+(e.type==1?'买入':'卖出')+'</div>'+
+
+                            //             '<div class="num '+(e.type==2?'':'sell')+'">'+(e.type==2?'-':'+')+e.amount+'</div>'+
+                            //             '<div class="time">'+utils.formatDate( new Date(e.createtime * 1000) )+'</div>'+
+                            //         '</div>'+
+                            //     '</div>'
                         })
                         $('.block1').after(html)
                         language_pack.loadProperties(GetQueryString('lang'));  

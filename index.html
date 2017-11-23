@@ -1121,8 +1121,8 @@
                         $('.msg').html(data.noreadMsgCount)
                     }
 
-                    localStorage.rate = data.drawRate
-                    localStorage.btcBalance = data.btcBalance
+                    sessionStorage.rate = data.drawRate
+                    sessionStorage.btcBalance = data.btcBalance
 
                     $('.btcBalance').html(data.btcBalance+' BTC')
                     $('.gtcBalance').html(data.gtcBalance)
