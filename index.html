@@ -1121,11 +1121,13 @@
                         $('.msg').html(data.noreadMsgCount)
                     }
 
-                    sessionStorage.rate = data.drawRate
-                    sessionStorage.btcBalance = data.btcBalance
+                    
 
                     $('.btcBalance').html(data.btcBalance+' BTC')
                     $('.gtcBalance').html(data.gtcBalance)
+
+                    sessionStorage.rate = data.drawRate
+                    sessionStorage.btcBalance = data.btcBalance
                 }
             });
             // $.ajax({
