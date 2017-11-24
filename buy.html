@@ -421,7 +421,7 @@
                         $('.price').html(PRICE)
 
                         var amount = NUM*1000 * ( PRICE * 100 ) / 100000
-                        $('.sum').text(amount)
+                        $('.sum').text( ceil(amount) )
                     }
 
 
@@ -492,7 +492,7 @@
                         $('.price').html(PRICE)
 
                         var amount = NUM*1000 * ( PRICE * 100 ) / 100000
-                        $('.sum').text(amount)
+                        $('.sum').text( ceil(amount) )
                     }
 
 
@@ -624,61 +624,7 @@
         }
 
 
-        function round(x) {    
-            var f = parseFloat(x);    
-            if (isNaN(f)) {    
-                return false;    
-            }    
-            var f = Math.round(x*100)/100;    
-            var s = f.toString();    
-            var rs = s.indexOf('.');    
-            if (rs < 0) {    
-                rs = s.length;    
-                s += '.';    
-            }    
-            while (s.length <= rs + 2) {    
-                s += '0';    
-            }    
-            return s;    
-        }
-
-
-        function ceil(x) {    
-            var f = parseFloat(x);    
-            if (isNaN(f)) {    
-                return false;    
-            }    
-            var f = Math.ceil(x*100)/100;    
-            var s = f.toString();    
-            var rs = s.indexOf('.');    
-            if (rs < 0) {    
-                rs = s.length;    
-                s += '.';    
-            }    
-            while (s.length <= rs + 2) {    
-                s += '0';    
-            }    
-            return s;    
-        }
-
-
-        function floor(x) {    
-            var f = parseFloat(x);    
-            if (isNaN(f)) {    
-                return false;    
-            }    
-            var f = Math.floor(x*100)/100;    
-            var s = f.toString();    
-            var rs = s.indexOf('.');    
-            if (rs < 0) {    
-                rs = s.length;    
-                s += '.';    
-            }    
-            while (s.length <= rs + 2) {    
-                s += '0';    
-            }    
-            return s;    
-        }
+     
 
 
         $(window).resize(function(){

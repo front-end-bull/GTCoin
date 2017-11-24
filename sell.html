@@ -411,8 +411,8 @@
             $('.price').html(PRICE)
 
             var income = (NUM * 1000) * (SINGAPOPRICE*100) /100000
-            $('.income').html(Math.floor(income))
-            SUM = Math.floor(income)
+            $('.income').html(floor(income))
+            SUM = floor(income)
 
 
             setInterval(
@@ -504,6 +504,63 @@
                     isFirst = true
                 }
             })
+        }
+
+
+        function round(x) {    
+            var f = parseFloat(x);    
+            if (isNaN(f)) {    
+                return false;    
+            }    
+            var f = Math.round(x*100)/100;    
+            var s = f.toString();    
+            var rs = s.indexOf('.');    
+            if (rs < 0) {    
+                rs = s.length;    
+                s += '.';    
+            }    
+            while (s.length <= rs + 2) {    
+                s += '0';    
+            }    
+            return s;    
+        }
+
+
+        function ceil(x) {    
+            var f = parseFloat(x);    
+            if (isNaN(f)) {    
+                return false;    
+            }    
+            var f = Math.ceil(x*100)/100;    
+            var s = f.toString();    
+            var rs = s.indexOf('.');    
+            if (rs < 0) {    
+                rs = s.length;    
+                s += '.';    
+            }    
+            while (s.length <= rs + 2) {    
+                s += '0';    
+            }    
+            return s;    
+        }
+
+
+        function floor(x) {    
+            var f = parseFloat(x);    
+            if (isNaN(f)) {    
+                return false;    
+            }    
+            var f = Math.floor(x*100)/100;    
+            var s = f.toString();    
+            var rs = s.indexOf('.');    
+            if (rs < 0) {    
+                rs = s.length;    
+                s += '.';    
+            }    
+            while (s.length <= rs + 2) {    
+                s += '0';    
+            }    
+            return s;    
         }
 
         // function app_pay_done(parmas1,parmas2,parmas3){
