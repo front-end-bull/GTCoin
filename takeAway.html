@@ -349,7 +349,10 @@
 </head>
 <body>
     <div class="container">
-        <div class="label" data-lang="string_address"></div>
+         <div class="line">
+            <div class="left" data-lang="string_address"></div>         
+            <div class="right" onclick="goAddAddr()">+<span data-lang="string_addAddr" style="color: #0093A3;"></span></div>
+        </div>
         <div class="input" onclick="selectAddr()">
             <div class="left address" data-lang="string_pleaseSelectAddr"></div>
             <div class="right">
@@ -614,6 +617,10 @@
             language_pack.loadProperties(GetQueryString('lang'));
         }) 
         
+        function goAddAddr(){
+            $('.loading').show()
+            window.location.href = 'addAddr.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&from=buy'
+        }
 
         function getAddrList(){
 

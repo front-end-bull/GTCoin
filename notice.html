@@ -419,9 +419,11 @@
                             html += '<div class="block">'+
                                 '<div class="container" onclick="goOrder(\''+e.orderid+'\')">'+
                                     '<div class="title">'+$.i18n.map['string_statusDesc'+e.type + e.orderStatus]+
-                                    '<div class="buy-box"><div class="'+(e.type==2?'sell':'buy')+'">'+
-                                    $.i18n.map['string_labelType'+e.type]+
-                                    '</div></div></div>'+
+                                    '<div class="buy-box">'+
+                                    // '<div class="'+(e.type==2?'sell':'buy')+'">'+
+                                    // $.i18n.map['string_labelType'+e.type]+
+                                    // '</div>'+
+                                    '</div></div>'+
                                     '<div class="time">'+utils.formatDate ( new Date ( e.createtime*1000) ) +'</div>'+
                                     '<img src="img/arrow.png" alt="" class="arrow">'+
                                 '</div>'+

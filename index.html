@@ -260,13 +260,26 @@
             border-left: 1px solid #e1e1e1;
             border-bottom: 1px solid #e1e1e1;
         }
+        
+        .block2 .symbol{
+            width: 1rem;
+            height: .98rem;
+            border-bottom: 1px solid #e1e1e1;
+            float: left;
+            font-size: .333rem;
+            line-height: .98rem;
+            text-align: center;
+        }
 
         .block2 .middle{
-            width: 3.62rem;
+            width: 2.62rem;
             height: .98rem;
             border-bottom: 1px solid #e1e1e1;
             float: left;
         }
+
+
+
 
         .block2 .middle input{
             border:none;
@@ -824,6 +837,7 @@
         <div class="middle">
             <input type="number" placeholder="" class="atleast500 amount1" onkeyup="changeBuyAmount(this.value)">
         </div>
+        <div class="symbol">SGD</div>
         <div class="right" onclick="toggle()" data-lang="string_buybyBtc"></div>
     </div>
 
@@ -993,6 +1007,7 @@
 
         function chooseCurrency(currency){
             $('.simpleSymbol').html(currency)
+            $('.symbol').html(currency)
             $('.pricetype').html(currency)
             $('.USD1').show()
             $('.USD2').hide()

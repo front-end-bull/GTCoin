@@ -82,9 +82,9 @@
             font-size: .2917rem;
             color: #FFFFFF;
             letter-spacing: 0;
-            bottom: 1.26rem;
             position: absolute;
             width: 100%;
+            bottom: .41rem;
             text-align: center;
         }
 
@@ -96,7 +96,7 @@
             position: absolute;
             width: 100%;
             line-height: .68rem;
-            bottom: .51rem;
+            bottom: .9rem;
             text-align: center;
         }
 
@@ -423,7 +423,7 @@
         </div>
         <div class="line2">
             <div class="left">2017-11-23 16:14</div>
-            <div class="right">-10000 GTCash</div>
+            <div class="right">-10000 SGD</div>
         </div>
         <img src="img/arrow.png" alt="" class="arrow">
     </div> -->
@@ -590,11 +590,11 @@
                                                     '<div class="line2">'+
                                                         '<div class="left">'+utils.formatDate(new Date(e.createtime*1000))+'</div>'
                                     if(e.type==1){
-                                        html += '<div class="right">-'+e.num+' GTCash</div>'
+                                        html += '<div class="right">-'+e.num+' SGD</div>'
                                     }else if(e.type==2){
-                                        html += '<div class="right">+'+e.num+' GTCash</div>'
+                                        html += '<div class="right">+'+e.num+' SGD</div>'
                                     }else if(e.type==3){
-                                        html += '<div class="right">-'+e.num+' GTCash</div>'
+                                        html += '<div class="right">-'+e.num+' SGD</div>'
                                     }
 
                                         html += '</div>'+
