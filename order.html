@@ -433,6 +433,28 @@
             if(from=='buy'){
                 FLAG = setInterval(function(){init(orderid)},3000)
                 $('.button').show()
+
+
+                if (window.history && window.history.pushState) {
+                    $(window).on('popstate', function() {
+                      var hashLocation = location.hash;
+                      var hashSplit = hashLocation.split("#!/");
+                      var hashName = hashSplit[1];
+
+                      if (hashName !== '') {
+                        var hash = window.location.hash;
+                        if (hash === '') {
+                          // alert('後退按鈕點擊');
+                            window.location.href = 'index.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
+                          // closeWindow()
+                        }
+                      }
+                    });
+                    window.history.pushState('forward', null, '');
+                }
+
+
+
             }
 
 
