@@ -8,9 +8,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
-    <script src="js/jQuery.js"></script>
+    <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jQuery.js"></script>
     <script src="js/config201711221741.js"></script>
-    <script src="js/jquery.i18n.properties.min.js"></script>
+    <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jquery.i18n.properties.min.js"></script>
 
     <script type="text/javascript">
         var deviceWidth = $(window).width()
@@ -244,8 +244,8 @@
         <div class="left" data-lang="string_nowPrice2">
             实时币价
         </div>
-        <div class="right" style="color: #0093A3;">
-            <span class="symbol"></span><span class="price"></span>/BTC
+        <div class="right" >
+            <span class="symbol"></span> <span class="price" style="color: #0093A3;"></span> /BTC
         </div>
     </div>
 
@@ -264,15 +264,15 @@
             预计收入
         </div>
         <div class="right">
-            <span class="income"></span>
              SGD
+            <span class="income"></span>
         </div>
     </div>
 
     <div class="desc2">
         <!-- 交易说明 -->
         <span data-lang="string_buyDesc"></span>
-        <img src="img/desc.png" alt="">
+        <img src="http://d3tbpk51ffth2m.cloudfront.net/img/desc.png" alt="">
     </div>
     
     <div class="bottom clearfix" data-lang="string_confirmSelling" onclick="commitSell()">
@@ -389,14 +389,24 @@
             // getPrice(num)
 
             if(CURRENCY=='USD'){
-                $('.symbol').text('$')
+                $('.symbol').text('USD')
             }else if(CURRENCY=='CNY'){
-                $('.symbol').text('¥')
+                $('.symbol').text('CNY')
             }else if(CURRENCY=='SGD'){
-                $('.symbol').text('S$')
+                $('.symbol').text('SGD')
             }else if(CURRENCY=='AED'){
-                $('.symbol').text('ر.س')
+                $('.symbol').text('AED')
             }
+
+            // if(CURRENCY=='USD'){
+            //     $('.symbol').text('$')
+            // }else if(CURRENCY=='CNY'){
+            //     $('.symbol').text('¥')
+            // }else if(CURRENCY=='SGD'){
+            //     $('.symbol').text('S$')
+            // }else if(CURRENCY=='AED'){
+            //     $('.symbol').text('ر.س')
+            // }
 
 
             $('.price').html(PRICE)

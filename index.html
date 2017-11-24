@@ -15,8 +15,8 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
 
-    <script src="js/jQuery.js"></script>
-    <script src="js/jquery.i18n.properties.min.js"></script>
+    <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jQuery.js"></script>
+    <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jquery.i18n.properties.min.js"></script>
     <script src="js/config201711221741.js"></script>
     
     <script type="text/javascript">
@@ -81,7 +81,7 @@
         .pagetop{
             width: 100%;
             height: 2.27rem;
-            background-image: url('img/bj.png');
+            background-image: url('http://d3tbpk51ffth2m.cloudfront.net/img/bj.png');
             background-size: 100%; 
             position: relative;
             /*animation:wave 5s  linear infinite;*/
@@ -816,7 +816,7 @@
             <div class="pricenum"></div>
         </div>
         <div class="desc" ><span data-lang="string_nowPrice"></span></div>
-        <img src="img/message.jpg" alt="" class="message" onclick="goNotice()">
+        <img src="http://d3tbpk51ffth2m.cloudfront.net/img/message.jpg" alt="" class="message" onclick="goNotice()">
         <div class="msgNum" style="display: none;"></div>
         <img src="img/toggle.jpg" alt="" class="toggle" onclick="showShade()">
     </div>
@@ -886,7 +886,7 @@
             <div class="right"><span class="btcBalance">&nbsp;</span>
             </div>
             <div class="pad1">1</div>
-            <img src="img/arrow.png" alt="" style="right: .333rem;">
+            <img src="http://d3tbpk51ffth2m.cloudfront.net/img/arrow.png" alt="" style="right: .333rem;">
         </div>
     </a>
     
@@ -897,14 +897,14 @@
             <div class="right"><span class="gtcBalance">&nbsp;</span>
             </div>
             <div class="pad1">1</div>
-            <img src="img/arrow.png" alt="" style="right: .333rem;">
+            <img src="http://d3tbpk51ffth2m.cloudfront.net/img/arrow.png" alt="" style="right: .333rem;">
         </div>
     </a> -->
 
     <div class="block6">
         <span data-lang="string_read"></span><a onclick="goAgreement()" href="javascript:void(0)" style="color: #1095A3;" data-lang="string_agreement"></a>
-        <img src="img/checked.png"  class="checked" alt="" onclick="agree()">
-        <img src="img/unchecked.png" class="unchecked"  alt="" onclick="agree()" style="display: none;">
+        <img src="http://d3tbpk51ffth2m.cloudfront.net/img/checked.png"  class="checked" alt="" onclick="agree()">
+        <img src="http://d3tbpk51ffth2m.cloudfront.net/img/unchecked.png" class="unchecked"  alt="" onclick="agree()" style="display: none;">
     </div>
 
     <div class="button" data-lang='string_purchase' onclick="commit()">
@@ -1021,6 +1021,7 @@
             $('.'+currency+'2').show()
             $('.shade').hide()
             getPrice('toggle')
+            sessionStorage.currency = currency
         }
 
         function showShade(){
@@ -1290,6 +1291,11 @@
 
 
         $(function(){
+
+            if(sessionStorage.currency){
+                chooseCurrency(sessionStorage.currency)
+            }
+
             $('.shade').css('height',$(window).height()+'px')
             $('input').val('')
             init()

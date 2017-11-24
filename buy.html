@@ -15,9 +15,9 @@
     <meta http-equiv="Cache" content="no-cache">
 
     
-    <script src="js/jQuery.js"></script>
+    <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jQuery.js"></script>
     <script src="js/config201711221741.js"></script>
-    <script src="js/jquery.i18n.properties.min.js"></script>
+    <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jquery.i18n.properties.min.js"></script>
     <!-- <script src="//oi6dgk1k6.qnssl.com/jquery.min.2.1.4.js"></script> -->
     
     <script type="text/javascript">
@@ -243,8 +243,8 @@
         <div class="left" data-lang='string_nowPrice'>
             <!-- 实时币价 -->
         </div>
-        <div class="right" style="color: #0093A3;">
-            <span class="currencySymbol"></span><span class="price"></span>/BTC
+        <div class="right" >
+            <span class="currencySymbol" ></span> <span class="price" style="color: #0093A3;"></span> /BTC
         </div>
     </div>
 
@@ -271,7 +271,7 @@
     <div class="desc2">
         <span data-lang="string_buyDesc"></span>
         <!-- 交易说明 -->
-        <img src="img/desc.png" alt="">
+        <img src="http://d3tbpk51ffth2m.cloudfront.net/img/desc.png" alt="">
     </div>
     
     <div class="msg" style="display: none;">
@@ -380,13 +380,13 @@
             PRICE = GetQueryString('price')
 
             if(CURRENCY=='USD'){
-                $('.currencySymbol').text('$')
+                $('.currencySymbol').text('USD')
             }else if(CURRENCY=='CNY'){
-                $('.currencySymbol').text('¥')
+                $('.currencySymbol').text('CNY')
             }else if(CURRENCY=='SGD'){
-                $('.currencySymbol').text('S$')
+                $('.currencySymbol').text('SGD')
             }else if(CURRENCY=='AED'){
-                $('.currencySymbol').text('ر.س')
+                $('.currencySymbol').text('AED')
             }
 
 
