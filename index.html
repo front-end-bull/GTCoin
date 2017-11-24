@@ -1049,12 +1049,20 @@
             }else{
                 BUYAMOUNT = value
                 isInput1 = true
+                
+                var num = BUYAMOUNT*100000/(BUY_PRICE*100)
+
                 if(isAgree && BUY_PRICE){
-                    canBuy(1)
+                    if(num<1){
+                        canBuy(0)
+                    }else{
+                        canBuy(1)
+                    }
                 }else{
                     canBuy(0)
                 }
-                var num = BUYAMOUNT*100000/(BUY_PRICE*100)
+
+
                 $('.estimatedNum').html(parseInt(num)/1000)
             }   
             getPrice()
