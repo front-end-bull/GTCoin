@@ -401,8 +401,16 @@
                 $('.estimatedNum').html(parseInt(num)/1000)
                 NUM = parseInt(num)/1000
 
-                var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
-                $('.sgdSum').html(Math.ceil(sgdSum))
+                
+
+
+                if(CURRENCY=='SGD'){
+                    var sgdSum = amount
+                    $('.sgdSum').html(sgdSum)
+                }else{
+                    var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
+                    $('.sgdSum').html(Math.ceil(sgdSum))
+                }
 
             }else if(TYPE=='num'){
                 var num = GetQueryString('num')  
