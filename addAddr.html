@@ -320,6 +320,22 @@
                 transform: rotate3d(0, 0, 1, 360deg);
             }
         }
+
+        .msg{
+            width: 5.44rem;
+            position: relative;
+            background: rgba(17, 17, 17, 0.7);
+            text-align: center;
+            border-radius: 0.1rem;
+            left: 50%;
+            top: 50%;
+            margin-left: -2.72rem;
+            color: white;
+            font-size: .3rem;
+            line-height: 1.4;
+            padding: .5rem .3rem;
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
@@ -360,6 +376,9 @@
     </div>
     
 
+    <div class="msg" style="display: none;">
+        <!-- Sorry, your balance is not enough. -->
+    </div>
     <script>
         var isFirst = true
         var isOk = false
@@ -388,25 +407,9 @@
         }
 
         function checkUrl(addr){
-            $('.loading').show()
+            // $('.loading').show()
 
-            $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcAddressValidation"+'&code='+GetQueryString('code')+'&address='+addr,
-                type:'get',
-                success:function(data){
-                    if(isString(data)){
-                        data = JSON.parse(data)
-                    }
-                    l(data)
-                    $('.loading').hide()
-                },
-                error:function(err){
-                    l(str(err))
-                    isFirst = true
-                    $('.loading').hide()
-
-                }
-            })
+            
 
             
         }
@@ -521,27 +524,55 @@
         function addAddr(){
             var address = $('.url').val()
             var remark = $('.remark').val()
-            // if ( !checkUrl(address) ){ return }
+
             if(!isFirst || !isOk){
                 return 
             }
             $('.loading').show()
             isFirst = false
-            
+
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcAddressAdd"+'&code='+GetQueryString('code')+'&address='+address+'&remark='+remark,
+                url:HOST+"/bitcoin/v1?cmd=btcAddressValidation"+'&code='+GetQueryString('code')+'&address='+address,
                 type:'get',
                 success:function(data){
                     if(isString(data)){
                         data = JSON.parse(data)
                     }
-                    $('.loading').hide()
+                    // l(data)
 
-                    if(data.code==0){
-                        window.location.href = 'takeAway.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
+                    if(data.data==true){
+                            $.ajax({
+                                url:HOST+"/bitcoin/v1?cmd=btcAddressAdd"+'&code='+GetQueryString('code')+'&address='+address+'&remark='+remark,
+                                type:'get',
+                                success:function(data){
+                                    if(isString(data)){
+                                        data = JSON.parse(data)
+                                    }
+                                    // $('.loading').hide()
+
+                                    if(data.code==0){
+                                        window.location.href = 'takeAway.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
+                                    }else{
+                                        // alert(data.text)
+                                        l(data.text)
+                                    }
+
+                                },
+                                error:function(err){
+                                    l(str(err))
+                                    isFirst = true
+                                    $('.loading').hide()
+
+                                }
+                            })
                     }else{
-                        // alert(data.text)
-                        l(data.text)
+                        isFirst = true
+                        $('.loading').hide()
+                        $('.msg').text($.i18n.map['string_addressIncorrect'])
+                        $('.msg').show()
+                        setTimeout(function(){
+                            $('.msg').hide()
+                        },2000)
                     }
 
                 },
@@ -549,9 +580,11 @@
                     l(str(err))
                     isFirst = true
                     $('.loading').hide()
-
                 }
             })
+
+
+
         }
 
 
