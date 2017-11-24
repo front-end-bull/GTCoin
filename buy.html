@@ -390,42 +390,39 @@
             }
 
 
-            if(TYPE=='amount'){
-                var amount = GetQueryString('amount')  
-                $('.sum').text(amount)
-                // console.log(amount)
-                // getPrice(amount)
+                    if(TYPE=='amount'){
+                        var amount = GetQueryString('amount')  
+                        $('.sum').text(amount)
+                        // console.log(amount)
+                        // getPrice(amount)
 
-                $('.price').html(PRICE)
-                SUM = amount
-                var num = amount*100000/(PRICE*100)
-                $('.estimatedNum').html(parseInt(num)/1000)
-                NUM = parseInt(num)/1000
+                        $('.price').html(PRICE)
+                        SUM = amount
+                        var num = amount*100000/(PRICE*100)
+                        $('.estimatedNum').html(parseInt(num)/1000)
+                        NUM = parseInt(num)/1000
 
-                
+                        if(CURRENCY=='SGD'){
+                            var sgdSum = amount
+                            $('.sgdSum').html(ceil ( sgdSum ))
+                        }else{
+                            var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
+                            $('.sgdSum').html(ceil(sgdSum) )
+                        }
 
+                    }else if(TYPE=='num'){
+                        var num = GetQueryString('num')  
+                        $('.estimatedNum').html(num)
+                        NUM = num
 
-                if(CURRENCY=='SGD'){
-                    var sgdSum = amount
-                    $('.sgdSum').html(sgdSum)
-                }else{
-                    var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
-                    $('.sgdSum').html(Math.ceil(sgdSum))
-                }
+                        var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
+                        $('.sgdSum').html(ceil(sgdSum))
 
-            }else if(TYPE=='num'){
-                var num = GetQueryString('num')  
-                $('.estimatedNum').html(num)
-                NUM = num
+                        $('.price').html(PRICE)
 
-                var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
-                $('.sgdSum').html(Math.ceil(sgdSum))
-
-                $('.price').html(PRICE)
-
-                var amount = NUM*1000 * ( PRICE * 100 ) / 100000
-                $('.sum').text(amount)
-            }
+                        var amount = NUM*1000 * ( PRICE * 100 ) / 100000
+                        $('.sum').text(amount)
+                    }
 
 
             
@@ -476,8 +473,13 @@
                         $('.estimatedNum').html(parseInt(num)/1000)
                         NUM = parseInt(num)/1000
 
-                        var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
-                        $('.sgdSum').html(Math.ceil(sgdSum))
+                        if(CURRENCY=='SGD'){
+                            var sgdSum = amount
+                            $('.sgdSum').html(ceil ( sgdSum ))
+                        }else{
+                            var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
+                            $('.sgdSum').html(ceil(sgdSum) )
+                        }
 
                     }else if(TYPE=='num'){
                         var num = GetQueryString('num')  
@@ -485,13 +487,15 @@
                         NUM = num
 
                         var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
-                        $('.sgdSum').html(Math.ceil(sgdSum))
+                        $('.sgdSum').html(ceil(sgdSum))
 
                         $('.price').html(PRICE)
 
                         var amount = NUM*1000 * ( PRICE * 100 ) / 100000
                         $('.sum').text(amount)
                     }
+
+
 
                 }
             })
@@ -560,6 +564,120 @@
             })
 
 
+        }
+
+
+        function round(x) {    
+            var f = parseFloat(x);    
+            if (isNaN(f)) {    
+                return false;    
+            }    
+            var f = Math.round(x*100)/100;    
+            var s = f.toString();    
+            var rs = s.indexOf('.');    
+            if (rs < 0) {    
+                rs = s.length;    
+                s += '.';    
+            }    
+            while (s.length <= rs + 2) {    
+                s += '0';    
+            }    
+            return s;    
+        }
+
+
+        function ceil(x) {    
+            var f = parseFloat(x);    
+            if (isNaN(f)) {    
+                return false;    
+            }    
+            var f = Math.ceil(x*100)/100;    
+            var s = f.toString();    
+            var rs = s.indexOf('.');    
+            if (rs < 0) {    
+                rs = s.length;    
+                s += '.';    
+            }    
+            while (s.length <= rs + 2) {    
+                s += '0';    
+            }    
+            return s;    
+        }
+
+
+        function floor(x) {    
+            var f = parseFloat(x);    
+            if (isNaN(f)) {    
+                return false;    
+            }    
+            var f = Math.floor(x*100)/100;    
+            var s = f.toString();    
+            var rs = s.indexOf('.');    
+            if (rs < 0) {    
+                rs = s.length;    
+                s += '.';    
+            }    
+            while (s.length <= rs + 2) {    
+                s += '0';    
+            }    
+            return s;    
+        }
+
+
+        function round(x) {    
+            var f = parseFloat(x);    
+            if (isNaN(f)) {    
+                return false;    
+            }    
+            var f = Math.round(x*100)/100;    
+            var s = f.toString();    
+            var rs = s.indexOf('.');    
+            if (rs < 0) {    
+                rs = s.length;    
+                s += '.';    
+            }    
+            while (s.length <= rs + 2) {    
+                s += '0';    
+            }    
+            return s;    
+        }
+
+
+        function ceil(x) {    
+            var f = parseFloat(x);    
+            if (isNaN(f)) {    
+                return false;    
+            }    
+            var f = Math.ceil(x*100)/100;    
+            var s = f.toString();    
+            var rs = s.indexOf('.');    
+            if (rs < 0) {    
+                rs = s.length;    
+                s += '.';    
+            }    
+            while (s.length <= rs + 2) {    
+                s += '0';    
+            }    
+            return s;    
+        }
+
+
+        function floor(x) {    
+            var f = parseFloat(x);    
+            if (isNaN(f)) {    
+                return false;    
+            }    
+            var f = Math.floor(x*100)/100;    
+            var s = f.toString();    
+            var rs = s.indexOf('.');    
+            if (rs < 0) {    
+                rs = s.length;    
+                s += '.';    
+            }    
+            while (s.length <= rs + 2) {    
+                s += '0';    
+            }    
+            return s;    
         }
 
 
