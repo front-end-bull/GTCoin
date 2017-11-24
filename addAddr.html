@@ -16,7 +16,11 @@
     <script src="js/jQuery.js"></script>
     <script src="js/config201711221741.js"></script>
     <script src="js/jquery.i18n.properties.min.js"></script>
+    <script src="js/wallet-address-validator.min.js"></script>
     
+
+
+
     <script type="text/javascript">
         var deviceWidth = $(window).width()
         var fontSize = deviceWidth/750*100 +'px'
@@ -324,7 +328,6 @@
         }
 
 
-
     </style>
    
 </head>
@@ -393,8 +396,18 @@
             checkOk()
         }
 
+        function checkUrl(addr){
+            // 1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck
+            var valid = WAValidator.validate('1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck', 'BTC');
+            if(valid){
+                alert('This is a valid address');
+                // return false
 
-
+            }else{
+                // return true
+                alert('Address INVALID');
+            }
+        }
 
         function saoma(){
             alert('扫码')
@@ -504,13 +517,17 @@
         
 
         function addAddr(){
+            var address = $('.url').val()
+            var remark = $('.remark').val()
+            // if ( !checkUrl(address) ){ return }
+
+
             if(!isFirst || !isOk){
                 return 
             }
             $('.loading').show()
             isFirst = false
-            var address = $('.url').val()
-            var remark = $('.remark').val()
+            
             $.ajax({
                 url:HOST+"/bitcoin/v1?cmd=btcAddressAdd"+'&code='+GetQueryString('code')+'&address='+address+'&remark='+remark,
                 type:'get',
@@ -535,6 +552,7 @@
 
                 }
             })
+
 
 
         }
