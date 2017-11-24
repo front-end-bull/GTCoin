@@ -12,14 +12,9 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
-    
     <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jQuery.js"></script>
     <script src="js/config201711221741.js"></script>
     <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jquery.i18n.properties.min.js"></script>
-    <script src="js/wallet-address-validator.min.js"></script>
-    
-
-
 
     <script type="text/javascript">
         var deviceWidth = $(window).width()
@@ -36,7 +31,6 @@
             r = null;  
             return context == null || context == "" || context == "undefined" ? "" : context;  
         }
-
     </script>
 
     
@@ -326,10 +320,7 @@
                 transform: rotate3d(0, 0, 1, 360deg);
             }
         }
-
-
     </style>
-   
 </head>
 <body>
     <div class="container">
@@ -339,7 +330,7 @@
                 <input type="text" placeholder="" class="num url" onkeyup="checkAddr(this.value)">
             </div>
             <div class="right">
-                <img src="http://d3tbpk51ffth2m.cloudfront.net/img/saoma.png" alt="" class="dizhi" onclick="saoma()" style="display: none;">
+                <img src="img/saoma.png" alt="" class="dizhi" onclick="saoma()" style="display: none;">
             </div>
         </div>
         <div class="divider" style="margin-top: .3rem;margin-bottom: .4rem;"></div>
@@ -397,16 +388,27 @@
         }
 
         function checkUrl(addr){
-            // 1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck
-            var valid = WAValidator.validate('1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck', 'BTC');
-            if(valid){
-                alert('This is a valid address');
-                // return false
+            $('.loading').show()
 
-            }else{
-                // return true
-                alert('Address INVALID');
-            }
+            $.ajax({
+                url:HOST+"/bitcoin/v1?cmd=btcAddressValidation"+'&code='+GetQueryString('code')+'&address='+addr,
+                type:'get',
+                success:function(data){
+                    if(isString(data)){
+                        data = JSON.parse(data)
+                    }
+                    l(data)
+                    $('.loading').hide()
+                },
+                error:function(err){
+                    l(str(err))
+                    isFirst = true
+                    $('.loading').hide()
+
+                }
+            })
+
+            
         }
 
         function saoma(){
@@ -520,8 +522,6 @@
             var address = $('.url').val()
             var remark = $('.remark').val()
             // if ( !checkUrl(address) ){ return }
-
-
             if(!isFirst || !isOk){
                 return 
             }
@@ -552,9 +552,6 @@
 
                 }
             })
-
-
-
         }
 
 
