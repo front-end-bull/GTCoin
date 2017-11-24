@@ -524,10 +524,12 @@
         }   
 
         function goTakeAway(){
+            $('.loading').show()
             window.location.href = 'takeAway.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
         }
 
         function goOrder(orderid){
+            $('.loading').show()
             window.location.href = 'order.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&orderid='+orderid
         }
 

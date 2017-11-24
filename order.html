@@ -445,6 +445,7 @@
                         var hash = window.location.hash;
                         if (hash === '') {
                           // alert('後退按鈕點擊');
+                            $('.loading').show()
                             window.location.href = 'index.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
                           // closeWindow()
                         }
@@ -481,7 +482,7 @@
                     $('.createtime').text(utils.formatDate(new Date(data.createtime*1000)))
                     $('.orderid').text(data.id)
 
-                    if(STATUS==1||STATUS==99){
+                    if(STATUS==1||STATUS==99||STATUS==-1||STATUS==-2){
                         clearInterval(FLAG)
                     }
 

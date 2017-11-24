@@ -722,8 +722,8 @@
         }
 
         .shade .card{
-            width: 6.2rem;
-            height: 6.6rem;
+            width: 5.6rem;
+            height: 4.96rem;
             border-radius: .04rem;
             background: white;
             position: absolute;
@@ -738,37 +738,53 @@
         .card .top{
             height: 1.07rem;
             width: 100%;
-            text-align: center;
-            border-bottom:1px solid #dfdfdf;
-            font-family: PingFangSC-Regular;
-            font-size: .32rem;
-            color: #333333;
             line-height: 1.07rem;
+            padding-left: .48rem;
+            border-bottom:1px solid #dfdfdf;
             font-family: NotoSansCJKsc-Regular;
-            font-size: 40px;
+            font-size: .4rem;
+            color: rgba(0,0,0,0.87);
             color: rgba(0,0,0,0.87);
         }
         
         .card .block{
+            padding: 0 .48rem;
+        }
+
+        .card .block .container{
+            font-size: 0;
             width: 100%;
-            border-bottom:1px solid #dfdfdf;
-            padding-top: .36rem;
-            padding-bottom: .3rem;
-            padding-left:.32rem;
+            border-bottom: 1px solid #e1e1e1;
+        }
+    
+        .card .block .container .left{
+            width: 60%;
+            display: inline-block;
+            /*background: red;*/
+            line-height: .78rem;
+            font-size: .32rem;
+            color: rgba(0,0,0,0.54);
         }
 
-
-        .card .block .title{
-            font-family: PingFangSC-Light;
-            font-size: .3rem;
-            color: #333333;
+        .card .block .container .right{
+            width: 40%;
+            display: inline-block;
+            /*background: blue;*/
+            line-height: .78rem;
+            position: relative;
+            color: white;
+            vertical-align: top;
         }
 
-        .card .block .content{
-            font-family: PingFangSC-Light;
-            font-size: .26rem;
-            color: #333333;
-            margin-top: .18rem;
+        
+        .point{
+            width: .32rem;
+            height: .32rem;
+            position: absolute;
+            margin:auto;
+            right: 0;
+            top: 0;
+            bottom: 0;
         }
 
 
@@ -783,7 +799,7 @@
 
     <div class="pagetop">
         <div class="num">
-            <div class="pricetype">RMB</div>
+            <div class="pricetype">SGD</div>
             <div class="pricenum"></div>
         </div>
         <div class="desc" ><span data-lang="string_nowPrice"></span></div>
@@ -818,7 +834,7 @@
     </div>
 
 
-     <div class="block2-2 clearfix" style="display: none;">
+    <div class="block2-2 clearfix" style="display: none;">
         <div class="left" data-lang="string_buyQuantity"></div>
         <div class="middle">
             <input type="number" placeholder="" class="atleast001" onkeyup="changeBuyQuantity(this.value)">
@@ -885,6 +901,63 @@
     <div class="shade" onclick="closeShade()" style="display: none;">
         <div class="card" onclick="closeShade2()">
             <div class="top">选择币种</div>
+
+            <div class="block">
+                <div class="container" onclick="chooseCurrency('USD')">
+                    <div class="left">
+                        U.S.Dollar
+                    </div>
+                    <div class="right">
+                        1
+                        <img src="img/uncheckedPoint.png" class="point USD1" alt="">
+                        <img src="img/checkedPoint.png" class="point USD2" alt="" style="display: none;">
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="block">
+                <div class="container" onclick="chooseCurrency('CNY')">
+                    <div class="left">
+                        人民币
+                    </div>
+                    <div class="right">
+                        1
+                        <img src="img/uncheckedPoint.png" class="point CNY1" alt="">
+                        <img src="img/checkedPoint.png" class="point CNY2" alt="" style="display: none;">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="block">
+                <div class="container" onclick="chooseCurrency('SGD')">
+                    <div class="left">
+                        Singapore Dollar
+                    </div>
+                    <div class="right">
+                        1
+                        <img src="img/uncheckedPoint.png" class="point SGD1" alt="" style="display: none;">
+                        <img src="img/checkedPoint.png" class="point SGD2" alt="" >
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="block">
+                <div class="container" onclick="chooseCurrency('AED')">
+                    <div class="left">
+                        درهم
+                    </div>
+                    <div class="right">
+                        1
+                        <img src="img/uncheckedPoint.png" class="point AED1" alt="">
+                        <img src="img/checkedPoint.png" class="point AED2" alt="" style="display: none;">
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 
@@ -906,6 +979,32 @@
 
         var Cost,Income
 
+
+
+        function closeShade(){
+            $('.shade').hide()
+        }
+
+        function closeShade2(e){ 
+            window.event? window.event.cancelBubble = true : e.stopPropagation();
+        }  
+
+
+
+        function chooseCurrency(currency){
+            $('.pricetype').html(currency)
+            $('.USD1').show()
+            $('.USD2').hide()
+            $('.CNY1').show()
+            $('.CNY2').hide()
+            $('.SGD1').show()
+            $('.SGD2').hide()
+            $('.AED1').show()
+            $('.AED2').hide()
+
+            $('.'+currency+'2').show()
+            $('.shade').hide()
+        }
 
         function showShade(){
             $('.shade').show()
@@ -1201,7 +1300,7 @@
                 });
 
                 window.history.pushState('forward', null, '');
-              }
+            }
         }) 
 
 
@@ -1214,8 +1313,11 @@
 
         function getPrice(){
             // l('come in!')
+            // 
+            var currency = $('.pricetype').html()
+
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+( GetQueryString('lang')?GetQueryString('lang'):'en' ),
+                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+( GetQueryString('lang')?GetQueryString('lang'):'en' )+'&currency='+currency,
                 type:'get',
                 success:function(data){
                     // alert(data)
