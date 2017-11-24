@@ -16,7 +16,7 @@
 
     
     <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jQuery.js"></script>
-    <script src="js/config201711242241.js"></script>
+    <script src="js/config201711242323.js"></script>
     <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jquery.i18n.properties.min.js"></script>
     <!-- <script src="//oi6dgk1k6.qnssl.com/jquery.min.2.1.4.js"></script> -->
     
@@ -396,7 +396,7 @@
                         // console.log(amount)
                         // getPrice(amount)
 
-                        $('.price').html(PRICE)
+                        $('.price').html(utils.comdify ( PRICE) ) 
                         SUM = amount
                         var num = amount*100000/(PRICE*100)
                         $('.estimatedNum').html(parseInt(num)/1000)
@@ -404,10 +404,10 @@
 
                         if(CURRENCY=='SGD'){
                             var sgdSum = amount
-                            $('.sgdSum').html(ceil ( sgdSum ))
+                            $('.sgdSum').html(utils.comdify( utils.comdify( ceil ( sgdSum )) ) )
                         }else{
                             var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
-                            $('.sgdSum').html(ceil(sgdSum) )
+                            $('.sgdSum').html(utils.comdify( utils.comdify( ceil(sgdSum) ) ) )
                         }
 
                     }else if(TYPE=='num'){
@@ -416,12 +416,12 @@
                         NUM = num
 
                         var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
-                        $('.sgdSum').html(ceil(sgdSum))
+                        $('.sgdSum').html(utils.comdify( utils.comdify( ceil(sgdSum)) ) )
 
-                        $('.price').html(PRICE)
+                        $('.price').html(utils.comdify ( PRICE) ) 
 
                         var amount = NUM*1000 * ( PRICE * 100 ) / 100000
-                        $('.sum').text( ceil(amount) )
+                        $('.sum').text( utils.comdify( utils.comdify( ceil(amount) ) ) )
                     }
 
 
@@ -460,14 +460,13 @@
                     // PRICE = price
                     // NUM = parseInt(num)/1000
 
-
                     if(TYPE=='amount'){
                         var amount = GetQueryString('amount')  
                         $('.sum').text(amount)
                         // console.log(amount)
                         // getPrice(amount)
 
-                        $('.price').html(PRICE)
+                        $('.price').html(utils.comdify ( PRICE) ) 
                         SUM = amount
                         var num = amount*100000/(PRICE*100)
                         $('.estimatedNum').html(parseInt(num)/1000)
@@ -475,10 +474,10 @@
 
                         if(CURRENCY=='SGD'){
                             var sgdSum = amount
-                            $('.sgdSum').html(ceil ( sgdSum ))
+                            $('.sgdSum').html(utils.comdify( utils.comdify( ceil ( sgdSum )) ) )
                         }else{
                             var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
-                            $('.sgdSum').html(ceil(sgdSum) )
+                            $('.sgdSum').html(utils.comdify( utils.comdify( ceil(sgdSum) ) ) )
                         }
 
                     }else if(TYPE=='num'){
@@ -487,12 +486,12 @@
                         NUM = num
 
                         var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
-                        $('.sgdSum').html(ceil(sgdSum))
+                        $('.sgdSum').html(utils.comdify( utils.comdify( ceil(sgdSum)) ) )
 
-                        $('.price').html(PRICE)
+                        $('.price').html(utils.comdify ( PRICE) ) 
 
                         var amount = NUM*1000 * ( PRICE * 100 ) / 100000
-                        $('.sum').text( ceil(amount) )
+                        $('.sum').text( utils.comdify( utils.comdify( ceil(amount) ) ) )
                     }
 
 
@@ -514,10 +513,14 @@
 
             $('.loading').show()
 
+            
+            var sgdSum = $('.sgdSum').html()
+            sgdSum = sgdSum.replace(/[,]/g,"")
+
             var url = HOST+"/bitcoin/v1?cmd=btcBuy"
                 +'&show_amount='+NUM
                 +'&show_price='+SINGAPOPRICE
-                +'&total_pay='+$('.sgdSum').html()
+                +'&total_pay='+ sgdSum
                 +'&code='+GetQueryString('code')
             // l(url)
             $.ajax({

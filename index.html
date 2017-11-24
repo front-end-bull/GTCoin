@@ -16,7 +16,7 @@
 
     <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jQuery.js"></script>
     <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jquery.i18n.properties.min.js"></script>
-    <script src="js/config201711242241.js"></script>
+    <script src="js/config201711242323.js"></script>
     
     <script type="text/javascript">
         var deviceWidth = $(window).width()
@@ -1078,7 +1078,7 @@
                 isInput2 = false
                 canBuy(0)
                 var cost = (BUYNUM * 1000) * (BUY_PRICE * 100) / 100000
-                $('.estimatedCost').html(ceil(cost))
+                $('.estimatedCost').html(utils.comdify( ceil(cost) ))
                 Cost = ceil(cost)
             }else{
                 BUYNUM = value/1000
@@ -1089,7 +1089,7 @@
                     canBuy(0)
                 }
                 var cost = (BUYNUM * 1000) * (BUY_PRICE * 100) / 100000
-                $('.estimatedCost').html(ceil(cost))
+                $('.estimatedCost').html(utils.comdify( ceil(cost) ))
                 Cost = ceil(cost)
             }   
             getPrice()
@@ -1104,8 +1104,8 @@
                 isInput2 = false
                 canBuy(0)
                 var income = (SELLNUM * 1000) * (SELL_PRICE*100) /100000
-                $('.estimatedIncome').html(floor(income))
-                Income = floor(income)
+                $('.estimatedIncome').html(utils.comdify( floor(income)) )
+                Income = utils.comdify( floor(income) )
             }else{
                 SELLNUM = value/1000
                 isInput2 = true
@@ -1115,8 +1115,8 @@
                     canBuy(0)
                 }
                 var income = (SELLNUM * 1000) * (SELL_PRICE*100) /100000
-                $('.estimatedIncome').html(floor(income))
-                Income = floor(income)
+                $('.estimatedIncome').html(utils.comdify( floor(income)) )
+                Income = utils.comdify( floor(income) )
             }
             getPrice()
         }
@@ -1378,9 +1378,9 @@
                     SGD_SELL_PRICE = data.sell_sgd_price
 
                     if(isBuy){
-                        $('.pricenum').html(BUY_PRICE)
+                        $('.pricenum').html( utils.comdify( BUY_PRICE) )
                     }else{
-                        $('.pricenum').html(SELL_PRICE)
+                        $('.pricenum').html( utils.comdify( SELL_PRICE) )
                     }
 
 
@@ -1391,13 +1391,13 @@
                     // l('BUYNUM',BUYNUM)
 
                     var cost = (BUYNUM * 1000) * (BUY_PRICE * 100) / 100000
-                    $('.estimatedCost').html(ceil(cost))
-                    Cost = ceil(cost)
+                    $('.estimatedCost').html(utils.comdify( ceil(cost) ))
+                    Cost = utils.comdify( ceil(cost) )
                     // console.log('SELLNUM',SELLNUM)
 
                     var income = (SELLNUM * 1000) * (SELL_PRICE*100) /100000
-                    $('.estimatedIncome').html(floor(income))
-                    Income = floor(income)
+                    $('.estimatedIncome').html(utils.comdify(  floor(income)) )
+                    Income = utils.comdify(  floor(income) )
                 }
             })
         }

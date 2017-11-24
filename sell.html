@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
     <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jQuery.js"></script>
-    <script src="js/config201711242241.js"></script>
+    <script src="js/config201711242323.js"></script>
     <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jquery.i18n.properties.min.js"></script>
 
     <script type="text/javascript">
@@ -408,10 +408,10 @@
             // }
 
 
-            $('.price').html(PRICE)
+            $('.price').html(utils.comdify( PRICE) )
 
             var income = (NUM * 1000) * (SINGAPOPRICE*100) /100000
-            $('.income').html(floor(income))
+            $('.income').html(utils.comdify( floor(income)) )
             SUM = floor(income)
 
 
@@ -436,10 +436,10 @@
                     PRICE = data.sell_price
                     SINGAPOPRICE = data.sell_sgd_price
 
-                    $('.price').html(PRICE)
+                    $('.price').html( utils.comdify( PRICE) )
 
                     var income = (NUM * 1000) * (SINGAPOPRICE*100) /100000
-                    $('.income').html(floor(income))
+                    $('.income').html(utils.comdify( floor(income)) )
                     SUM = floor(income)
 
 

@@ -13,7 +13,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jQuery.js"></script>
-    <script src="js/config201711242241.js"></script>
+    <script src="js/config201711242323.js"></script>
     <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jquery.i18n.properties.min.js"></script>
     <!-- <script src="//oi6dgk1k6.qnssl.com/jquery.min.2.1.4.js"></script> -->
     
@@ -588,11 +588,11 @@
                                                     '<div class="line2">'+
                                                         '<div class="left">'+utils.formatDate(new Date(e.createtime*1000))+'</div>'
                                     if(e.type==1){
-                                        html += '<div class="right">-'+e.num+' SGD</div>'
+                                        html += '<div class="right">-'+utils.comdify( e.num )+' SGD</div>'
                                     }else if(e.type==2){
-                                        html += '<div class="right">+'+e.num+' SGD</div>'
+                                        html += '<div class="right">+'+utils.comdify( e.num )+' SGD</div>'
                                     }else if(e.type==3){
-                                        html += '<div class="right">-'+e.num+' SGD</div>'
+                                        html += '<div class="right">-'+utils.comdify( e.num )+' SGD</div>'
                                     }
 
                                         html += '</div>'+

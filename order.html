@@ -16,7 +16,7 @@
 
     
     <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jQuery.js"></script>
-    <script src="js/config201711242241.js"></script>
+    <script src="js/config201711242323.js"></script>
     <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jquery.i18n.properties.min.js"></script>
     <!-- <script src="//oi6dgk1k6.qnssl.com/jquery.min.2.1.4.js"></script> -->
     
@@ -476,9 +476,9 @@
                         data = JSON.parse(data)
                     }
                     data = data.data
-                    $('.num').text(data.num)
+                    $('.num').text( utils.comdify( data.num) )
                     $('.amount').text(data.amount)
-                    $('.price').text(data.price)
+                    $('.price').text(utils.comdify( data.price) )
                     $('.createtime').text(utils.formatDate(new Date(data.createtime*1000)))
                     $('.orderid').text(data.id)
 
