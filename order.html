@@ -285,9 +285,7 @@
         <div class="buy-box buyBox" style="display: none;"><div class="buy" data-lang="string_buyLabel">买</div></div>
         <div class="buy-box sellBox" style="display: none;"><div class="sell" data-lang="string_sellLabel">卖</div></div>
         <div class="buy-box widthDrawBox" style="display: none;"><div class="widthDraw" data-lang="string_widthDrawLabel"></div></div>
-        <div class="status status0" style="display: none;" data-lang="string_transactionProcessing"></div>
-        <div class="status status1" style="display: none;" data-lang="string_success"></div>
-        <div class="status status2" style="display: none;" data-lang="string_failure"></div>
+        <div class="status"></div>
     </div>
     <div class="container" style="display: none;">
         <div class="block  buyOrSell"  style="display: none;">
@@ -460,8 +458,6 @@
                     $('.price').text(data.price)
                     $('.createtime').text(utils.formatDate(new Date(data.createtime*1000)))
                     $('.orderid').text(data.id)
-                    $('.status'+data.status).show()
-                    STATUS = data.status
 
                     if(STATUS==1||STATUS==99){
                         clearInterval(FLAG)
@@ -475,17 +471,20 @@
                         $('.label2 .left').text($.i18n.map['string_buyQuantity'])
                         $('.label3 .left').text($.i18n.map['string_EstimatedCost'])
                         $('.buyOrSell').show()
+                        $('.status').text($.i18n.map['string_status'+data.type+data.status])
                     }else if(data.type==2){
                         $('.sellBox').show()
                         $('.stage .title').text($.i18n.map['string_selling'])
                         $('.label2 .left').text($.i18n.map['string_sellCount'])
                         $('.label3 .left').text($.i18n.map['string_anticipatedIncome'])
                         $('.buyOrSell').show()
+                        $('.status').text($.i18n.map['string_status'+data.type+data.status])
                     }else if(data.type==3){
                         $('.widthDrawBox').show()
                         $('.stage .title').text($.i18n.map['string_takeAway'])
                         $('.pickup').show()
                         $('.rate').text(sessionStorage.rate*100)
+                        $('.status').text($.i18n.map['string_status'+data.type+data.status])
                     }
 
                     $('.container').show()

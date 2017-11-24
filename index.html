@@ -25,6 +25,8 @@
         $('html').css({'font-size':fontSize})
 
         function GetQueryString(name) {  
+
+            // if(name=='code') return '[B@7de397c3'
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
             var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
             var context = "";  
@@ -40,6 +42,7 @@
     
     <title>Bitcoin</title>
     <style>
+
         *{
             margin: 0;
             padding: 0;
@@ -75,7 +78,7 @@
             clear: both; 
         }
 
-        .top{
+        .pagetop{
             width: 100%;
             height: 2.27rem;
             background-image: url('img/bj.png');
@@ -97,18 +100,40 @@
           to {background-position: right bottom;}
           }
 
-        .top .num{
+        .pagetop .num{
+            font-size: 0;
+            position: absolute;
+            /*width: 100%;*/
+            margin: auto;
+            left: -.6rem;
+            right: 0;
+            bottom: 0.8rem;
+            text-align: center;
+            line-height: .6rem;
+            /*display: inline-block;*/
+        }
+
+        .pagetop .num .pricetype{
+            display: inline-block;
+            font-family: Roboto-Regular;
+            font-size: .22rem;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            vertical-align: top;
+            line-height: .35rem;
+        }
+
+        .pagetop .num .pricenum{
+            display: inline-block;
+            line-height: .6rem;
             font-family: Roboto-Medium;
             font-size: .5833rem;
             color: #FFFFFF;
-            letter-spacing: 0;
-            position: absolute;
-            width: 100%;
-            bottom: 1.01rem;
-            text-align: center;
-        }
+            margin-left: .1rem;
+            font-weight: bold;
+        }   
 
-        .top .desc{
+        .pagetop .desc{
             font-family: NotoSansCJKsc-Regular;
             font-size: .2917rem;
             color: #FFFFFF;
@@ -679,9 +704,75 @@
                 transform: rotate3d(0, 0, 1, 360deg);
             }
         }
+    .toggle{
+        width: .44rem;
+        height: .44rem;
+        position: absolute;
+        left: .24rem;
+        top: .24rem;
+    }
+
+    .shade{
+            width: 100%;
+            background:rgba(0,0,0,.3);
+            z-index: 100;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .shade .card{
+            width: 6.2rem;
+            height: 6.6rem;
+            border-radius: .04rem;
+            background: white;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            margin: auto;
+            overflow:scroll
+        }
+        
+        .card .top{
+            height: 1.07rem;
+            width: 100%;
+            text-align: center;
+            border-bottom:1px solid #dfdfdf;
+            font-family: PingFangSC-Regular;
+            font-size: .32rem;
+            color: #333333;
+            line-height: 1.07rem;
+            font-family: NotoSansCJKsc-Regular;
+            font-size: 40px;
+            color: rgba(0,0,0,0.87);
+        }
+        
+        .card .block{
+            width: 100%;
+            border-bottom:1px solid #dfdfdf;
+            padding-top: .36rem;
+            padding-bottom: .3rem;
+            padding-left:.32rem;
+        }
+
+
+        .card .block .title{
+            font-family: PingFangSC-Light;
+            font-size: .3rem;
+            color: #333333;
+        }
+
+        .card .block .content{
+            font-family: PingFangSC-Light;
+            font-size: .26rem;
+            color: #333333;
+            margin-top: .18rem;
+        }
+
 
     </style>
-    
 </head>
 <body class="zh">
     <div class="loading" style="display: none;">
@@ -690,11 +781,15 @@
     </div>
 
 
-    <div class="top">
-        <div class="num"></div>
-        <div class="desc" ><span data-lang="string_nowPrice"></span>（$/BTC）</div>
+    <div class="pagetop">
+        <div class="num">
+            <div class="pricetype">RMB</div>
+            <div class="pricenum"></div>
+        </div>
+        <div class="desc" ><span data-lang="string_nowPrice"></span></div>
         <img src="img/message.jpg" alt="" class="message" onclick="goNotice()">
         <div class="msgNum" style="display: none;"></div>
+        <img src="img/toggle.jpg" alt="" class="toggle" onclick="showShade()">
     </div>
     <div class="block1 clearfix">
         <div class="left bingo buy" onclick="buy(1)" >
@@ -777,7 +872,7 @@
     </a> -->
 
     <div class="block6">
-        <span data-lang="string_read"></span><a href="javascript:void(0)" style="color: #1095A3;" data-lang="string_agreement"></a>
+        <span data-lang="string_read"></span><a onclick="goAgreement()" href="javascript:void(0)" style="color: #1095A3;" data-lang="string_agreement"></a>
         <img src="img/checked.png"  class="checked" alt="" onclick="agree()">
         <img src="img/unchecked.png" class="unchecked"  alt="" onclick="agree()" style="display: none;">
     </div>
@@ -785,6 +880,14 @@
     <div class="button" data-lang='string_purchase' onclick="commit()">
         <!-- 确认购买 -->
     </div>
+
+
+    <div class="shade" onclick="closeShade()" style="display: none;">
+        <div class="card" onclick="closeShade2()">
+            <div class="top">选择币种</div>
+        </div>
+    </div>
+
     <script>
         var BUYAMOUNT = 0
         var BUYNUM = 0
@@ -802,6 +905,13 @@
         var SELL_PRICE 
 
         var Cost,Income
+
+
+        function showShade(){
+            $('.shade').show()
+        }
+
+
         function canBuy(flag){
             if(flag){
                 $('.button').addClass('commit')
@@ -890,15 +1000,23 @@
         }
 
 
+        function goAgreement(){
+            $('.loading').show()
+            window.location.href = 'agreement.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
+        }
+
         function goNotice(){
+            $('.loading').show()
             window.location.href = 'notice.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
         }
 
         function goPosition(){
+            $('.loading').show()
             window.location.href = 'position.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
         }
 
         function goBalance(){
+            $('.loading').show()
             window.location.href = 'balance.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')
         }
 
@@ -915,7 +1033,7 @@
             if(!BUY_PRICE){
                 return
             }
-
+            $('.loading').show()
             window.location.href = 'buy.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&amount='+amount+'&price='+BUY_PRICE
         }
 
@@ -926,7 +1044,7 @@
             if(!SELL_PRICE){
                 return
             }
-            
+            $('.loading').show()
             window.location.href = 'sell.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&num='+num+'&price='+SELL_PRICE
         }
 
@@ -1048,7 +1166,7 @@
 
 
         $(function(){
-
+            $('.shade').css('height',$(window).height()+'px')
             $('input').val('')
             init()
             getPrice()
@@ -1065,7 +1183,31 @@
                 }  
                 language_pack.loadProperties(new_lang);  
             });  
+
+            if (window.history && window.history.pushState) {
+                $(window).on('popstate', function() {
+                  var hashLocation = location.hash;
+                  var hashSplit = hashLocation.split("#!/");
+                  var hashName = hashSplit[1];
+
+                  if (hashName !== '') {
+                    var hash = window.location.hash;
+                    if (hash === '') {
+                      // alert('後退按鈕點擊');
+                      closeWindow()
+                    }
+                  }
+                });
+
+                window.history.pushState('forward', null, '');
+              }
         }) 
+
+
+        function closeWindow(){
+            // window.reload()
+        }
+
 
         function getPrice(){
             // l('come in!')
@@ -1088,9 +1230,9 @@
 
 
                     if(isBuy){
-                        $('.num').html(BUY_PRICE)
+                        $('.pricenum').html(BUY_PRICE)
                     }else{
-                        $('.num').html(SELL_PRICE)
+                        $('.pricenum').html(SELL_PRICE)
                     }
 
 
@@ -1192,7 +1334,7 @@
                 $('.block3-3').hide()
                 isBuy = true
                 $('.button').text($.i18n.map['string_confirmBuy'])
-                $('.num').html(BUY_PRICE)
+                $('.pricenum').html(BUY_PRICE)
             }else{
                 $('.buy').removeClass('bingo');
                 $('.sell').addClass('bingo');
@@ -1204,7 +1346,7 @@
                 $('.block3-3').show()
                 isBuy = false
                 $('.button').text($.i18n.map['string_confirmSelling'])
-                $('.num').html(SELL_PRICE)
+                $('.pricenum').html(SELL_PRICE)
             }
         }
 
