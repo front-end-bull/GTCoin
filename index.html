@@ -1078,8 +1078,8 @@
                 isInput2 = false
                 canBuy(0)
                 var cost = (BUYNUM * 1000) * (BUY_PRICE * 100) / 100000
-                $('.estimatedCost').html(Math.ceil(cost))
-                Cost = Math.ceil(cost)
+                $('.estimatedCost').html(ceil(cost))
+                Cost = ceil(cost)
             }else{
                 BUYNUM = value/1000
                 isInput2 = true
@@ -1089,8 +1089,8 @@
                     canBuy(0)
                 }
                 var cost = (BUYNUM * 1000) * (BUY_PRICE * 100) / 100000
-                $('.estimatedCost').html(Math.ceil(cost))
-                Cost = Math.ceil(cost)
+                $('.estimatedCost').html(ceil(cost))
+                Cost = ceil(cost)
             }   
             getPrice()
         }
@@ -1104,8 +1104,8 @@
                 isInput2 = false
                 canBuy(0)
                 var income = (SELLNUM * 1000) * (SELL_PRICE*100) /100000
-                $('.estimatedIncome').html(Math.floor(income))
-                Income = Math.floor(income)
+                $('.estimatedIncome').html(floor(income))
+                Income = floor(income)
             }else{
                 SELLNUM = value/1000
                 isInput2 = true
@@ -1115,8 +1115,8 @@
                     canBuy(0)
                 }
                 var income = (SELLNUM * 1000) * (SELL_PRICE*100) /100000
-                $('.estimatedIncome').html(Math.floor(income))
-                Income = Math.floor(income)
+                $('.estimatedIncome').html(floor(income))
+                Income = floor(income)
             }
             getPrice()
         }
@@ -1391,13 +1391,13 @@
                     // l('BUYNUM',BUYNUM)
 
                     var cost = (BUYNUM * 1000) * (BUY_PRICE * 100) / 100000
-                    $('.estimatedCost').html(Math.ceil(cost))
-                    Cost = Math.ceil(cost)
+                    $('.estimatedCost').html(ceil(cost))
+                    Cost = ceil(cost)
                     // console.log('SELLNUM',SELLNUM)
 
                     var income = (SELLNUM * 1000) * (SELL_PRICE*100) /100000
-                    $('.estimatedIncome').html(Math.floor(income))
-                    Income = Math.floor(income)
+                    $('.estimatedIncome').html(floor(income))
+                    Income = floor(income)
                 }
             })
         }
