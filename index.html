@@ -1482,7 +1482,7 @@
                 $('.block3-3').hide()
                 isBuy = true
                 $('.button').text($.i18n.map['string_confirmBuy'])
-                $('.pricenum').html(BUY_PRICE)
+                $('.pricenum').html(utils.comdify( BUY_PRICE) )
             }else{
                 $('.buy').removeClass('bingo');
                 $('.sell').addClass('bingo');
@@ -1494,7 +1494,7 @@
                 $('.block3-3').show()
                 isBuy = false
                 $('.button').text($.i18n.map['string_confirmSelling'])
-                $('.pricenum').html(SELL_PRICE)
+                $('.pricenum').html(utils.comdify( SELL_PRICE) )
             }
         }
 
