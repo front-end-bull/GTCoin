@@ -290,7 +290,7 @@
     <div class="container" style="display: none;">
         <div class="block  buyOrSell"  style="display: none;">
             <div class="left" data-lang="string_strikePrice"></div>
-            <div class="right">$ <span class="price"></span></div>
+            <div class="right"><span class="symbol">S$</span> <span class="price"></span></div>
         </div>
         <div class="block label2 buyOrSell"  style="display: none;">
             <div class="left" data-lang=""></div>
@@ -298,7 +298,7 @@
         </div>
         <div class="block label3 buyOrSell" style="margin-bottom: .32rem;display: none;">
             <div class="left" data-lang=""></div>
-            <div class="right"><span class="num"></span> GTCoin</div>
+            <div class="right"><span class="sgdSymbol">S$</span> <span class="num"></span></div>
         </div>
 
         <div class="block pickup"  style="display: none;">
@@ -470,7 +470,7 @@
                 success:function(data){
                     $('.loading').hide()
 
-                    // l(str(data))
+                    l(str(data))
                     l(data)
                     if(isString(data)){
                         data = JSON.parse(data)
@@ -481,6 +481,8 @@
                     $('.price').text(data.price)
                     $('.createtime').text(utils.formatDate(new Date(data.createtime*1000)))
                     $('.orderid').text(data.id)
+
+                    STATUS = data.status
 
                     if(STATUS==1||STATUS==99||STATUS==-1||STATUS==-2){
                         clearInterval(FLAG)

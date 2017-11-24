@@ -245,7 +245,7 @@
             实时币价
         </div>
         <div class="right" style="color: #0093A3;">
-            $<span class="price"></span>/BTC
+            <span class="symbol"></span><span class="price"></span>/BTC
         </div>
     </div>
 
@@ -265,7 +265,7 @@
         </div>
         <div class="right">
             <span class="income"></span>
-             GTCoin
+             SGD
         </div>
     </div>
 
@@ -286,7 +286,7 @@
     </div>
 
     <script>
-        var SUM,PRICE,NUM
+        var SUM,PRICE,NUM,SINGAPOPRICE,CURRENCY
 
         var language_pack = {
             now_lang : 0, // 0:ch,1:en  
@@ -379,31 +379,42 @@
         } 
 
         $(function(){
-            var num = GetQueryString('num')
-            $('.num').text(num)
+            NUM = GetQueryString('num')
+            CURRENCY = GetQueryString('CURRENCY')
+            SINGAPOPRICE = GetQueryString('sgdPrice')
+            PRICE = GetQueryString('price')
+
+            $('.num').text(NUM)
             // console.log(amount)
             // getPrice(num)
 
+            if(CURRENCY=='USD'){
+                $('.symbol').text('$')
+            }else if(CURRENCY=='CNY'){
+                $('.symbol').text('¥')
+            }else if(CURRENCY=='SGD'){
+                $('.symbol').text('S$')
+            }else if(CURRENCY=='AED'){
+                $('.symbol').text('ر.س')
+            }
 
-            var price = GetQueryString('price')
-            $('.price').html(price)
-            var income = (num * 1000) * (price*100) /100000
+
+            $('.price').html(PRICE)
+
+            var income = (NUM * 1000) * (SINGAPOPRICE*100) /100000
             $('.income').html(Math.floor(income))
             SUM = Math.floor(income)
-            PRICE = price
-            NUM = num
-
 
 
             setInterval(
-                function () { getPrice(num) },10000)
+                function () { getPrice(NUM) },10000)
 
             language_pack.loadProperties(GetQueryString('lang'));
         })
 
         function getPrice(num){
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+GetQueryString('lang'),
+                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+GetQueryString('lang')+'&currency='+CURRENCY,
                 type:'get',
                 success:function(data){
                     // alert(data)
@@ -413,18 +424,17 @@
                         data = JSON.parse(data)
                     }
 
-                    var price = data.sell_price
-                    $('.price').html(price)
-                    // console.log(BUYNUM)
+                    PRICE = data.sell_price
+                    SINGAPOPRICE = data.sell_sgd_price
 
-                    var income = (num * 1000) * (price*100) /100000
+                    $('.price').html(PRICE)
+
+                    var income = (NUM * 1000) * (SINGAPOPRICE*100) /100000
                     $('.income').html(Math.floor(income))
-
-
-
                     SUM = Math.floor(income)
-                    PRICE = price
-                    NUM = num
+
+
+
                 }
             })
         }
@@ -437,7 +447,7 @@
             $('.loading').show()
             var url = HOST+"/bitcoin/v1?cmd=btcSell"
                 +'&show_amount='+NUM
-                +'&show_price='+PRICE
+                +'&show_price='+SINGAPOPRICE
                 +'&total_pay='+SUM
                 +'&code='+GetQueryString('code')
             l(url)

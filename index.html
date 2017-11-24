@@ -845,7 +845,7 @@
     <div class="block3-2" style="display: none;">
         <div class="pad">1</div>
         <div class="left" data-lang="string_EstimatedCost"></div>
-        <div class="right "><span class="estimatedCost"></span> GTCoin</div>
+        <div class="right "><span class="estimatedCost"></span> <span class="simpleSymbol">SGD</span></div>
     </div>
 
 
@@ -859,7 +859,7 @@
     <div class="block3-3" style="display: none;">
         <div class="pad">1</div>
         <div class="left" data-lang="string_EstimatedIncome"></div>
-        <div class="right"><span class="estimatedIncome"></span> GTcoin</div>
+        <div class="right"><span class="estimatedIncome"></span> <span class="simpleSymbol">SGD</span></div>
     </div>
 
 
@@ -977,7 +977,7 @@
         var BUY_PRICE 
         var SELL_PRICE 
 
-        var Cost,Income
+        var Cost,Income,SGD_BUY_PRICE,SGD_SELL_PRICE
 
 
 
@@ -992,6 +992,7 @@
 
 
         function chooseCurrency(currency){
+            $('.simpleSymbol').html(currency)
             $('.pricetype').html(currency)
             $('.USD1').show()
             $('.USD2').hide()
@@ -1004,6 +1005,7 @@
 
             $('.'+currency+'2').show()
             $('.shade').hide()
+            getPrice('toggle')
         }
 
         function showShade(){
@@ -1121,30 +1123,38 @@
 
         function goBuy(){
             var amount 
-            if(isInput1&&isBuy&&!isBTC){
-                amount = $('.amount1').val()
-            }else if(isInput2&&isBuy&&isBTC){
-                amount = Cost
-            }else if(isInput3&&!isBuy){
-                amount = Income
-            }
+            var num = BUYNUM
+            var currency = $('.pricetype').html()
 
+            // var type
             if(!BUY_PRICE){
                 return
             }
-            $('.loading').show()
-            window.location.href = 'buy.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&amount='+amount+'&price='+BUY_PRICE
+
+
+            if(isInput1&&isBuy&&!isBTC){
+                amount = $('.amount1').val()
+                $('.loading').show()
+                window.location.href = 'buy.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&amount='+amount+'&price='+BUY_PRICE+'&type=amount'+'&currency='+currency+'&sgdPrice='+SGD_BUY_PRICE
+            }else if(isInput2&&isBuy&&isBTC){
+                $('.loading').show()
+                window.location.href = 'buy.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&num='+BUYNUM+'&price='+BUY_PRICE+'&type=num'+'&currency='+currency+'&sgdPrice='+SGD_BUY_PRICE
+            }
+
+            
         }
 
         function goSell(){
             var num 
             num = SELLNUM
+            var currency = $('.pricetype').html()
+            
 
             if(!SELL_PRICE){
                 return
             }
             $('.loading').show()
-            window.location.href = 'sell.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&num='+num+'&price='+SELL_PRICE
+            window.location.href = 'sell.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&num='+num+'&price='+SELL_PRICE+'&currency='+currency+'&sgdPrice='+SGD_SELL_PRICE
         }
 
 
@@ -1311,16 +1321,20 @@
         }
 
 
-        function getPrice(){
+        function getPrice(flag){
+            if(flag=='toggle') $('.loading').show()
+
             // l('come in!')
             // 
             var currency = $('.pricetype').html()
-
+            var url = HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+( GetQueryString('lang')?GetQueryString('lang'):'en' )+'&currency='+currency
+            l(url)
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+( GetQueryString('lang')?GetQueryString('lang'):'en' )+'&currency='+currency,
+                url:url,
                 type:'get',
                 success:function(data){
                     // alert(data)
+                    $('.loading').hide()
                     l(data)
 
                     if(isString(data)){
@@ -1332,7 +1346,8 @@
 
                     BUY_PRICE = data.buy_price
                     SELL_PRICE = data.sell_price
-
+                    SGD_BUY_PRICE = data.buy_sgd_price
+                    SGD_SELL_PRICE = data.sell_sgd_price
 
                     if(isBuy){
                         $('.pricenum').html(BUY_PRICE)

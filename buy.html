@@ -189,7 +189,7 @@
             <!-- 实时币价 -->
         </div>
         <div class="right" style="color: #0093A3;">
-            $<span class="price"></span>/BTC
+            <span class="currencySymbol"></span><span class="price"></span>/BTC
         </div>
     </div>
 
@@ -198,8 +198,8 @@
             <!-- 购买金额 -->
         </div>
         <div class="right">
+            <span class="currencySymbol"></span>
             <span class="sum"></span>
-            GTCoin
         </div>
     </div>
 
@@ -224,12 +224,12 @@
     </div>
 
     <div class="bottom clearfix">
-        <div class="left">GTCoin：<span style="color:#0093A3;" class="sum"></span></div>
+        <div class="left">SGD：<span style="color:#0093A3;" class="sgdSum"></span></div>
         <div class="right" data-lang="string_confirmPay" onclick="pay()"></div>
     </div>
      <input type="hidden" id="orderid">
     <script>
-        var SUM,PRICE,NUM
+        var SUM,PRICE,NUM,SINGAPOPRICE,CURRENCY
 
         var language_pack = {
             now_lang : 0, // 0:ch,1:en  
@@ -319,18 +319,53 @@
             }  
         } 
         $(function(){
-            var amount = GetQueryString('amount')  
-            $('.sum').text(amount)
-            // console.log(amount)
-            // getPrice(amount)
+            TYPE = GetQueryString('type')
+            CURRENCY = GetQueryString('currency')
+            SINGAPOPRICE = GetQueryString('sgdPrice')
+            PRICE = GetQueryString('price')
 
-            var price = GetQueryString('price')
-            $('.price').html(price)
-            PRICE = price
-            SUM = amount
-            var num = amount*100000/(price*100)
-            $('.estimatedNum').html(parseInt(num)/1000)
-            NUM = parseInt(num)/1000
+            if(CURRENCY=='USD'){
+                $('.currencySymbol').text('$')
+            }else if(CURRENCY=='CNY'){
+                $('.currencySymbol').text('¥')
+            }else if(CURRENCY=='SGD'){
+                $('.currencySymbol').text('S$')
+            }else if(CURRENCY=='AED'){
+                $('.currencySymbol').text('ر.س')
+            }
+
+
+            if(TYPE=='amount'){
+                var amount = GetQueryString('amount')  
+                $('.sum').text(amount)
+                // console.log(amount)
+                // getPrice(amount)
+
+                $('.price').html(PRICE)
+                SUM = amount
+                var num = amount*100000/(PRICE*100)
+                $('.estimatedNum').html(parseInt(num)/1000)
+                NUM = parseInt(num)/1000
+
+                var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
+                $('.sgdSum').html(Math.ceil(sgdSum))
+
+            }else if(TYPE=='num'){
+                var num = GetQueryString('num')  
+                $('.estimatedNum').html(num)
+                NUM = num
+
+                var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
+                $('.sgdSum').html(Math.ceil(sgdSum))
+
+                $('.price').html(PRICE)
+
+                var amount = NUM*1000 * ( PRICE * 100 ) / 100000
+                $('.sum').text(amount)
+            }
+
+
+            
 
 
             setInterval(
@@ -342,26 +377,59 @@
 
         function getPrice(amount){
             $.ajax({
-                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+GetQueryString('lang'),
+                url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+GetQueryString('lang')+'&currency='+CURRENCY,
                 type:'get',
                 success:function(data){
-                    // alert(data)
                     l(data)
-                    // console.log(amount)
                     if(isString(data)){
                         data = JSON.parse(data)
                     }
 
-                    var price = data.buy_price
-                    $('.price').html(price)
-                    // console.log(BUYNUM)
+                    SINGAPOPRICE = data.buy_sgd_price
+                    PRICE = data.buy_price
 
-                    var num = amount*100000/(price*100)
-                    $('.estimatedNum').html(parseInt(num)/1000)
+                    // var price = data.buy_price
+                    // $('.price').html(price)
 
-                    SUM = amount
-                    PRICE = price
-                    NUM = parseInt(num)/1000
+                    // var SINGAPOPRICE = data.buy_sgd_price
+
+                    // var num = amount*100000/(price*100)
+                    // $('.estimatedNum').html(parseInt(num)/1000)
+
+                    // SUM = amount
+                    // PRICE = price
+                    // NUM = parseInt(num)/1000
+
+
+                    if(TYPE=='amount'){
+                        var amount = GetQueryString('amount')  
+                        $('.sum').text(amount)
+                        // console.log(amount)
+                        // getPrice(amount)
+
+                        $('.price').html(PRICE)
+                        SUM = amount
+                        var num = amount*100000/(PRICE*100)
+                        $('.estimatedNum').html(parseInt(num)/1000)
+                        NUM = parseInt(num)/1000
+
+                        var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
+                        $('.sgdSum').html(Math.ceil(sgdSum))
+
+                    }else if(TYPE=='num'){
+                        var num = GetQueryString('num')  
+                        $('.estimatedNum').html(num)
+                        NUM = num
+
+                        var sgdSum = NUM*1000 * ( SINGAPOPRICE * 100 ) / 100000
+                        $('.sgdSum').html(Math.ceil(sgdSum))
+
+                        $('.price').html(PRICE)
+
+                        var amount = NUM*1000 * ( PRICE * 100 ) / 100000
+                        $('.sum').text(amount)
+                    }
+
                 }
             })
         }
@@ -379,8 +447,8 @@
 
             var url = HOST+"/bitcoin/v1?cmd=btcBuy"
                 +'&show_amount='+NUM
-                +'&show_price='+PRICE
-                +'&total_pay='+SUM
+                +'&show_price='+SINGAPOPRICE
+                +'&total_pay='+$('.sgdSum').html()
                 +'&code='+GetQueryString('code')
             l(url)
             $.ajax({
