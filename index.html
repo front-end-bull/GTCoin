@@ -636,7 +636,7 @@
             top: .24rem;
         }
 
-        .en .block2 .right{
+        /*.en .block2 .right{
             line-height: .98rem !important;
             font-size: .3rem !important;
         }
@@ -644,7 +644,7 @@
         .en .block2-2 .right{
             line-height: .98rem !important;
             font-size: .3rem !important;
-        }
+        }*/
 
         .msgNum{
             width: .26rem;
@@ -796,7 +796,12 @@
             top: 0;
             bottom: 0;
         }
+        
 
+        .en .switch{
+            line-height: .98rem !important;
+            font-size:.3rem;
+        }
 
     </style>
 </head>
@@ -835,7 +840,7 @@
             <input type="number" placeholder="" class="atleast500 amount1" onkeyup="changeBuyAmount(this.value)">
         </div>
         <div class="symbol">SGD</div>
-        <div class="right" onclick="toggle()" data-lang="string_buybyBtc"></div>
+        <div class="right switch" onclick="toggle()" data-lang="string_buybyBtc"></div>
     </div>
 
     <div class="block3">
@@ -850,7 +855,7 @@
         <div class="middle">
             <input type="number" placeholder="" class="atleast001" onkeyup="changeBuyQuantity(this.value)">
         </div>
-        <div class="right" onclick="toggle()" data-lang="string_buybyMoney"></div>
+        <div class="right switch" onclick="toggle()" data-lang="string_buybyMoney"></div>
     </div>
 
     <div class="block3-2" style="display: none;">
