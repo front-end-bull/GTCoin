@@ -16,7 +16,7 @@
 
     <script src="js/jQuery.js"></script>
     <script src="js/jquery.i18n.properties.min.js"></script>
-    <script src="js/config201711242323.js"></script>
+    <script src="js/config201711281848.js"></script>
     
     <script type="text/javascript">
         var deviceWidth = $(window).width()
@@ -1210,7 +1210,7 @@
 
         function changeBuyQuantity(value){
             var value = parseInt(value*1000)
-            l('value',value)
+            // l('value',value)
             if(isNaN(value)){value = 0}
 
             if(value<1){
@@ -1433,7 +1433,7 @@
                     url:'http://115.159.111.138:3003/user/showUrl?url='+window.location.href,
                     type:'get',
                     success:function(data){
-                        l(data)
+                        // l(data)
                         // alert(data)
                         // $('.loading').hide()
                         // l(data)
@@ -1499,14 +1499,14 @@
             // 
             var currency = $('.pricetype').html()
             var url = HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+( GetQueryString('lang')?GetQueryString('lang'):'en' )+'&currency='+currency
-            l(url)
+            // l(url)
             $.ajax({
                 url:url,
                 type:'get',
                 success:function(data){
                     // alert(data)
                     $('.loading').hide()
-                    l(data)
+                    // l(data)
 
                     if(isString(data)){
                         data = JSON.parse(data)
@@ -1553,7 +1553,7 @@
                 type:'get',
                 success:function(data){
                     // console.log(data)
-                    l(data)
+                    // l(data)
                     // $('.loading').hide()
 
                     if(isString(data)){

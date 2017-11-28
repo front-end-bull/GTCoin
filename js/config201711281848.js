@@ -7,8 +7,10 @@ const HOST = 'http://ddcoin.com:4002'
 // var http://d3tbpk51ffth2m.cloudfront.net = http://d3tbpk51ffth2m.cloudfront.net
 
 const isString = function(obj){
-	  return Object.prototype.toString.call(obj) === "[object String]"; 
+	  // return Object.prototype.toString.call(obj) === "[object String]"; 
+      return typeof obj === 'string'
 }
+
 const str = JSON.stringify
 const l = console.log
 
