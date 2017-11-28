@@ -4,7 +4,7 @@
 // const HOST = 'http://gtdollar.licaishenqi.cn:4002'
 const HOST = 'http://ddcoin.com:4002'
 
-// var backup = http://d3tbpk51ffth2m.cloudfront.net
+// var http://d3tbpk51ffth2m.cloudfront.net = http://d3tbpk51ffth2m.cloudfront.net
 
 const isString = function(obj){
 	  return Object.prototype.toString.call(obj) === "[object String]"; 
