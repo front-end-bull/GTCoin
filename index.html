@@ -14,8 +14,8 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
 
-    <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jQuery.js"></script>
-    <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jquery.i18n.properties.min.js"></script>
+    <script src="backup/js/jQuery.js"></script>
+    <script src="backup/js/jquery.i18n.properties.min.js"></script>
     <script src="js/config201711242323.js"></script>
     
     <script type="text/javascript">
@@ -78,7 +78,7 @@
         .pagetop{
             width: 100%;
             height: 2.27rem;
-            background-image: url('http://d3tbpk51ffth2m.cloudfront.net/img/bj.png');
+            background-image: url('backup/img/bj.png');
             background-size: 100%; 
             position: relative;
             /*animation:wave 5s  linear infinite;*/
@@ -810,6 +810,22 @@
 
         }
 
+        .limit{
+            font-family:PingFangSC-Regular;
+            font-size: .28rem;
+            line-height: .4rem;
+            text-align: center;
+            color: rgba(51,51,51,0.54);
+            /*color:#333;*/
+            padding: 0 .32rem;
+            position: absolute;
+            bottom: 1.35rem;
+        }
+        
+
+
+
+
     </style>
 </head>
 <body>
@@ -825,7 +841,7 @@
             <div class="pricenum"></div>
         </div>
         <div class="desc" ><span data-lang="string_nowPrice"></span></div>
-        <img src="http://d3tbpk51ffth2m.cloudfront.net/img/message.jpg" alt="" class="message" onclick="goNotice()">
+        <img src="backup/img/message.jpg" alt="" class="message" onclick="goNotice()">
         <div class="msgNum" style="display: none;"></div>
         <img src="img/toggle.jpg" alt="" class="toggle" onclick="showShade()">
     </div>
@@ -895,7 +911,7 @@
             <div class="right"><span class="btcBalance">&nbsp;</span>
             </div>
             <div class="pad1">1</div>
-            <img src="http://d3tbpk51ffth2m.cloudfront.net/img/arrow.png" alt="" style="right: .333rem;">
+            <img src="backup/img/arrow.png" alt="" style="right: .333rem;">
         </div>
     </a>
     
@@ -906,15 +922,17 @@
             <div class="right"><span class="gtcBalance">&nbsp;</span>
             </div>
             <div class="pad1">1</div>
-            <img src="http://d3tbpk51ffth2m.cloudfront.net/img/arrow.png" alt="" style="right: .333rem;">
+            <img src="backup/img/arrow.png" alt="" style="right: .333rem;">
         </div>
     </a> -->
 
     <!-- <div class="block6">
         <span data-lang="string_read"></span><a onclick="goAgreement()" href="javascript:void(0)" style="color: #1095A3;" data-lang="string_agreement"></a>
-        <img src="http://d3tbpk51ffth2m.cloudfront.net/img/checked.png"  class="checked" alt="" onclick="agree()">
-        <img src="http://d3tbpk51ffth2m.cloudfront.net/img/unchecked.png" class="unchecked"  alt="" onclick="agree()" style="display: none;">
+        <img src="backup/img/checked.png"  class="checked" alt="" onclick="agree()">
+        <img src="backup/img/unchecked.png" class="unchecked"  alt="" onclick="agree()" style="display: none;">
     </div> -->
+
+    <div class="limit" data-lang="string_buyLimit">Batas harian untuk membeli 10.000 yuan Singapura</div>
 
     <div class="button" data-lang='string_purchase' onclick="commit()">
         <!-- 确认购买 -->
@@ -1495,6 +1513,7 @@
                 isBuy = true
                 $('.button').text($.i18n.map['string_confirmBuy'])
                 $('.pricenum').html(utils.comdify( BUY_PRICE) )
+                $('.limit').html($.i18n.map['string_buyLimit'])
             }else{
                 $('.buy').removeClass('bingo');
                 $('.sell').addClass('bingo');
@@ -1506,6 +1525,7 @@
                 $('.block3-3').show()
                 isBuy = false
                 $('.button').text($.i18n.map['string_confirmSelling'])
+                $('.limit').html($.i18n.map['string_sellLimit'])
                 $('.pricenum').html(utils.comdify( SELL_PRICE) )
             }
         }

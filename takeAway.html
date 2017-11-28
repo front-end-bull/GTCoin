@@ -13,9 +13,9 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     
-    <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jQuery.js"></script>
+    <script src="backup/js/jQuery.js"></script>
     <script src="js/config201711242323.js"></script>
-    <script src="http://d3tbpk51ffth2m.cloudfront.net/js/jquery.i18n.properties.min.js"></script>
+    <script src="backup/js/jquery.i18n.properties.min.js"></script>
     
     <script type="text/javascript">
         var deviceWidth = $(window).width()
@@ -185,7 +185,7 @@
             left: 0;
             right: 0;
             /*bottom: 2.22rem;*/
-            top:8.2rem;
+            top:9.2rem;
             text-align: center;
             line-height: 1rem;
             font-size: .36rem;
@@ -344,6 +344,19 @@
         }
 
 
+        .limit{
+            font-family:PingFangSC-Regular;
+            font-size: .26rem;
+            line-height: .4rem;
+            text-align: center;
+            color: rgba(51,51,51,0.54);
+            /*color:#333;*/
+            padding: 0 .32rem;
+            position: absolute;
+            bottom: 4.4rem;
+        }
+
+
     </style>
    
 </head>
@@ -391,6 +404,8 @@
     <div class="msg" style="display: none;">
         <!-- Sorry, your balance is not enough. -->
     </div>
+    
+    <div class="limit" data-lang="string_transferLimit"></div>
 
     <div class="button" data-lang="string_commit" onclick="commit()">
         确认
