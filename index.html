@@ -206,22 +206,7 @@
             bottom: 0; 
         }*/
         
-        .ar .block2{
-            padding-right: .32rem;
-            padding-left: 0;
-        }
-
-        .ar .block2 .left{
-            float: right;
-        }
-
-        .ar .block2 .right{
-            float: right;
-        }
-
-        .ar .block2 .middle{
-            float: right;
-        }
+        
 
         .block2{
             width: 100%;
@@ -820,11 +805,104 @@
             padding: 0 .32rem;
             position: absolute;
             bottom: 1.35rem;
+            width: 100%;
+        }
+
+
+        .ml .limit{
+            font-size: .25rem;
+        }
+    
+        .ar .pagetop .num{
+            left:0;
+            right: -.6rem;
+        }
+
+        .ar .pagetop .num .pricenum{
+            margin-right: .1rem;
+        }
+
+
+        .ar .message{
+            left: .24rem;
+            right: auto;
+        }
+
+        .ar .toggle{
+            right: .24rem;
+            left:0;
+        }
+
+        .ar .block2 .symbol{
+            float: right;
         }
         
 
+        .ar .block2{
+            padding-right: .32rem;
+            padding-left: 0;
+        }
 
+        .ar .block2 .left{
+            float: right;
+        }
 
+        .ar .block2 .right{
+            float: right;
+        }
+
+        .ar .block2 .middle{
+            float: right;
+        }
+        
+
+        .ar .block2-2 .symbol{
+            float: right;
+        }
+        
+
+        .ar .block2-2{
+            padding-right: .32rem;
+            padding-left: 0;
+        }
+
+        .ar .block2-2 .left{
+            float: right;
+        }
+
+        .ar .block2-2 .right{
+            float: right;
+        }
+
+        .ar .block2-2 .middle{
+            float: right;
+        }
+        
+
+        .ar .card .top{
+            padding-left: 0;
+            padding-right: .48rem;
+        }
+        
+        .ar .point{
+            left: 0;
+            right: auto;
+        }
+
+        .ar .block2-3{
+            padding-right: .32rem;
+            padding-left: 0;
+        }
+
+        .ar .block2-3 .left{
+            float: right;
+        }
+
+        .ar .block2-3 .middle{
+            float: right;
+            padding-right: 0;
+            padding-left: .325rem;
+        }
 
     </style>
 </head>
@@ -1303,15 +1381,14 @@
                             $('.block5 img').css({left:'.333rem',right:'auto'})
                             $('.block6').css({'padding-left':0,'padding-right':'.72rem'})
                             $('.block6 img').css({'left':'auto','right':'.32rem'})
-                            $('.block2 .right').css({float:'left','border-right':'1px solid #e1e1e1','border-bottom':'1px solid #e1e1e1','border-left':'none'})
-                            $('.block2-2 .right').css({float:'left','border-right':'1px solid #e1e1e1','border-bottom':'1px solid #e1e1e1','border-left':'none'})
+                            // $('.block2 .right').css({float:'left','border-right':'1px solid #e1e1e1','border-bottom':'1px solid #e1e1e1','border-left':'none'})
+                            // $('.block2-2 .right').css({float:'left','border-right':'1px solid #e1e1e1','border-bottom':'1px solid #e1e1e1','border-left':'none'})
                         }
-
 
                         if(new_lang==1 || new_lang=='en'){
                             $('.block2 .right').css('padding-top','0')
                             $('.block2-2 .right').css('padding-top','0')
-                        }else{
+                        }else {
                             $('.block2 .right').css('padding-top','.136rem')
                             $('.block2-2 .right').css('padding-top','.136rem')
                         }
@@ -1336,6 +1413,8 @@
             init()
             getPrice()
             setInterval(getPrice,10000)
+
+            alert(GetQueryString('lang'))
 
             language_pack.loadProperties(GetQueryString('lang')?GetQueryString('lang'):'en');
         
