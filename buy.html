@@ -453,7 +453,7 @@
                 url:HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+GetQueryString('lang')+'&currency='+CURRENCY,
                 type:'get',
                 success:function(data){
-                    l(data)
+                    // l(data)
                     if(isString(data)){
                         data = JSON.parse(data)
                     }
@@ -573,7 +573,7 @@
                     }
                 },
                 error:function(err){
-                    l(str(err))
+                    // l(str(err))
                     isFirst = true
                     $('.loading').hide()
                 }

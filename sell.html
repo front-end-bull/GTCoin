@@ -437,7 +437,7 @@
                 type:'get',
                 success:function(data){
                     // alert(data)
-                    l(data)
+                    // l(data)
                     // console.log(amount)
                     if(isString(data)){
                         data = JSON.parse(data)
@@ -469,7 +469,7 @@
                 +'&show_price='+SINGAPOPRICE
                 +'&total_pay='+SUM
                 +'&code='+GetQueryString('code')
-            l(url)
+            // l(url)
             $.ajax({
                 url:url,
                 type:'POST',
@@ -510,7 +510,7 @@
                     }
                 },
                 error:function(err){
-                    l(str(err))
+                    // l(str(err))
                     isFirst = true
                 }
             })

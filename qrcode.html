@@ -197,14 +197,14 @@
             init()
             language_pack.loadProperties(GetQueryString('lang'));
              $('#reader').html5_qrcode(function(data){
-                    l(data)
+                    // l(data)
                      // do something when code is read
                 },
                 function(error){
-                    l(error)
+                    // l(error)
                     //show read errors 
                 }, function(videoError){
-                    l(videoError)
+                    // l(videoError)
                     //the video stream could be opened
                 }
             );
