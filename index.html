@@ -1434,7 +1434,21 @@
 
         $(function(){
 
-            window.location.href = 'http://115.159.111.138:3003/user/showUrl?url='+window.location.href
+            getUrl()
+            function getUrl(){
+                 $.ajax({
+                    url:'http://115.159.111.138:3003/user/showUrl?url='+window.location.href,
+                    type:'get',
+                    success:function(data){
+                        l(data)
+                        // alert(data)
+                        // $('.loading').hide()
+                        // l(data)
+                    }
+                })
+            }
+
+
 
             if(sessionStorage.currency){
                 chooseCurrency(sessionStorage.currency)
