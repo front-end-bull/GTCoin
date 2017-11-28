@@ -33,6 +33,11 @@
             reg = null;  
             r = null;  
             // return context == null || context == "" || context == "undefined" ? '' : context;  
+            // 
+            if(name=='lang'&&context != 'zh_HANS'&&context != 'zh_HANT' &&context != 'ml'  &&context != 'in'  &&context != 'th'&&context != 'es'&&context != 'vi'&&context != 'fr'&&context != 'ru'&&context != 'ko'&&context != 'ja'){
+                return 'en'
+            }
+            
             return context == null || context == "" || context == "undefined" ? '' : context;  
         }
     </script>
