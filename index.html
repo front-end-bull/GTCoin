@@ -793,11 +793,18 @@
             font-size:.3rem;
         }
 
+        .in .switch{
+            line-height: .98rem !important;
+            font-size:.3rem;
+        }
 
         .ml .switch{
-            padding-top: .05rem !important;
-            line-height: .32rem !important;
+            line-height: .98rem !important;
+            font-size:.3rem;
+        }
 
+        .ml .block3-3 .right{
+            float: right;
         }
 
         .limit{
@@ -865,7 +872,6 @@
             float: right;
         }
         
-
         .ar .block2-2{
             padding-right: .32rem;
             padding-left: 0;
@@ -1029,7 +1035,7 @@
 
     <div class="shade" onclick="closeShade()" style="display: none;">
         <div class="card" onclick="closeShade2()">
-            <div class="top">选择币种</div>
+            <div class="top" data-lang="string_chooseCurrency"></div>
 
             <div class="block">
                 <div class="container" onclick="chooseCurrency('USD')">
@@ -1401,7 +1407,7 @@
                         //     // $('.block2-2 .right').css({float:'left','border-right':'1px solid #e1e1e1','border-bottom':'1px solid #e1e1e1','border-left':'none'})
                         // }
 
-                        if(new_lang == 'zh_HANS' ||new_lang == 'zh_HANT'||new_lang == 'ml'||new_lang == 'in'||new_lang == 'es'||new_lang == 'vi'||new_lang == 'fr'||new_lang == 'ru'||new_lang == 'ko'||new_lang == 'ja'||new_lang == 'hi'){
+                        if(new_lang == 'zh_HANS' ||new_lang == 'zh_HANT'||new_lang == 'es'||new_lang == 'vi'||new_lang == 'fr'||new_lang == 'ru'||new_lang == 'ko'||new_lang == 'ja'||new_lang == 'hi'){
                             $('.block2 .right').css('padding-top','.136rem')
                             $('.block2-2 .right').css('padding-top','.136rem')
                         }else{
@@ -1421,8 +1427,6 @@
         
 
         $(function(){
-
-            
             getUrl()
             function getUrl(){
                 $.ajax({
