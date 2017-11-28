@@ -33,6 +33,10 @@
             reg = null;  
             r = null;  
             // return context == null || context == "" || context == "undefined" ? '' : context;  
+
+            if(context=='eng'){
+                return 'en'
+            }
             return context == null || context == "" || context == "undefined" ? '' : context;  
         }
     </script>
@@ -1414,7 +1418,7 @@
             getPrice()
             setInterval(getPrice,10000)
 
-            alert(GetQueryString('lang'))
+            // alert(GetQueryString('lang'))
 
             language_pack.loadProperties(GetQueryString('lang')?GetQueryString('lang'):'en');
         
