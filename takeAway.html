@@ -662,7 +662,7 @@
                     if(data.list.length==0){
                         window.location.href = 'addAddr.html?lang='+language_pack.now_lang+'&code='+GetQueryString('code')+'&from=buy'
                     }else{
-                        var html = '<div class="top">地址簿</div>'
+                        var html = '<div class="top">'+$.i18n.map['string_addressBook']+'</div>'
                         data.list.forEach(function(e){
                             html += '<div class="block" onclick="chooseAddr(\''+e.address+'\')">'+
                                         '<div class="title">'+e.remark+'</div>'+
