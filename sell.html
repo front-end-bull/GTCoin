@@ -320,68 +320,53 @@
                 if(new_lang == 'zh_HANS'){  
                     tmp_lang = 'zh';  
                     $('body').addClass('zh');  
-                }
-                if(new_lang == 'zh_HANT'){  
+                }else if(new_lang == 'zh_HANT'){  
                     tmp_lang = 'zh';  
                     $('body').addClass('zh');  
-                }
-                if(new_lang == 'en'){  
-                    tmp_lang = 'en';  
-                    $('body').addClass('en');  
-                } 
-                if(new_lang == 'ml'){  
+                }else if(new_lang == 'ml'){  
                     //马来西亚
                     tmp_lang = 'ml';  
                     $('body').addClass('ml');  
-                }  
-                if(new_lang == 'in'){  
+                }else if(new_lang == 'in'){  
                     //印度尼西亚
                     tmp_lang = 'in';  
                     $('body').addClass('in');  
-                }  
-                if(new_lang == 'ar'){
-                    tmp_lang = 'ar';  
-                    $('body').addClass('ar'); 
-                }
-                if(new_lang == 'th'){
+                }else if(new_lang == 'th'){
                     //泰国
                     tmp_lang = 'th';  
                     $('body').addClass('th'); 
-                }
-                if(new_lang == 'es'){
+                }else if(new_lang == 'es'){
                     //西班牙
                     tmp_lang = 'es';  
                     $('body').addClass('es'); 
-                }
-                if(new_lang == 'vi'){
+                }else if(new_lang == 'vi'){
                     //越南
                     tmp_lang = 'vi';  
                     $('body').addClass('vi'); 
-                }
-                if(new_lang == 'fr'){
+                }else if(new_lang == 'fr'){
                     //法国
                     tmp_lang = 'fr';  
                     $('body').addClass('fr'); 
-                }
-                if(new_lang == 'ru'){
+                }else if(new_lang == 'ru'){
                     //俄罗斯
                     tmp_lang = 'ru';  
                     $('body').addClass('ru'); 
-                }
-                if(new_lang == 'ko'){
+                }else if(new_lang == 'ko'){
                     //韩国
                     tmp_lang = 'ko';  
                     $('body').addClass('ko'); 
-                }
-                if(new_lang == 'ja'){
+                }else if(new_lang == 'ja'){
                     //日本
                     tmp_lang = 'ja';  
                     $('body').addClass('ja'); 
-                }
-                if(new_lang == 'hi'){
+                }else if(new_lang == 'hi'){
                     //海地
                     tmp_lang = 'hi';  
                     $('body').addClass('hi'); 
+
+                }else{  
+                    tmp_lang = 'en';  
+                    $('body').addClass('en');  
                 }   
                 jQuery.i18n.properties({//加载资浏览器语言对应的资源文件  
                     name: 'strings', //资源文件名称  
