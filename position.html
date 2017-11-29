@@ -404,6 +404,101 @@
             padding-top: .3rem;            
         }
 
+        .in .container .num{
+            padding-top: .3rem;            
+        }
+
+        .in .line1 .left{
+            width: 70%;
+        }
+
+        .in .line1 .right{
+            width: 30%;
+        }
+        
+        .in .container{
+            padding-top: .2rem;
+            padding-bottom: .2rem;
+        }
+
+
+        .in .container .title{
+            position: relative;
+            top: auto;
+            margin-bottom: .1rem;
+        }
+
+        .in .block2 .container{
+            height: auto;
+        }
+        
+        .in .block2 .time{
+            position: relative;
+            width: 50%;
+            bottom: auto;
+            float: left;
+        }
+
+        .in .block2 .num{
+            position: relative;
+            width: 50%;
+            bottom: auto;
+        }
+
+        .in .container .num{
+            position: relative;
+            line-height: 1;
+            padding-top: 0;
+            float: left;
+            text-align: right;
+        }
+
+
+
+        .ml .line1 .left{
+            width: 70%;
+        }
+
+        .ml .line1 .right{
+            width: 30%;
+        }
+        
+        .ml .container{
+            padding-top: .2rem;
+            padding-bottom: .2rem;
+        }
+
+
+        .ml .container .title{
+            position: relative;
+            top: auto;
+            margin-bottom: .1rem;
+        }
+
+        .ml .block2 .container{
+            height: auto;
+        }
+        
+        .ml .block2 .time{
+            position: relative;
+            width: 50%;
+            bottom: auto;
+            float: left;
+        }
+
+        .ml .block2 .num{
+            position: relative;
+            width: 50%;
+            bottom: auto;
+        }
+
+        .ml .container .num{
+            position: relative;
+            line-height: 1;
+            padding-top: 0;
+            float: left;
+            text-align: right;
+        }
     </style>
    
 </head>
@@ -618,10 +713,10 @@
                             }else if(e.type==3){
 
                                 html+=  '<div class="block2" onclick="goOrder(\''+e.id+'\')">'+
-                                            '<div class="container">'+
+                                            '<div class="container clearfix">'+
                                                 '<div class="title"><span data-lang="string_takeAway"></span>-<span data-lang="string_widthdrawStatus'+e.status+'"></span></div>'+
-                                                '<div class="num">-'+e.amount+' BTC</div>'+
                                                 '<div class="time">'+utils.formatDate(new Date(e.createtime*1000))+'</div>'+
+                                                '<div class="num">-'+e.amount+' BTC</div>'+
                                                 '<img src="img/arrow.png" alt="" class="arrow">'+
                                             '</div>'+
                                         '</div>'
