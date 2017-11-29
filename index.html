@@ -926,6 +926,10 @@
             float: right;
         }
 
+        .in ::-webkit-input-placeholder {
+            font-size: .29rem;
+        }
+
     </style>
 </head>
 <body>
@@ -1125,7 +1129,7 @@
         var isInput2 = false
         var isInput3 = false
         var isCanbuy = false
-
+        var CURRENCY
 
 
         var BUY_PRICE 
@@ -1163,8 +1167,10 @@
 
             $('.'+currency+'2').show()
             $('.shade').hide()
-            getPrice('toggle')
             sessionStorage.currency = currency
+            CURRENCY = currency
+            // window.location.reload()
+            getPrice('toggle')
         }
 
         function showShade(){
@@ -1182,7 +1188,63 @@
             }
         }
 
-        function changeBuyAmount(value){
+
+
+        function isBiggerThan20000(amount,type,buyType,currency){
+            var flag = 20000
+            if(currency=='SGD'){
+                    if(type=='amount'){
+                            if(amount>flag){
+                                return true
+                            }
+                            return false
+                    }else if(type=='num'){
+                            var num = amount
+
+                            if(buyType=='buy'){
+                                var sum =  Math.ceil( num * 1000 * SGD_BUY_PRICE * 100 / 100000 )
+                                if(sum>flag){
+                                    return true
+                                }
+                                return false
+                            }else if(buyType=='sell'){
+                                var sum = Math.floor( num * 1000 * SGD_SELL_PRICE * 100 / 100000 )
+                                if(sum>flag){
+                                    return true
+                                }
+                                return false
+                            }
+                    }
+            }else{
+                    if(type=='amount'){
+                            var num = amount * 100000 / (BUY_PRICE*100)
+                            var sum =  Math.ceil ( num * SGD_BUY_PRICE * 100 / 100000 )
+                            if(sum>flag){
+                                return true
+                            }
+                            return false
+                    }else if(type == 'num'){
+                            var num = amount 
+                            if(buyType=='buy'){
+                                var sum =  Math.ceil( num * 1000 * SGD_BUY_PRICE * 100 / 100000 )
+                                if(sum>flag){
+                                    return true
+                                }
+                                return false
+                            }else if(buyType=='sell'){
+                                var sum = Math.floor( num * 1000 * SGD_SELL_PRICE * 100 / 100000 )
+                                if(sum>flag){
+                                    return true
+                                }
+                                return false
+                            }
+                    }
+            }
+        }   
+
+    
+
+        function changeBuyAmount(value,flag){
             var value = parseInt(value)
             if(isNaN(value)){value = 0}
             if(value==0){
@@ -1198,7 +1260,7 @@
                 
                 var num = BUYAMOUNT*100000/(BUY_PRICE*100)
 
-                if(isAgree && BUY_PRICE){
+                if(isAgree && BUY_PRICE && !isBiggerThan20000(BUYAMOUNT,'amount','buy',CURRENCY) ){
                     if(num<1){
                         canBuy(0)
                     }else{
@@ -1211,10 +1273,10 @@
 
                 $('.estimatedNum').html(parseInt(num)/1000)
             }   
-            getPrice()
+            if(!flag){getPrice()}
         }
 
-        function changeBuyQuantity(value){
+        function changeBuyQuantity(value,flag){
             var value = parseInt(value*1000)
             // l('value',value)
             if(isNaN(value)){value = 0}
@@ -1229,7 +1291,7 @@
             }else{
                 BUYNUM = value/1000
                 isInput2 = true
-                if(isAgree && BUY_PRICE){
+                if(isAgree && BUY_PRICE && !isBiggerThan20000(BUYNUM,'num','buy',CURRENCY) ){
                     canBuy(1)
                 }else{
                     canBuy(0)
@@ -1238,10 +1300,10 @@
                 $('.estimatedCost').html(utils.comdify( ceil(cost) ))
                 Cost = ceil(cost)
             }   
-            getPrice()
+            if(!flag){getPrice()}
         }
 
-        function changeSellNum(value){
+        function changeSellNum(value,flag){
             var value = parseInt(value*1000)
             if(isNaN(value)){value = 0}
             // console.log('value',value)
@@ -1255,7 +1317,7 @@
             }else{
                 SELLNUM = value/1000
                 isInput2 = true
-                if(isAgree && SELL_PRICE){
+                if(isAgree && SELL_PRICE && !isBiggerThan20000(SELLNUM,'num','sell',CURRENCY) ){
                     canBuy(1)
                 }else{
                     canBuy(0)
@@ -1264,7 +1326,7 @@
                 $('.estimatedIncome').html(utils.comdify( floor(income)) )
                 Income = utils.comdify( floor(income) )
             }
-            getPrice()
+            if(!flag){getPrice()}
         }
 
 
@@ -1532,6 +1594,7 @@
                         $('.pricenum').html( utils.comdify( SELL_PRICE) )
                     }
 
+                    
 
                     // console.log(BUYNUM)
                     var num = BUYAMOUNT*100000/(BUY_PRICE*100)
@@ -1547,6 +1610,19 @@
                     var income = (SELLNUM * 1000) * (SELL_PRICE*100) /100000
                     $('.estimatedIncome').html(utils.comdify(  floor(income)) )
                     Income = utils.comdify(  floor(income) )
+
+
+                    if(isBuy&&!isBTC){
+                        changeBuyAmount(BUYAMOUNT,1)
+                    }else if(isBuy&&isBTC){
+                        changeBuyQuantity(BUYNUM,1)
+                    }else if(!isBuy){
+                        changeSellNum(SELLNUM,1)
+                    }
+
+                },
+                error:function(error){
+                    // l(error)
                 }
             })
         }
@@ -1591,6 +1667,7 @@
 
         var isBTC = false
         function toggle(){
+            // l('come in')
             if(!isBTC){
                 $('.block2').hide()
                 $('.block3').hide()
@@ -1600,6 +1677,7 @@
                 // $('.block2 .middle input').attr('placeholder',$.i18n.map['string_atleast001'])
                 // $('.block2 .right').html($.i18n.map['string_buybyMoney'])
                 // $('.block3 .left').html($.i18n.map['string_EstimatedCost'])
+                
             }else{
                 // $('.block2 .left').html($.i18n.map['string_buyNum'])
                 // $('.block2 .middle input').attr('placeholder',$.i18n.map['string_atleast500'])
@@ -1609,8 +1687,17 @@
                 $('.block3').show()
                 $('.block2-2').hide()
                 $('.block3-2').hide()
+                
             }
             isBTC = !isBTC
+
+            if(isBuy&&!isBTC){
+                changeBuyAmount(BUYAMOUNT,1)
+            }else if(isBuy&&isBTC){
+                changeBuyQuantity(BUYNUM,1)
+            }else if(!isBuy){
+                changeSellNum(SELLNUM,1)
+            }
         }
 
         var isBuy = true
@@ -1646,6 +1733,14 @@
                 $('.button').text($.i18n.map['string_confirmSelling'])
                 $('.limit').html($.i18n.map['string_sellLimit'])
                 $('.pricenum').html(utils.comdify( SELL_PRICE) )
+            }
+
+            if(isBuy&&!isBTC){
+                changeBuyAmount(BUYAMOUNT,1)
+            }else if(isBuy&&isBTC){
+                changeBuyQuantity(BUYNUM,1)
+            }else if(!isBuy){
+                changeSellNum(SELLNUM,1)
             }
         }
 

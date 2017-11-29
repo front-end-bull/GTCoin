@@ -259,6 +259,7 @@
             padding-top: .36rem;
             padding-bottom: .3rem;
             padding-left:.32rem;
+            padding-right: .32rem;
         }
 
 
@@ -266,6 +267,7 @@
             font-family: PingFangSC-Light;
             font-size: .3rem;
             color: #333333;
+            overflow:hidden;
         }
 
         .card .block .content{
@@ -517,10 +519,20 @@
 
         }
 
+
         function checkOk(){
             // l ( $('.num').val() )
-            if(isAddr && $('.num').val()){
-                isOk = true
+            var num = $('.num').val() 
+
+            if(isAddr && num > 0 && !( (num * 1000) > (sessionStorage.btcBalance * 1000)  )){
+
+                var sum =  Math.ceil ( num * 1000 * SGD_SELL_PRICE * 100 / 100000 ) 
+                // l('sum',sum)
+                if(sum>20000){
+                    isOk  = false
+                }else{
+                    isOk = true
+                }
             }else{
                 isOk = false
             }
@@ -530,7 +542,14 @@
             }else{
                 $('.button').removeClass('ok')
             }
+
         }
+    
+
+
+
+
+
 
         function selectAddr(){
             getAddrList()
@@ -650,9 +669,42 @@
             $('.shade').css('height',$(window).height()+'px')
             $('.rate').text(sessionStorage.rate*100)
             $('.btcBalance').text(sessionStorage.btcBalance)
-
+            getPrice()
+            setInterval(getPrice,10000)
             language_pack.loadProperties(GetQueryString('lang'));
         }) 
+
+
+
+        function getPrice(flag){
+            var currency = sessionStorage.currency
+            var url = HOST+"/bitcoin/v1?cmd=btcNow"+'&code='+GetQueryString('code')+'&lang='+( GetQueryString('lang')?GetQueryString('lang'):'en' )+'&currency='+currency
+            // l(url)
+            $.ajax({
+                url:url,
+                type:'get',
+                success:function(data){
+
+                    if(isString(data)){
+                        data = JSON.parse(data)
+                    }
+
+                    // 当地货币
+                    // 美金
+
+                    BUY_PRICE = data.buy_price
+                    SELL_PRICE = data.sell_price
+                    SGD_BUY_PRICE = data.buy_sgd_price
+                    SGD_SELL_PRICE = data.sell_sgd_price
+                },
+                error:function(error){
+                    // l(error)
+                }
+            })
+        }
+
+
+
         
         function goAddAddr(){
             $('.loading').show()

@@ -525,9 +525,21 @@
             var address = $('.url').val()
             var remark = $('.remark').val()
 
+            
             if(!isFirst || !isOk){
                 return 
             }
+
+            if(remark.length>20){
+                $('.msg').text($.i18n.map['string_lessThan20'])
+                $('.msg').show()
+                setTimeout(function(){
+                    $('.msg').hide()
+                },2000)
+                return
+            }
+
+            
             $('.loading').show()
             isFirst = false
 
@@ -538,7 +550,7 @@
                     if(isString(data)){
                         data = JSON.parse(data)
                     }
-                    
+
                     // l(data)
 
                     if(data.data==true){
