@@ -38,6 +38,7 @@ const utils = {
 	    var second = now.getSeconds()
 	    if(month<10) month = '0'+month
 	    if(date<10) date = '0'+date
+        if(minute<10) minute = '0'+minute
 
 	    return year + "-" + month + "-" + date + " " + hour + ":" + minute;
 	    // return year + "-" + month + "-" + date;
