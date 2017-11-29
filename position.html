@@ -401,11 +401,11 @@
         }
         
         .th .container .num{
-            padding-top: .3rem;            
+            /*padding-top: .3rem;            */
         }
 
         .in .container .num{
-            padding-top: .3rem;            
+            /*padding-top: .3rem;            */
         }
 
         .in .line1 .left{
@@ -426,6 +426,8 @@
             position: relative;
             top: auto;
             margin-bottom: .1rem;
+            width: 68%;
+            /*word-break: break-all;*/
         }
 
         .in .block2 .container{
@@ -439,18 +441,23 @@
             float: left;
         }
 
-        .in .block2 .num{
+        /*.in .block2 .num{
             position: relative;
             width: 50%;
             bottom: auto;
-        }
+        }*/
 
-        .in .container .num{
+        /*.in .container .num{
             position: relative;
             line-height: 1;
             padding-top: 0;
             float: left;
             text-align: right;
+        }*/
+
+        .in .container .num{
+            height: .4rem;            
+            line-height: .4rem;
         }
 
 
@@ -473,6 +480,8 @@
             position: relative;
             top: auto;
             margin-bottom: .1rem;
+            width: 68%;
+            word-break: break-all;
         }
 
         .ml .block2 .container{
@@ -486,19 +495,73 @@
             float: left;
         }
 
-        .ml .block2 .num{
+        /*.ml .block2 .num{
             position: relative;
             width: 50%;
             bottom: auto;
-        }
+        }*/
 
         .ml .container .num{
+            height: .4rem;            
+            line-height: .4rem;
+        }
+
+
+
+
+        .th .line1 .left{
+            width: 70%;
+        }
+
+        .th .line1 .right{
+            width: 30%;
+        }
+        
+        .th .container{
+            padding-top: .2rem;
+            padding-bottom: .2rem;
+        }
+
+
+        .th .container .title{
+            position: relative;
+            top: auto;
+            margin-bottom: .1rem;
+            width: 68%;
+            /*word-break: break-all;*/
+        }
+
+        .th .block2 .container{
+            height: auto;
+        }
+        
+        .th .block2 .time{
+            position: relative;
+            width: 50%;
+            bottom: auto;
+            float: left;
+        }
+
+        /*.th .block2 .num{
+            position: relative;
+            width: 50%;
+            bottom: auto;
+        }*/
+
+        /*.th .container .num{
             position: relative;
             line-height: 1;
             padding-top: 0;
             float: left;
             text-align: right;
+        }*/
+
+        .th .container .num{
+            height: .4rem;            
+            line-height: .4rem;
         }
+
+
     </style>
    
 </head>
@@ -644,6 +707,7 @@
         }
 
         $(function(){
+            $('.loading').hide()
             init()
             language_pack.loadProperties(GetQueryString('lang'));
         })

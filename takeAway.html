@@ -666,6 +666,8 @@
         } 
 
         $(function(){
+            $('.loading').hide()
+            
             $('.shade').css('height',$(window).height()+'px')
             $('.rate').text(sessionStorage.rate*100)
             $('.btcBalance').text(sessionStorage.btcBalance)

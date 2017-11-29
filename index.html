@@ -1312,12 +1312,14 @@
                 isInput2 = false
                 canBuy(0)
                 var income = (SELLNUM * 1000) * (SELL_PRICE*100) /100000
+                // l('income',income)
+
                 $('.estimatedIncome').html(utils.comdify( floor(income)) )
                 Income = utils.comdify( floor(income) )
             }else{
                 SELLNUM = value/1000
                 isInput2 = true
-                if(isAgree && SELL_PRICE && !isBiggerThan20000(SELLNUM,'num','sell',CURRENCY) ){
+                if(isAgree && SELL_PRICE && !isBiggerThan20000(SELLNUM,'num','sell',CURRENCY) && !(SELLNUM*1000 > sessionStorage.btcBalance * 1000)){
                     canBuy(1)
                 }else{
                     canBuy(0)
@@ -1495,6 +1497,7 @@
         
 
         $(function(){
+            $('.loading').hide()
             getUrl()
             function getUrl(){
                 $.ajax({
