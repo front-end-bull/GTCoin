@@ -7,8 +7,10 @@ const HOST = 'http://ddcoin.com:4002'
 // var http://d3tbpk51ffth2m.cloudfront.net = http://d3tbpk51ffth2m.cloudfront.net
 
 const isString = function(obj){
-	  return Object.prototype.toString.call(obj) === "[object String]"; 
+	  // return Object.prototype.toString.call(obj) === "[object String]"; 
+      return typeof obj === 'string'
 }
+
 const str = JSON.stringify
 const l = console.log
 
@@ -36,6 +38,7 @@ const utils = {
 	    var second = now.getSeconds()
 	    if(month<10) month = '0'+month
 	    if(date<10) date = '0'+date
+        if(minute<10) minute = '0'+minute
 
 	    return year + "-" + month + "-" + date + " " + hour + ":" + minute;
 	    // return year + "-" + month + "-" + date;
